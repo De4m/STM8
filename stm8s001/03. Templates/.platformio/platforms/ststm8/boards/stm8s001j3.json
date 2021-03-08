@@ -1,0 +1,47 @@
+{
+  "build": {
+    "core": "sduino",
+    "extra_flags": "-DSTM8S_UNO -DSTM8S001",
+    "f_cpu": "16000000L",
+    "cpu": "stm8",
+    "mcu": "stm8s001j3",
+    "variant": "My_dev"
+  },
+  "debug": {
+    "openocd_target": "stm8s",
+    "tools": {
+      "stlink": {
+        "default": true,
+        "server": {
+          "arguments": [
+            "-f",
+            "scripts/interface/stlink.cfg",
+            "-f",
+            "scripts/target/stm8s.cfg"
+          ],
+          "executable": "bin/openocd",
+          "package": "tool-openocd"
+        },
+        "onboard": true
+      }
+    }
+  },
+
+  "frameworks": [
+    "arduino",
+    "spl"
+  ],
+  "upload": {
+    "maximum_ram_size": 1024,
+    "maximum_size": 8192,
+    "protocol": "stlink",
+    "protocols": [
+      "stlinkv2",
+      "stlink",
+      "serial"
+    ]
+  },
+  "name": "ST (STM8S001j3)",
+  "url": "https://github.com/roybaer/sduino_uno",
+  "vendor": "ST"
+}

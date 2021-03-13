@@ -18,7 +18,8 @@
 			"stm8s.h": "c",
 			"main.h": "c",
 			"stm8s_gpio.h": "c",
-			"stm8s_beep.h": "c"
+			"stm8s_beep.h": "c",
+			"delay.h": "c"
 		}
 	}
 }

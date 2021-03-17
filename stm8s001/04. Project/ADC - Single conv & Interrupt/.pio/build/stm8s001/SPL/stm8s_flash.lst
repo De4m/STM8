@@ -1,0 +1,609 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.8.4 #10766 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module stm8s_flash
+                                      6 	.optsdcc -mstm8
+                                      7 	
+                                      8 ;--------------------------------------------------------
+                                      9 ; Public variables in this module
+                                     10 ;--------------------------------------------------------
+                                     11 	.globl _FLASH_Unlock
+                                     12 	.globl _FLASH_Lock
+                                     13 	.globl _FLASH_DeInit
+                                     14 	.globl _FLASH_ITConfig
+                                     15 	.globl _FLASH_EraseByte
+                                     16 	.globl _FLASH_ProgramByte
+                                     17 	.globl _FLASH_ReadByte
+                                     18 	.globl _FLASH_ProgramWord
+                                     19 	.globl _FLASH_ProgramOptionByte
+                                     20 	.globl _FLASH_EraseOptionByte
+                                     21 	.globl _FLASH_ReadOptionByte
+                                     22 	.globl _FLASH_SetLowPowerMode
+                                     23 	.globl _FLASH_SetProgrammingTime
+                                     24 	.globl _FLASH_GetLowPowerMode
+                                     25 	.globl _FLASH_GetProgrammingTime
+                                     26 	.globl _FLASH_GetBootSize
+                                     27 	.globl _FLASH_GetFlagStatus
+                                     28 	.globl _FLASH_WaitForLastOperation
+                                     29 	.globl _FLASH_EraseBlock
+                                     30 	.globl _FLASH_ProgramBlock
+                                     31 ;--------------------------------------------------------
+                                     32 ; ram data
+                                     33 ;--------------------------------------------------------
+                                     34 	.area DATA
+                                     35 ;--------------------------------------------------------
+                                     36 ; ram data
+                                     37 ;--------------------------------------------------------
+                                     38 	.area INITIALIZED
+                                     39 ;--------------------------------------------------------
+                                     40 ; absolute external ram data
+                                     41 ;--------------------------------------------------------
+                                     42 	.area DABS (ABS)
+                                     43 
+                                     44 ; default segment ordering for linker
+                                     45 	.area HOME
+                                     46 	.area GSINIT
+                                     47 	.area GSFINAL
+                                     48 	.area CONST
+                                     49 	.area INITIALIZER
+                                     50 	.area CODE
+                                     51 
+                                     52 ;--------------------------------------------------------
+                                     53 ; global & static initialisations
+                                     54 ;--------------------------------------------------------
+                                     55 	.area HOME
+                                     56 	.area GSINIT
+                                     57 	.area GSFINAL
+                                     58 	.area GSINIT
+                                     59 ;--------------------------------------------------------
+                                     60 ; Home
+                                     61 ;--------------------------------------------------------
+                                     62 	.area HOME
+                                     63 	.area HOME
+                                     64 ;--------------------------------------------------------
+                                     65 ; code
+                                     66 ;--------------------------------------------------------
+                                     67 	.area CODE
+                                     68 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 168: void FLASH_Unlock(FLASH_MemType_TypeDef FLASH_MemType)
+                                     69 ;	-----------------------------------------
+                                     70 ;	 function FLASH_Unlock
+                                     71 ;	-----------------------------------------
+      000000                         72 _FLASH_Unlock:
+                                     73 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 174: if(FLASH_MemType == FLASH_MEMTYPE_PROG)
+      000000 7B 03            [ 1]   74 	ld	a, (0x03, sp)
+      000002 A1 FD            [ 1]   75 	cp	a, #0xfd
+      000004 26 09            [ 1]   76 	jrne	00102$
+                                     77 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 176: FLASH->PUKR = FLASH_RASS_KEY1;
+      000006 35 56 50 62      [ 1]   78 	mov	0x5062+0, #0x56
+                                     79 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 177: FLASH->PUKR = FLASH_RASS_KEY2;
+      00000A 35 AE 50 62      [ 1]   80 	mov	0x5062+0, #0xae
+      00000E 81               [ 4]   81 	ret
+      00000F                         82 00102$:
+                                     83 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 182: FLASH->DUKR = FLASH_RASS_KEY2; /* Warning: keys are reversed on data memory !!! */
+      00000F 35 AE 50 64      [ 1]   84 	mov	0x5064+0, #0xae
+                                     85 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 183: FLASH->DUKR = FLASH_RASS_KEY1;
+      000013 35 56 50 64      [ 1]   86 	mov	0x5064+0, #0x56
+                                     87 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 185: }
+      000017 81               [ 4]   88 	ret
+                                     89 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 193: void FLASH_Lock(FLASH_MemType_TypeDef FLASH_MemType)
+                                     90 ;	-----------------------------------------
+                                     91 ;	 function FLASH_Lock
+                                     92 ;	-----------------------------------------
+      000018                         93 _FLASH_Lock:
+                                     94 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 199: FLASH->IAPSR &= (uint8_t)FLASH_MemType;
+      000018 C6 50 5F         [ 1]   95 	ld	a, 0x505f
+      00001B 14 03            [ 1]   96 	and	a, (0x03, sp)
+      00001D C7 50 5F         [ 1]   97 	ld	0x505f, a
+                                     98 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 200: }
+      000020 81               [ 4]   99 	ret
+                                    100 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 207: void FLASH_DeInit(void)
+                                    101 ;	-----------------------------------------
+                                    102 ;	 function FLASH_DeInit
+                                    103 ;	-----------------------------------------
+      000021                        104 _FLASH_DeInit:
+                                    105 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 209: FLASH->CR1 = FLASH_CR1_RESET_VALUE;
+      000021 35 00 50 5A      [ 1]  106 	mov	0x505a+0, #0x00
+                                    107 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 210: FLASH->CR2 = FLASH_CR2_RESET_VALUE;
+      000025 35 00 50 5B      [ 1]  108 	mov	0x505b+0, #0x00
+                                    109 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 211: FLASH->NCR2 = FLASH_NCR2_RESET_VALUE;
+      000029 35 FF 50 5C      [ 1]  110 	mov	0x505c+0, #0xff
+                                    111 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 212: FLASH->IAPSR &= (uint8_t)(~FLASH_IAPSR_DUL);
+      00002D 72 17 50 5F      [ 1]  112 	bres	20575, #3
+                                    113 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 213: FLASH->IAPSR &= (uint8_t)(~FLASH_IAPSR_PUL);
+      000031 72 13 50 5F      [ 1]  114 	bres	20575, #1
+                                    115 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 214: (void) FLASH->IAPSR; /* Reading of this register causes the clearing of status flags */
+      000035 C6 50 5F         [ 1]  116 	ld	a, 0x505f
+                                    117 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 215: }
+      000038 81               [ 4]  118 	ret
+                                    119 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 223: void FLASH_ITConfig(FunctionalState NewState)
+                                    120 ;	-----------------------------------------
+                                    121 ;	 function FLASH_ITConfig
+                                    122 ;	-----------------------------------------
+      000039                        123 _FLASH_ITConfig:
+                                    124 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 230: FLASH->CR1 |= FLASH_CR1_IE; /* Enables the interrupt sources */
+      000039 C6 50 5A         [ 1]  125 	ld	a, 0x505a
+                                    126 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 228: if(NewState != DISABLE)
+      00003C 0D 03            [ 1]  127 	tnz	(0x03, sp)
+      00003E 27 06            [ 1]  128 	jreq	00102$
+                                    129 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 230: FLASH->CR1 |= FLASH_CR1_IE; /* Enables the interrupt sources */
+      000040 AA 02            [ 1]  130 	or	a, #0x02
+      000042 C7 50 5A         [ 1]  131 	ld	0x505a, a
+      000045 81               [ 4]  132 	ret
+      000046                        133 00102$:
+                                    134 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 234: FLASH->CR1 &= (uint8_t)(~FLASH_CR1_IE); /* Disables the interrupt sources */
+      000046 A4 FD            [ 1]  135 	and	a, #0xfd
+      000048 C7 50 5A         [ 1]  136 	ld	0x505a, a
+                                    137 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 236: }
+      00004B 81               [ 4]  138 	ret
+                                    139 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 245: void FLASH_EraseByte(uint32_t Address)
+                                    140 ;	-----------------------------------------
+                                    141 ;	 function FLASH_EraseByte
+                                    142 ;	-----------------------------------------
+      00004C                        143 _FLASH_EraseByte:
+                                    144 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 253: *(PointerAttr uint8_t*) (MemoryAddressCast)Address = FLASH_CLEAR_BYTE;
+      00004C 1E 05            [ 2]  145 	ldw	x, (0x05, sp)
+      00004E 7F               [ 1]  146 	clr	(x)
+                                    147 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 257: }
+      00004F 81               [ 4]  148 	ret
+                                    149 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 267: void FLASH_ProgramByte(uint32_t Address, uint8_t Data)
+                                    150 ;	-----------------------------------------
+                                    151 ;	 function FLASH_ProgramByte
+                                    152 ;	-----------------------------------------
+      000050                        153 _FLASH_ProgramByte:
+                                    154 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 275: *(PointerAttr uint8_t*) (MemoryAddressCast)Address = Data;
+      000050 1E 05            [ 2]  155 	ldw	x, (0x05, sp)
+      000052 7B 07            [ 1]  156 	ld	a, (0x07, sp)
+      000054 F7               [ 1]  157 	ld	(x), a
+                                    158 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 279: }
+      000055 81               [ 4]  159 	ret
+                                    160 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 288: uint8_t FLASH_ReadByte(uint32_t Address)
+                                    161 ;	-----------------------------------------
+                                    162 ;	 function FLASH_ReadByte
+                                    163 ;	-----------------------------------------
+      000056                        164 _FLASH_ReadByte:
+                                    165 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 296: return(*(PointerAttr uint8_t *) (MemoryAddressCast)Address); 
+      000056 1E 05            [ 2]  166 	ldw	x, (0x05, sp)
+      000058 F6               [ 1]  167 	ld	a, (x)
+                                    168 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 300: }
+      000059 81               [ 4]  169 	ret
+                                    170 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 310: void FLASH_ProgramWord(uint32_t Address, uint32_t Data)
+                                    171 ;	-----------------------------------------
+                                    172 ;	 function FLASH_ProgramWord
+                                    173 ;	-----------------------------------------
+      00005A                        174 _FLASH_ProgramWord:
+      00005A 52 04            [ 2]  175 	sub	sp, #4
+                                    176 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 316: FLASH->CR2 |= FLASH_CR2_WPRG;
+      00005C 72 1C 50 5B      [ 1]  177 	bset	20571, #6
+                                    178 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 317: FLASH->NCR2 &= (uint8_t)(~FLASH_NCR2_NWPRG);
+      000060 72 1D 50 5C      [ 1]  179 	bres	20572, #6
+                                    180 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 322: *((PointerAttr uint8_t*)(MemoryAddressCast)Address)       = *((uint8_t*)(&Data));
+      000064 16 09            [ 2]  181 	ldw	y, (0x09, sp)
+      000066 96               [ 1]  182 	ldw	x, sp
+      000067 1C 00 0B         [ 2]  183 	addw	x, #11
+      00006A 1F 01            [ 2]  184 	ldw	(0x01, sp), x
+      00006C F6               [ 1]  185 	ld	a, (x)
+      00006D 90 F7            [ 1]  186 	ld	(y), a
+                                    187 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 324: *(((PointerAttr uint8_t*)(MemoryAddressCast)Address) + 1) = *((uint8_t*)(&Data)+1); 
+      00006F 93               [ 1]  188 	ldw	x, y
+      000070 5C               [ 1]  189 	incw	x
+      000071 1F 03            [ 2]  190 	ldw	(0x03, sp), x
+      000073 1E 01            [ 2]  191 	ldw	x, (0x01, sp)
+      000075 E6 01            [ 1]  192 	ld	a, (0x1, x)
+      000077 1E 03            [ 2]  193 	ldw	x, (0x03, sp)
+      000079 F7               [ 1]  194 	ld	(x), a
+                                    195 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 326: *(((PointerAttr uint8_t*)(MemoryAddressCast)Address) + 2) = *((uint8_t*)(&Data)+2); 
+      00007A 93               [ 1]  196 	ldw	x, y
+      00007B 5C               [ 1]  197 	incw	x
+      00007C 5C               [ 1]  198 	incw	x
+      00007D 1F 03            [ 2]  199 	ldw	(0x03, sp), x
+      00007F 1E 01            [ 2]  200 	ldw	x, (0x01, sp)
+      000081 E6 02            [ 1]  201 	ld	a, (0x2, x)
+      000083 1E 03            [ 2]  202 	ldw	x, (0x03, sp)
+      000085 F7               [ 1]  203 	ld	(x), a
+                                    204 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 328: *(((PointerAttr uint8_t*)(MemoryAddressCast)Address) + 3) = *((uint8_t*)(&Data)+3); 
+      000086 72 A9 00 03      [ 2]  205 	addw	y, #0x0003
+      00008A 1E 01            [ 2]  206 	ldw	x, (0x01, sp)
+      00008C E6 03            [ 1]  207 	ld	a, (0x3, x)
+      00008E 90 F7            [ 1]  208 	ld	(y), a
+                                    209 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 335: }
+      000090 5B 04            [ 2]  210 	addw	sp, #4
+      000092 81               [ 4]  211 	ret
+                                    212 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 343: void FLASH_ProgramOptionByte(uint16_t Address, uint8_t Data)
+                                    213 ;	-----------------------------------------
+                                    214 ;	 function FLASH_ProgramOptionByte
+                                    215 ;	-----------------------------------------
+      000093                        216 _FLASH_ProgramOptionByte:
+                                    217 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 349: FLASH->CR2 |= FLASH_CR2_OPT;
+      000093 72 1E 50 5B      [ 1]  218 	bset	20571, #7
+                                    219 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 350: FLASH->NCR2 &= (uint8_t)(~FLASH_NCR2_NOPT);
+      000097 72 1F 50 5C      [ 1]  220 	bres	20572, #7
+                                    221 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 356: *((NEAR uint8_t*)Address) = Data;
+      00009B 1E 03            [ 2]  222 	ldw	x, (0x03, sp)
+                                    223 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 353: if(Address == 0x4800)
+      00009D 89               [ 2]  224 	pushw	x
+      00009E 1E 05            [ 2]  225 	ldw	x, (0x05, sp)
+      0000A0 A3 48 00         [ 2]  226 	cpw	x, #0x4800
+      0000A3 85               [ 2]  227 	popw	x
+      0000A4 26 05            [ 1]  228 	jrne	00102$
+                                    229 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 356: *((NEAR uint8_t*)Address) = Data;
+      0000A6 7B 05            [ 1]  230 	ld	a, (0x05, sp)
+      0000A8 F7               [ 1]  231 	ld	(x), a
+      0000A9 20 0A            [ 2]  232 	jra	00103$
+      0000AB                        233 00102$:
+                                    234 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 361: *((NEAR uint8_t*)Address) = Data;
+      0000AB 7B 05            [ 1]  235 	ld	a, (0x05, sp)
+      0000AD F7               [ 1]  236 	ld	(x), a
+                                    237 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 362: *((NEAR uint8_t*)((uint16_t)(Address + 1))) = (uint8_t)(~Data);
+      0000AE 1E 03            [ 2]  238 	ldw	x, (0x03, sp)
+      0000B0 5C               [ 1]  239 	incw	x
+      0000B1 7B 05            [ 1]  240 	ld	a, (0x05, sp)
+      0000B3 43               [ 1]  241 	cpl	a
+      0000B4 F7               [ 1]  242 	ld	(x), a
+      0000B5                        243 00103$:
+                                    244 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 364: FLASH_WaitForLastOperation(FLASH_MEMTYPE_PROG);
+      0000B5 4B FD            [ 1]  245 	push	#0xfd
+      0000B7 CDr01r89         [ 4]  246 	call	_FLASH_WaitForLastOperation
+      0000BA 84               [ 1]  247 	pop	a
+                                    248 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 367: FLASH->CR2 &= (uint8_t)(~FLASH_CR2_OPT);
+      0000BB 72 1F 50 5B      [ 1]  249 	bres	20571, #7
+                                    250 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 368: FLASH->NCR2 |= FLASH_NCR2_NOPT;
+      0000BF 72 1E 50 5C      [ 1]  251 	bset	20572, #7
+                                    252 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 369: }
+      0000C3 81               [ 4]  253 	ret
+                                    254 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 376: void FLASH_EraseOptionByte(uint16_t Address)
+                                    255 ;	-----------------------------------------
+                                    256 ;	 function FLASH_EraseOptionByte
+                                    257 ;	-----------------------------------------
+      0000C4                        258 _FLASH_EraseOptionByte:
+                                    259 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 382: FLASH->CR2 |= FLASH_CR2_OPT;
+      0000C4 72 1E 50 5B      [ 1]  260 	bset	20571, #7
+                                    261 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 383: FLASH->NCR2 &= (uint8_t)(~FLASH_NCR2_NOPT);
+      0000C8 72 1F 50 5C      [ 1]  262 	bres	20572, #7
+                                    263 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 389: *((NEAR uint8_t*)Address) = FLASH_CLEAR_BYTE;
+      0000CC 16 03            [ 2]  264 	ldw	y, (0x03, sp)
+                                    265 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 386: if(Address == 0x4800)
+      0000CE 1E 03            [ 2]  266 	ldw	x, (0x03, sp)
+      0000D0 A3 48 00         [ 2]  267 	cpw	x, #0x4800
+      0000D3 26 04            [ 1]  268 	jrne	00102$
+                                    269 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 389: *((NEAR uint8_t*)Address) = FLASH_CLEAR_BYTE;
+      0000D5 90 7F            [ 1]  270 	clr	(y)
+      0000D7 20 08            [ 2]  271 	jra	00103$
+      0000D9                        272 00102$:
+                                    273 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 394: *((NEAR uint8_t*)Address) = FLASH_CLEAR_BYTE;
+      0000D9 90 7F            [ 1]  274 	clr	(y)
+                                    275 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 395: *((NEAR uint8_t*)((uint16_t)(Address + (uint16_t)1 ))) = FLASH_SET_BYTE;
+      0000DB 1E 03            [ 2]  276 	ldw	x, (0x03, sp)
+      0000DD 5C               [ 1]  277 	incw	x
+      0000DE A6 FF            [ 1]  278 	ld	a, #0xff
+      0000E0 F7               [ 1]  279 	ld	(x), a
+      0000E1                        280 00103$:
+                                    281 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 397: FLASH_WaitForLastOperation(FLASH_MEMTYPE_PROG);
+      0000E1 4B FD            [ 1]  282 	push	#0xfd
+      0000E3 CDr01r89         [ 4]  283 	call	_FLASH_WaitForLastOperation
+      0000E6 84               [ 1]  284 	pop	a
+                                    285 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 400: FLASH->CR2 &= (uint8_t)(~FLASH_CR2_OPT);
+      0000E7 72 1F 50 5B      [ 1]  286 	bres	20571, #7
+                                    287 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 401: FLASH->NCR2 |= FLASH_NCR2_NOPT;
+      0000EB 72 1E 50 5C      [ 1]  288 	bset	20572, #7
+                                    289 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 402: }
+      0000EF 81               [ 4]  290 	ret
+                                    291 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 409: uint16_t FLASH_ReadOptionByte(uint16_t Address)
+                                    292 ;	-----------------------------------------
+                                    293 ;	 function FLASH_ReadOptionByte
+                                    294 ;	-----------------------------------------
+      0000F0                        295 _FLASH_ReadOptionByte:
+      0000F0 52 04            [ 2]  296 	sub	sp, #4
+                                    297 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 417: value_optbyte = *((NEAR uint8_t*)Address); /* Read option byte */
+      0000F2 1E 07            [ 2]  298 	ldw	x, (0x07, sp)
+      0000F4 F6               [ 1]  299 	ld	a, (x)
+      0000F5 6B 03            [ 1]  300 	ld	(0x03, sp), a
+                                    301 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 418: value_optbyte_complement = *(((NEAR uint8_t*)Address) + 1); /* Read option byte complement */
+      0000F7 E6 01            [ 1]  302 	ld	a, (0x1, x)
+      0000F9 6B 04            [ 1]  303 	ld	(0x04, sp), a
+                                    304 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 423: res_value =	 value_optbyte;
+      0000FB 90 5F            [ 1]  305 	clrw	y
+      0000FD 7B 03            [ 1]  306 	ld	a, (0x03, sp)
+      0000FF 90 97            [ 1]  307 	ld	yl, a
+                                    308 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 421: if(Address == 0x4800)	 
+      000101 1E 07            [ 2]  309 	ldw	x, (0x07, sp)
+      000103 A3 48 00         [ 2]  310 	cpw	x, #0x4800
+      000106 26 03            [ 1]  311 	jrne	00105$
+                                    312 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 423: res_value =	 value_optbyte;
+      000108 93               [ 1]  313 	ldw	x, y
+      000109 20 1A            [ 2]  314 	jra	00106$
+      00010B                        315 00105$:
+                                    316 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 427: if(value_optbyte == (uint8_t)(~value_optbyte_complement))
+      00010B 7B 04            [ 1]  317 	ld	a, (0x04, sp)
+      00010D 43               [ 1]  318 	cpl	a
+      00010E 11 03            [ 1]  319 	cp	a, (0x03, sp)
+      000110 26 10            [ 1]  320 	jrne	00102$
+                                    321 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 429: res_value = (uint16_t)((uint16_t)value_optbyte << 8);
+      000112 4F               [ 1]  322 	clr	a
+      000113 6B 02            [ 1]  323 	ld	(0x02, sp), a
+                                    324 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 430: res_value = res_value | (uint16_t)value_optbyte_complement;
+      000115 0F 03            [ 1]  325 	clr	(0x03, sp)
+      000117 7B 02            [ 1]  326 	ld	a, (0x02, sp)
+      000119 1A 04            [ 1]  327 	or	a, (0x04, sp)
+      00011B 97               [ 1]  328 	ld	xl, a
+      00011C 90 9F            [ 1]  329 	ld	a, yl
+      00011E 1A 03            [ 1]  330 	or	a, (0x03, sp)
+      000120 95               [ 1]  331 	ld	xh, a
+                                    332 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 434: res_value = FLASH_OPTIONBYTE_ERROR;
+      000121 BC                     333 	.byte 0xbc
+      000122                        334 00102$:
+      000122 AE 55 55         [ 2]  335 	ldw	x, #0x5555
+      000125                        336 00106$:
+                                    337 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 437: return(res_value);
+                                    338 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 438: }
+      000125 5B 04            [ 2]  339 	addw	sp, #4
+      000127 81               [ 4]  340 	ret
+                                    341 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 446: void FLASH_SetLowPowerMode(FLASH_LPMode_TypeDef FLASH_LPMode)
+                                    342 ;	-----------------------------------------
+                                    343 ;	 function FLASH_SetLowPowerMode
+                                    344 ;	-----------------------------------------
+      000128                        345 _FLASH_SetLowPowerMode:
+                                    346 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 452: FLASH->CR1 &= (uint8_t)(~(FLASH_CR1_HALT | FLASH_CR1_AHALT)); 
+      000128 C6 50 5A         [ 1]  347 	ld	a, 0x505a
+      00012B A4 F3            [ 1]  348 	and	a, #0xf3
+      00012D C7 50 5A         [ 1]  349 	ld	0x505a, a
+                                    350 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 455: FLASH->CR1 |= (uint8_t)FLASH_LPMode; 
+      000130 C6 50 5A         [ 1]  351 	ld	a, 0x505a
+      000133 1A 03            [ 1]  352 	or	a, (0x03, sp)
+      000135 C7 50 5A         [ 1]  353 	ld	0x505a, a
+                                    354 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 456: }
+      000138 81               [ 4]  355 	ret
+                                    356 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 464: void FLASH_SetProgrammingTime(FLASH_ProgramTime_TypeDef FLASH_ProgTime)
+                                    357 ;	-----------------------------------------
+                                    358 ;	 function FLASH_SetProgrammingTime
+                                    359 ;	-----------------------------------------
+      000139                        360 _FLASH_SetProgrammingTime:
+                                    361 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 469: FLASH->CR1 &= (uint8_t)(~FLASH_CR1_FIX);
+      000139 C6 50 5A         [ 1]  362 	ld	a, 0x505a
+      00013C A4 FE            [ 1]  363 	and	a, #0xfe
+      00013E C7 50 5A         [ 1]  364 	ld	0x505a, a
+                                    365 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 470: FLASH->CR1 |= (uint8_t)FLASH_ProgTime;
+      000141 C6 50 5A         [ 1]  366 	ld	a, 0x505a
+      000144 1A 03            [ 1]  367 	or	a, (0x03, sp)
+      000146 C7 50 5A         [ 1]  368 	ld	0x505a, a
+                                    369 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 471: }
+      000149 81               [ 4]  370 	ret
+                                    371 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 478: FLASH_LPMode_TypeDef FLASH_GetLowPowerMode(void)
+                                    372 ;	-----------------------------------------
+                                    373 ;	 function FLASH_GetLowPowerMode
+                                    374 ;	-----------------------------------------
+      00014A                        375 _FLASH_GetLowPowerMode:
+                                    376 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 480: return((FLASH_LPMode_TypeDef)(FLASH->CR1 & (uint8_t)(FLASH_CR1_HALT | FLASH_CR1_AHALT)));
+      00014A C6 50 5A         [ 1]  377 	ld	a, 0x505a
+      00014D A4 0C            [ 1]  378 	and	a, #0x0c
+                                    379 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 481: }
+      00014F 81               [ 4]  380 	ret
+                                    381 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 488: FLASH_ProgramTime_TypeDef FLASH_GetProgrammingTime(void)
+                                    382 ;	-----------------------------------------
+                                    383 ;	 function FLASH_GetProgrammingTime
+                                    384 ;	-----------------------------------------
+      000150                        385 _FLASH_GetProgrammingTime:
+                                    386 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 490: return((FLASH_ProgramTime_TypeDef)(FLASH->CR1 & FLASH_CR1_FIX));
+      000150 C6 50 5A         [ 1]  387 	ld	a, 0x505a
+      000153 A4 01            [ 1]  388 	and	a, #0x01
+                                    389 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 491: }
+      000155 81               [ 4]  390 	ret
+                                    391 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 498: uint32_t FLASH_GetBootSize(void)
+                                    392 ;	-----------------------------------------
+                                    393 ;	 function FLASH_GetBootSize
+                                    394 ;	-----------------------------------------
+      000156                        395 _FLASH_GetBootSize:
+      000156 52 04            [ 2]  396 	sub	sp, #4
+                                    397 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 503: temp = (uint32_t)((uint32_t)FLASH->FPR * (uint32_t)512);
+      000158 C6 50 5D         [ 1]  398 	ld	a, 0x505d
+      00015B 5F               [ 1]  399 	clrw	x
+      00015C 0F 04            [ 1]  400 	clr	(0x04, sp)
+      00015E 08 04            [ 1]  401 	sll	(0x04, sp)
+      000160 49               [ 1]  402 	rlc	a
+      000161 59               [ 2]  403 	rlcw	x
+      000162 90 95            [ 1]  404 	ld	yh, a
+      000164 7B 04            [ 1]  405 	ld	a, (0x04, sp)
+      000166 90 97            [ 1]  406 	ld	yl, a
+                                    407 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 506: if(FLASH->FPR == 0xFF)
+      000168 C6 50 5D         [ 1]  408 	ld	a, 0x505d
+      00016B 4C               [ 1]  409 	inc	a
+      00016C 26 0B            [ 1]  410 	jrne	00102$
+                                    411 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 508: temp += 512;
+      00016E 72 A9 02 00      [ 2]  412 	addw	y, #0x0200
+      000172 9F               [ 1]  413 	ld	a, xl
+      000173 A9 00            [ 1]  414 	adc	a, #0x00
+      000175 02               [ 1]  415 	rlwa	x
+      000176 A9 00            [ 1]  416 	adc	a, #0x00
+      000178 95               [ 1]  417 	ld	xh, a
+      000179                        418 00102$:
+                                    419 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 512: return(temp);
+      000179 51               [ 1]  420 	exgw	x, y
+                                    421 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 513: }
+      00017A 5B 04            [ 2]  422 	addw	sp, #4
+      00017C 81               [ 4]  423 	ret
+                                    424 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 523: FlagStatus FLASH_GetFlagStatus(FLASH_Flag_TypeDef FLASH_FLAG)
+                                    425 ;	-----------------------------------------
+                                    426 ;	 function FLASH_GetFlagStatus
+                                    427 ;	-----------------------------------------
+      00017D                        428 _FLASH_GetFlagStatus:
+                                    429 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 530: if((FLASH->IAPSR & (uint8_t)FLASH_FLAG) != (uint8_t)RESET)
+      00017D C6 50 5F         [ 1]  430 	ld	a, 0x505f
+      000180 14 03            [ 1]  431 	and	a, (0x03, sp)
+      000182 27 03            [ 1]  432 	jreq	00102$
+                                    433 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 532: status = SET; /* FLASH_FLAG is set */
+      000184 A6 01            [ 1]  434 	ld	a, #0x01
+      000186 81               [ 4]  435 	ret
+      000187                        436 00102$:
+                                    437 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 536: status = RESET; /* FLASH_FLAG is reset*/
+      000187 4F               [ 1]  438 	clr	a
+                                    439 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 540: return status;
+                                    440 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 541: }
+      000188 81               [ 4]  441 	ret
+                                    442 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 660: IN_RAM(FLASH_Status_TypeDef FLASH_WaitForLastOperation(FLASH_MemType_TypeDef FLASH_MemType)) 
+                                    443 ;	-----------------------------------------
+                                    444 ;	 function FLASH_WaitForLastOperation
+                                    445 ;	-----------------------------------------
+      000189                        446 _FLASH_WaitForLastOperation:
+                                    447 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 662: uint8_t flagstatus = 0x00;
+      000189 4F               [ 1]  448 	clr	a
+                                    449 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 688: while((flagstatus == 0x00) && (timeout != 0x00))
+      00018A 5F               [ 1]  450 	clrw	x
+      00018B 5A               [ 2]  451 	decw	x
+      00018C                        452 00102$:
+      00018C 4D               [ 1]  453 	tnz	a
+      00018D 26 0B            [ 1]  454 	jrne	00104$
+      00018F 5D               [ 2]  455 	tnzw	x
+      000190 27 08            [ 1]  456 	jreq	00104$
+                                    457 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 690: flagstatus = (uint8_t)(FLASH->IAPSR & (FLASH_IAPSR_EOP | FLASH_IAPSR_WR_PG_DIS));
+      000192 C6 50 5F         [ 1]  458 	ld	a, 0x505f
+      000195 A4 05            [ 1]  459 	and	a, #0x05
+                                    460 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 691: timeout--;
+      000197 5A               [ 2]  461 	decw	x
+      000198 20 F2            [ 2]  462 	jra	00102$
+      00019A                        463 00104$:
+                                    464 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 695: if(timeout == 0x00 )
+      00019A 5D               [ 2]  465 	tnzw	x
+      00019B 27 01            [ 1]  466 	jreq	00132$
+      00019D 81               [ 4]  467 	ret
+      00019E                        468 00132$:
+                                    469 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 697: flagstatus = FLASH_STATUS_TIMEOUT;
+      00019E A6 02            [ 1]  470 	ld	a, #0x02
+                                    471 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 700: return((FLASH_Status_TypeDef)flagstatus);
+                                    472 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 701: }
+      0001A0 81               [ 4]  473 	ret
+                                    474 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 710: IN_RAM(void FLASH_EraseBlock(uint16_t BlockNum, FLASH_MemType_TypeDef FLASH_MemType))
+                                    475 ;	-----------------------------------------
+                                    476 ;	 function FLASH_EraseBlock
+                                    477 ;	-----------------------------------------
+      0001A1                        478 _FLASH_EraseBlock:
+      0001A1 52 06            [ 2]  479 	sub	sp, #6
+                                    480 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 723: if(FLASH_MemType == FLASH_MEMTYPE_PROG)
+      0001A3 7B 0B            [ 1]  481 	ld	a, (0x0b, sp)
+      0001A5 A1 FD            [ 1]  482 	cp	a, #0xfd
+      0001A7 26 0A            [ 1]  483 	jrne	00102$
+                                    484 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 726: startaddress = FLASH_PROG_START_PHYSICAL_ADDRESS;
+      0001A9 AE 80 00         [ 2]  485 	ldw	x, #0x8000
+      0001AC 1F 03            [ 2]  486 	ldw	(0x03, sp), x
+      0001AE 5F               [ 1]  487 	clrw	x
+      0001AF 1F 01            [ 2]  488 	ldw	(0x01, sp), x
+      0001B1 20 08            [ 2]  489 	jra	00103$
+      0001B3                        490 00102$:
+                                    491 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 731: startaddress = FLASH_DATA_START_PHYSICAL_ADDRESS;
+      0001B3 AE 40 00         [ 2]  492 	ldw	x, #0x4000
+      0001B6 1F 03            [ 2]  493 	ldw	(0x03, sp), x
+      0001B8 5F               [ 1]  494 	clrw	x
+      0001B9 1F 01            [ 2]  495 	ldw	(0x01, sp), x
+      0001BB                        496 00103$:
+                                    497 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 739: pwFlash = (PointerAttr uint32_t *)(MemoryAddressCast)(startaddress + ((uint32_t)BlockNum * FLASH_BLOCK_SIZE));
+      0001BB 1E 09            [ 2]  498 	ldw	x, (0x09, sp)
+      0001BD 58               [ 2]  499 	sllw	x
+      0001BE 58               [ 2]  500 	sllw	x
+      0001BF 58               [ 2]  501 	sllw	x
+      0001C0 58               [ 2]  502 	sllw	x
+      0001C1 58               [ 2]  503 	sllw	x
+      0001C2 58               [ 2]  504 	sllw	x
+      0001C3 1F 05            [ 2]  505 	ldw	(0x05, sp), x
+      0001C5 7B 04            [ 1]  506 	ld	a, (0x04, sp)
+      0001C7 02               [ 1]  507 	rlwa	x
+      0001C8 7B 03            [ 1]  508 	ld	a, (0x03, sp)
+      0001CA 01               [ 1]  509 	rrwa	x
+      0001CB 97               [ 1]  510 	ld	xl, a
+      0001CC 72 FB 05         [ 2]  511 	addw	x, (0x05, sp)
+                                    512 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 743: FLASH->CR2 |= FLASH_CR2_ERASE;
+      0001CF 72 1A 50 5B      [ 1]  513 	bset	20571, #5
+                                    514 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 744: FLASH->NCR2 &= (uint8_t)(~FLASH_NCR2_NERASE);
+      0001D3 72 1B 50 5C      [ 1]  515 	bres	20572, #5
+                                    516 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 748: *pwFlash = (uint32_t)0;
+      0001D7 90 5F            [ 1]  517 	clrw	y
+      0001D9 EF 02            [ 2]  518 	ldw	(0x2, x), y
+      0001DB FF               [ 2]  519 	ldw	(x), y
+                                    520 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 756: }
+      0001DC 5B 06            [ 2]  521 	addw	sp, #6
+      0001DE 81               [ 4]  522 	ret
+                                    523 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 767: IN_RAM(void FLASH_ProgramBlock(uint16_t BlockNum, FLASH_MemType_TypeDef FLASH_MemType, 
+                                    524 ;	-----------------------------------------
+                                    525 ;	 function FLASH_ProgramBlock
+                                    526 ;	-----------------------------------------
+      0001DF                        527 _FLASH_ProgramBlock:
+      0001DF 52 08            [ 2]  528 	sub	sp, #8
+                                    529 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 776: if(FLASH_MemType == FLASH_MEMTYPE_PROG)
+      0001E1 7B 0D            [ 1]  530 	ld	a, (0x0d, sp)
+      0001E3 A1 FD            [ 1]  531 	cp	a, #0xfd
+      0001E5 26 0A            [ 1]  532 	jrne	00102$
+                                    533 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 779: startaddress = FLASH_PROG_START_PHYSICAL_ADDRESS;
+      0001E7 AE 80 00         [ 2]  534 	ldw	x, #0x8000
+      0001EA 1F 03            [ 2]  535 	ldw	(0x03, sp), x
+      0001EC 5F               [ 1]  536 	clrw	x
+      0001ED 1F 01            [ 2]  537 	ldw	(0x01, sp), x
+      0001EF 20 08            [ 2]  538 	jra	00103$
+      0001F1                        539 00102$:
+                                    540 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 784: startaddress = FLASH_DATA_START_PHYSICAL_ADDRESS;
+      0001F1 AE 40 00         [ 2]  541 	ldw	x, #0x4000
+      0001F4 1F 03            [ 2]  542 	ldw	(0x03, sp), x
+      0001F6 5F               [ 1]  543 	clrw	x
+      0001F7 1F 01            [ 2]  544 	ldw	(0x01, sp), x
+      0001F9                        545 00103$:
+                                    546 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 788: startaddress = startaddress + ((uint32_t)BlockNum * FLASH_BLOCK_SIZE);
+      0001F9 16 0B            [ 2]  547 	ldw	y, (0x0b, sp)
+      0001FB 5F               [ 1]  548 	clrw	x
+      0001FC 88               [ 1]  549 	push	a
+      0001FD A6 06            [ 1]  550 	ld	a, #0x06
+      0001FF                        551 00131$:
+      0001FF 90 58            [ 2]  552 	sllw	y
+      000201 59               [ 2]  553 	rlcw	x
+      000202 4A               [ 1]  554 	dec	a
+      000203 26 FA            [ 1]  555 	jrne	00131$
+      000205 17 08            [ 2]  556 	ldw	(0x08, sp), y
+      000207 84               [ 1]  557 	pop	a
+      000208 16 07            [ 2]  558 	ldw	y, (0x07, sp)
+      00020A 72 F9 03         [ 2]  559 	addw	y, (0x03, sp)
+      00020D 9F               [ 1]  560 	ld	a, xl
+      00020E 19 02            [ 1]  561 	adc	a, (0x02, sp)
+      000210 02               [ 1]  562 	rlwa	x
+      000211 19 01            [ 1]  563 	adc	a, (0x01, sp)
+      000213 95               [ 1]  564 	ld	xh, a
+      000214 17 03            [ 2]  565 	ldw	(0x03, sp), y
+      000216 1F 01            [ 2]  566 	ldw	(0x01, sp), x
+                                    567 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 794: FLASH->CR2 |= FLASH_CR2_PRG;
+      000218 C6 50 5B         [ 1]  568 	ld	a, 0x505b
+                                    569 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 791: if(FLASH_ProgMode == FLASH_PROGRAMMODE_STANDARD)
+      00021B 0D 0E            [ 1]  570 	tnz	(0x0e, sp)
+      00021D 26 0B            [ 1]  571 	jrne	00105$
+                                    572 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 794: FLASH->CR2 |= FLASH_CR2_PRG;
+      00021F AA 01            [ 1]  573 	or	a, #0x01
+      000221 C7 50 5B         [ 1]  574 	ld	0x505b, a
+                                    575 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 795: FLASH->NCR2 &= (uint8_t)(~FLASH_NCR2_NPRG);
+      000224 72 11 50 5C      [ 1]  576 	bres	20572, #0
+      000228 20 09            [ 2]  577 	jra	00114$
+      00022A                        578 00105$:
+                                    579 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 800: FLASH->CR2 |= FLASH_CR2_FPRG;
+      00022A AA 10            [ 1]  580 	or	a, #0x10
+      00022C C7 50 5B         [ 1]  581 	ld	0x505b, a
+                                    582 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 801: FLASH->NCR2 &= (uint8_t)(~FLASH_NCR2_NFPRG);
+      00022F 72 19 50 5C      [ 1]  583 	bres	20572, #4
+                                    584 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 805: for(Count = 0; Count < FLASH_BLOCK_SIZE; Count++)
+      000233                        585 00114$:
+      000233 90 5F            [ 1]  586 	clrw	y
+      000235                        587 00108$:
+                                    588 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 807: *((PointerAttr uint8_t*) (MemoryAddressCast)startaddress + Count) = ((uint8_t)(Buffer[Count]));
+      000235 1E 03            [ 2]  589 	ldw	x, (0x03, sp)
+      000237 1F 05            [ 2]  590 	ldw	(0x05, sp), x
+      000239 93               [ 1]  591 	ldw	x, y
+      00023A 72 FB 05         [ 2]  592 	addw	x, (0x05, sp)
+      00023D 1F 07            [ 2]  593 	ldw	(0x07, sp), x
+      00023F 93               [ 1]  594 	ldw	x, y
+      000240 72 FB 0F         [ 2]  595 	addw	x, (0x0f, sp)
+      000243 F6               [ 1]  596 	ld	a, (x)
+      000244 1E 07            [ 2]  597 	ldw	x, (0x07, sp)
+      000246 F7               [ 1]  598 	ld	(x), a
+                                    599 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 805: for(Count = 0; Count < FLASH_BLOCK_SIZE; Count++)
+      000247 90 5C            [ 1]  600 	incw	y
+      000249 90 A3 00 40      [ 2]  601 	cpw	y, #0x0040
+      00024D 25 E6            [ 1]  602 	jrc	00108$
+                                    603 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_flash.c: 809: }
+      00024F 5B 08            [ 2]  604 	addw	sp, #8
+      000251 81               [ 4]  605 	ret
+                                    606 	.area CODE
+                                    607 	.area CONST
+                                    608 	.area INITIALIZER
+                                    609 	.area CABS (ABS)

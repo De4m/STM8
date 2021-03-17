@@ -1,0 +1,566 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.8.4 #10766 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module main
+                                      6 	.optsdcc -mstm8
+                                      7 	
+                                      8 ;--------------------------------------------------------
+                                      9 ; Public variables in this module
+                                     10 ;--------------------------------------------------------
+                                     11 	.globl _main
+                                     12 	.globl _printf
+                                     13 	.globl _UART1_GetFlagStatus
+                                     14 	.globl _UART1_SendData8
+                                     15 	.globl _UART1_ReceiveData8
+                                     16 	.globl _UART1_Init
+                                     17 	.globl _UART1_DeInit
+                                     18 	.globl _GPIO_Init
+                                     19 	.globl _FLASH_WaitForLastOperation
+                                     20 	.globl _FLASH_ProgramOptionByte
+                                     21 	.globl _FLASH_ReadByte
+                                     22 	.globl _FLASH_Unlock
+                                     23 	.globl _CLK_HSIPrescalerConfig
+                                     24 	.globl _ADC1_StartConversion
+                                     25 	.globl _ADC1_ITConfig
+                                     26 	.globl _ADC1_Init
+                                     27 	.globl _ADC1_DeInit
+                                     28 	.globl _EndConversion
+                                     29 	.globl _Conversion_Value
+                                     30 	.globl _ADC_RegStatus_print
+                                     31 	.globl _putchar
+                                     32 	.globl _getchar
+                                     33 ;--------------------------------------------------------
+                                     34 ; ram data
+                                     35 ;--------------------------------------------------------
+                                     36 	.area DATA
+      000000                         37 _Conversion_Value::
+      000000                         38 	.ds 2
+      000002                         39 _EndConversion::
+      000002                         40 	.ds 1
+                                     41 ;--------------------------------------------------------
+                                     42 ; ram data
+                                     43 ;--------------------------------------------------------
+                                     44 	.area INITIALIZED
+                                     45 ;--------------------------------------------------------
+                                     46 ; Stack segment in internal ram 
+                                     47 ;--------------------------------------------------------
+                                     48 	.area	SSEG
+      000000                         49 __start__stack:
+      000000                         50 	.ds	1
+                                     51 
+                                     52 ;--------------------------------------------------------
+                                     53 ; absolute external ram data
+                                     54 ;--------------------------------------------------------
+                                     55 	.area DABS (ABS)
+                                     56 
+                                     57 ; default segment ordering for linker
+                                     58 	.area HOME
+                                     59 	.area GSINIT
+                                     60 	.area GSFINAL
+                                     61 	.area CONST
+                                     62 	.area INITIALIZER
+                                     63 	.area CODE
+                                     64 
+                                     65 ;--------------------------------------------------------
+                                     66 ; interrupt vector 
+                                     67 ;--------------------------------------------------------
+                                     68 	.area HOME
+      000000                         69 __interrupt_vect:
+      000000 82v00u00u00             70 	int s_GSINIT ; reset
+      000004 82v00u00u00             71 	int _TRAP_IRQHandler ; trap
+      000008 82v00u00u00             72 	int _TLI_IRQHandler ; int0
+      00000C 82v00u00u00             73 	int _AWU_IRQHandler ; int1
+      000010 82v00u00u00             74 	int _CLK_IRQHandler ; int2
+      000014 82v00u00u00             75 	int _EXTI_PORTA_IRQHandler ; int3
+      000018 82v00u00u00             76 	int _EXTI_PORTB_IRQHandler ; int4
+      00001C 82v00u00u00             77 	int _EXTI_PORTC_IRQHandler ; int5
+      000020 82v00u00u00             78 	int _EXTI_PORTD_IRQHandler ; int6
+      000024 82v00u00u00             79 	int _EXTI_PORTE_IRQHandler ; int7
+      000028 82 00 00 00             80 	int 0x000000 ; int8
+      00002C 82 00 00 00             81 	int 0x000000 ; int9
+      000030 82v00u00u00             82 	int _SPI_IRQHandler ; int10
+      000034 82v00u00u00             83 	int _TIM1_UPD_OVF_TRG_BRK_IRQHandler ; int11
+      000038 82v00u00u00             84 	int _TIM1_CAP_COM_IRQHandler ; int12
+      00003C 82v00u00u00             85 	int _TIM2_UPD_OVF_BRK_IRQHandler ; int13
+      000040 82v00u00u00             86 	int _TIM2_CAP_COM_IRQHandler ; int14
+      000044 82 00 00 00             87 	int 0x000000 ; int15
+      000048 82 00 00 00             88 	int 0x000000 ; int16
+      00004C 82v00u00u00             89 	int _UART1_TX_IRQHandler ; int17
+      000050 82v00u00u00             90 	int _UART1_RX_IRQHandler ; int18
+      000054 82v00u00u00             91 	int _I2C_IRQHandler ; int19
+      000058 82 00 00 00             92 	int 0x000000 ; int20
+      00005C 82 00 00 00             93 	int 0x000000 ; int21
+      000060 82v00u00u00             94 	int _ADC1_IRQHandler ; int22
+      000064 82v00u00u00             95 	int _TIM4_UPD_OVF_IRQHandler ; int23
+      000068 82v00u00u00             96 	int _EEPROM_EEC_IRQHandler ; int24
+                                     97 ;--------------------------------------------------------
+                                     98 ; global & static initialisations
+                                     99 ;--------------------------------------------------------
+                                    100 	.area HOME
+                                    101 	.area GSINIT
+                                    102 	.area GSFINAL
+                                    103 	.area GSINIT
+      000000                        104 __sdcc_gs_init_startup:
+      000000                        105 __sdcc_init_data:
+                                    106 ; stm8_genXINIT() start
+      000000 AEr00r00         [ 2]  107 	ldw x, #l_DATA
+      000003 27 07            [ 1]  108 	jreq	00002$
+      000005                        109 00001$:
+      000005 72 4FuFFuFF      [ 1]  110 	clr (s_DATA - 1, x)
+      000009 5A               [ 2]  111 	decw x
+      00000A 26 F9            [ 1]  112 	jrne	00001$
+      00000C                        113 00002$:
+      00000C AEr00r00         [ 2]  114 	ldw	x, #l_INITIALIZER
+      00000F 27 09            [ 1]  115 	jreq	00004$
+      000011                        116 00003$:
+      000011 D6uFFuFF         [ 1]  117 	ld	a, (s_INITIALIZER - 1, x)
+      000014 D7uFFuFF         [ 1]  118 	ld	(s_INITIALIZED - 1, x), a
+      000017 5A               [ 2]  119 	decw	x
+      000018 26 F7            [ 1]  120 	jrne	00003$
+      00001A                        121 00004$:
+                                    122 ; stm8_genXINIT() end
+                                    123 	.area GSFINAL
+      000000 CCr00r6C         [ 2]  124 	jp	__sdcc_program_startup
+                                    125 ;--------------------------------------------------------
+                                    126 ; Home
+                                    127 ;--------------------------------------------------------
+                                    128 	.area HOME
+                                    129 	.area HOME
+      00006C                        130 __sdcc_program_startup:
+      00006C CCr00r00         [ 2]  131 	jp	_main
+                                    132 ;	return from main will return to caller
+                                    133 ;--------------------------------------------------------
+                                    134 ; code
+                                    135 ;--------------------------------------------------------
+                                    136 	.area CODE
+                                    137 ;	src/main.c: 53: void main(void)
+                                    138 ;	-----------------------------------------
+                                    139 ;	 function main
+                                    140 ;	-----------------------------------------
+      000000                        141 _main:
+                                    142 ;	src/main.c: 69: __endasm;
+      000000 89               [ 2]  143 	pushw	x
+      000001 88               [ 1]  144 	push	a
+      000002 AE FF FF         [ 2]  145 	ldw	x, #0xFFFF
+      000005                        146 	      loop1:
+      000005 A6 32            [ 1]  147 	ld a, #50
+      000007                        148 	      loop2:
+      000007 4A               [ 1]  149 	dec a
+      000008 26 FD            [ 1]  150 	jrne	loop2
+      00000A 5A               [ 2]  151 	decw	x
+      00000B 26 F8            [ 1]  152 	jrne	loop1
+      00000D 84               [ 1]  153 	pop	a
+      00000E 85               [ 2]  154 	popw	x
+                                    155 ;	src/main.c: 73: OPT_Config();
+      00000F CDr00r6B         [ 4]  156 	call	_OPT_Config
+                                    157 ;	src/main.c: 75: GPIO_Config();
+      000012 CDr00r93         [ 4]  158 	call	_GPIO_Config
+                                    159 ;	src/main.c: 77: UART_Config();
+      000015 CDr00r94         [ 4]  160 	call	_UART_Config
+                                    161 ;	src/main.c: 79: ADC_Config();
+      000018 CDr00rB5         [ 4]  162 	call	_ADC_Config
+                                    163 ;	src/main.c: 82: printf("\n\r\n\r\n\r\n\r\n\r");  
+      00001B 4Br00            [ 1]  164 	push	#<(___str_0 + 0)
+      00001D 4Bs00            [ 1]  165 	push	#((___str_0 + 0) >> 8)
+      00001F CDr00r00         [ 4]  166 	call	_printf
+      000022 85               [ 2]  167 	popw	x
+                                    168 ;	src/main.c: 83: printf("\n\r================================    STM8S001    ===============================");
+      000023 4Br0B            [ 1]  169 	push	#<(___str_1 + 0)
+      000025 4Bs00            [ 1]  170 	push	#((___str_1 + 0) >> 8)
+      000027 CDr00r00         [ 4]  171 	call	_printf
+      00002A 85               [ 2]  172 	popw	x
+                                    173 ;	src/main.c: 84: printf("\n\r=  ACD Example : Single conversion with interrupt                             =");           
+      00002B 4Br5D            [ 1]  174 	push	#<(___str_2 + 0)
+      00002D 4Bs00            [ 1]  175 	push	#((___str_2 + 0) >> 8)
+      00002F CDr00r00         [ 4]  176 	call	_printf
+      000032 85               [ 2]  177 	popw	x
+                                    178 ;	src/main.c: 85: printf("\n\r=                                                                             =");
+      000033 4BrAF            [ 1]  179 	push	#<(___str_3 + 0)
+      000035 4Bs00            [ 1]  180 	push	#((___str_3 + 0) >> 8)
+      000037 CDr00r00         [ 4]  181 	call	_printf
+      00003A 85               [ 2]  182 	popw	x
+                                    183 ;	src/main.c: 86: printf("\n\r===============================================================================");
+      00003B 4Br01            [ 1]  184 	push	#<(___str_4 + 0)
+      00003D 4Bs01            [ 1]  185 	push	#((___str_4 + 0) >> 8)
+      00003F CDr00r00         [ 4]  186 	call	_printf
+      000042 85               [ 2]  187 	popw	x
+                                    188 ;	src/main.c: 90: while (1)
+      000043                        189 00104$:
+                                    190 ;	src/main.c: 93: if (EndConversion&1) //
+      000043 C6u00u02         [ 1]  191 	ld	a, _EndConversion+0
+      000046 44               [ 1]  192 	srl	a
+      000047 24 FA            [ 1]  193 	jrnc	00104$
+                                    194 ;	src/main.c: 95: printf("\n\rADC result:%x",Conversion_Value);
+      000049 CEu00u00         [ 2]  195 	ldw	x, _Conversion_Value+0
+      00004C 89               [ 2]  196 	pushw	x
+      00004D 4Br53            [ 1]  197 	push	#<(___str_5 + 0)
+      00004F 4Bs01            [ 1]  198 	push	#((___str_5 + 0) >> 8)
+      000051 CDr00r00         [ 4]  199 	call	_printf
+      000054 5B 04            [ 2]  200 	addw	sp, #4
+                                    201 ;	src/main.c: 96: EndConversion=0;
+      000056 72 5Fu00u02      [ 1]  202 	clr	_EndConversion+0
+                                    203 ;	src/main.c: 97: ADC1_ITConfig(ADC1_IT_EOCIE ,ENABLE);
+      00005A 4B 01            [ 1]  204 	push	#0x01
+      00005C 4B 20            [ 1]  205 	push	#0x20
+      00005E 4B 00            [ 1]  206 	push	#0x00
+      000060 CDr00r00         [ 4]  207 	call	_ADC1_ITConfig
+      000063 5B 03            [ 2]  208 	addw	sp, #3
+                                    209 ;	src/main.c: 98: ADC1_StartConversion();
+      000065 CDr00r00         [ 4]  210 	call	_ADC1_StartConversion
+      000068 20 D9            [ 2]  211 	jra	00104$
+                                    212 ;	src/main.c: 103: } 
+      00006A 81               [ 4]  213 	ret
+                                    214 ;	src/main.c: 105: void OPT_Config()
+                                    215 ;	-----------------------------------------
+                                    216 ;	 function OPT_Config
+                                    217 ;	-----------------------------------------
+      00006B                        218 _OPT_Config:
+                                    219 ;	src/main.c: 108: if(FLASH_ReadByte(OPT_Address) & 0x04) 
+      00006B 4B 03            [ 1]  220 	push	#0x03
+      00006D 4B 48            [ 1]  221 	push	#0x48
+      00006F 5F               [ 1]  222 	clrw	x
+      000070 89               [ 2]  223 	pushw	x
+      000071 CDr00r00         [ 4]  224 	call	_FLASH_ReadByte
+      000074 5B 04            [ 2]  225 	addw	sp, #4
+      000076 A5 04            [ 1]  226 	bcp	a, #0x04
+      000078 26 01            [ 1]  227 	jrne	00110$
+      00007A 81               [ 4]  228 	ret
+      00007B                        229 00110$:
+                                    230 ;	src/main.c: 110: FLASH_Unlock(FLASH_MEMTYPE_DATA); 
+      00007B 4B F7            [ 1]  231 	push	#0xf7
+      00007D CDr00r00         [ 4]  232 	call	_FLASH_Unlock
+      000080 84               [ 1]  233 	pop	a
+                                    234 ;	src/main.c: 112: FLASH_ProgramOptionByte(OPT_Address,4);             /* Enable [AIN2] */ 
+      000081 4B 04            [ 1]  235 	push	#0x04
+      000083 4B 03            [ 1]  236 	push	#0x03
+      000085 4B 48            [ 1]  237 	push	#0x48
+      000087 CDr00r00         [ 4]  238 	call	_FLASH_ProgramOptionByte
+      00008A 5B 03            [ 2]  239 	addw	sp, #3
+                                    240 ;	src/main.c: 113: FLASH_WaitForLastOperation(FLASH_MEMTYPE_DATA); 
+      00008C 4B F7            [ 1]  241 	push	#0xf7
+      00008E CDr00r00         [ 4]  242 	call	_FLASH_WaitForLastOperation
+      000091 84               [ 1]  243 	pop	a
+                                    244 ;	src/main.c: 115: }
+      000092 81               [ 4]  245 	ret
+                                    246 ;	src/main.c: 117: void GPIO_Config()
+                                    247 ;	-----------------------------------------
+                                    248 ;	 function GPIO_Config
+                                    249 ;	-----------------------------------------
+      000093                        250 _GPIO_Config:
+                                    251 ;	src/main.c: 121: }
+      000093 81               [ 4]  252 	ret
+                                    253 ;	src/main.c: 123: void UART_Config(void)
+                                    254 ;	-----------------------------------------
+                                    255 ;	 function UART_Config
+                                    256 ;	-----------------------------------------
+      000094                        257 _UART_Config:
+                                    258 ;	src/main.c: 126: CLK_HSIPrescalerConfig(CLK_PRESCALER_HSIDIV1);
+      000094 4B 00            [ 1]  259 	push	#0x00
+      000096 CDr00r00         [ 4]  260 	call	_CLK_HSIPrescalerConfig
+      000099 84               [ 1]  261 	pop	a
+                                    262 ;	src/main.c: 136: UART1_DeInit();
+      00009A CDr00r00         [ 4]  263 	call	_UART1_DeInit
+                                    264 ;	src/main.c: 137: UART1_Init((uint32_t)115200, UART1_WORDLENGTH_8D, UART1_STOPBITS_1, UART1_PARITY_NO,
+      00009D 4B 0C            [ 1]  265 	push	#0x0c
+      00009F 4B 80            [ 1]  266 	push	#0x80
+      0000A1 4B 00            [ 1]  267 	push	#0x00
+      0000A3 4B 00            [ 1]  268 	push	#0x00
+      0000A5 4B 00            [ 1]  269 	push	#0x00
+      0000A7 4B 00            [ 1]  270 	push	#0x00
+      0000A9 4B C2            [ 1]  271 	push	#0xc2
+      0000AB 4B 01            [ 1]  272 	push	#0x01
+      0000AD 4B 00            [ 1]  273 	push	#0x00
+      0000AF CDr00r00         [ 4]  274 	call	_UART1_Init
+      0000B2 5B 09            [ 2]  275 	addw	sp, #9
+                                    276 ;	src/main.c: 140: }
+      0000B4 81               [ 4]  277 	ret
+                                    278 ;	src/main.c: 142: void ADC_Config()
+                                    279 ;	-----------------------------------------
+                                    280 ;	 function ADC_Config
+                                    281 ;	-----------------------------------------
+      0000B5                        282 _ADC_Config:
+                                    283 ;	src/main.c: 146: GPIO_Init(GPIOC, GPIO_PIN_4, GPIO_MODE_IN_FL_NO_IT);
+      0000B5 4B 00            [ 1]  284 	push	#0x00
+      0000B7 4B 10            [ 1]  285 	push	#0x10
+      0000B9 4B 0A            [ 1]  286 	push	#0x0a
+      0000BB 4B 50            [ 1]  287 	push	#0x50
+      0000BD CDr00r00         [ 4]  288 	call	_GPIO_Init
+      0000C0 5B 04            [ 2]  289 	addw	sp, #4
+                                    290 ;	src/main.c: 149: ADC1_DeInit();
+      0000C2 CDr00r00         [ 4]  291 	call	_ADC1_DeInit
+                                    292 ;	src/main.c: 152: ADC1_Init(ADC1_CONVERSIONMODE_SINGLE, ADC1_CHANNEL_2, ADC1_PRESSEL_FCPU_D8, \
+      0000C5 4B 00            [ 1]  293 	push	#0x00
+      0000C7 4B 02            [ 1]  294 	push	#0x02
+      0000C9 4B 08            [ 1]  295 	push	#0x08
+      0000CB 4B 00            [ 1]  296 	push	#0x00
+      0000CD 4B 00            [ 1]  297 	push	#0x00
+      0000CF 4B 40            [ 1]  298 	push	#0x40
+      0000D1 4B 02            [ 1]  299 	push	#0x02
+      0000D3 4B 00            [ 1]  300 	push	#0x00
+      0000D5 CDr00r00         [ 4]  301 	call	_ADC1_Init
+      0000D8 5B 08            [ 2]  302 	addw	sp, #8
+                                    303 ;	src/main.c: 157: ADC1_ITConfig(ADC1_IT_EOCIE ,ENABLE);
+      0000DA 4B 01            [ 1]  304 	push	#0x01
+      0000DC 4B 20            [ 1]  305 	push	#0x20
+      0000DE 4B 00            [ 1]  306 	push	#0x00
+      0000E0 CDr00r00         [ 4]  307 	call	_ADC1_ITConfig
+      0000E3 5B 03            [ 2]  308 	addw	sp, #3
+                                    309 ;	src/main.c: 160: enableInterrupts();
+      0000E5 9A               [ 1]  310 	rim
+                                    311 ;	src/main.c: 163: ADC1_StartConversion();
+                                    312 ;	src/main.c: 165: }
+      0000E6 CCr00r00         [ 2]  313 	jp	_ADC1_StartConversion
+                                    314 ;	src/main.c: 167: void ADC_RegStatus_print(int num)
+                                    315 ;	-----------------------------------------
+                                    316 ;	 function ADC_RegStatus_print
+                                    317 ;	-----------------------------------------
+      0000E9                        318 _ADC_RegStatus_print:
+                                    319 ;	src/main.c: 171: printf("\n\r=========== %x",num) ; 
+      0000E9 1E 03            [ 2]  320 	ldw	x, (0x03, sp)
+      0000EB 89               [ 2]  321 	pushw	x
+      0000EC 4Br63            [ 1]  322 	push	#<(___str_6 + 0)
+      0000EE 4Bs01            [ 1]  323 	push	#((___str_6 + 0) >> 8)
+      0000F0 CDr00r00         [ 4]  324 	call	_printf
+      0000F3 5B 04            [ 2]  325 	addw	sp, #4
+                                    326 ;	src/main.c: 172: tmp = ADC1->CSR;
+      0000F5 C6 54 00         [ 1]  327 	ld	a, 0x5400
+      0000F8 5F               [ 1]  328 	clrw	x
+      0000F9 97               [ 1]  329 	ld	xl, a
+                                    330 ;	src/main.c: 173: printf ("\n\rADC1->CSR: %x",tmp);
+      0000FA 89               [ 2]  331 	pushw	x
+      0000FB 4Br74            [ 1]  332 	push	#<(___str_7 + 0)
+      0000FD 4Bs01            [ 1]  333 	push	#((___str_7 + 0) >> 8)
+      0000FF CDr00r00         [ 4]  334 	call	_printf
+      000102 5B 04            [ 2]  335 	addw	sp, #4
+                                    336 ;	src/main.c: 174: tmp = ADC1->CR1;
+      000104 C6 54 01         [ 1]  337 	ld	a, 0x5401
+      000107 5F               [ 1]  338 	clrw	x
+      000108 97               [ 1]  339 	ld	xl, a
+                                    340 ;	src/main.c: 175: printf ("\n\rADC1->CR1: %x",tmp);
+      000109 89               [ 2]  341 	pushw	x
+      00010A 4Br84            [ 1]  342 	push	#<(___str_8 + 0)
+      00010C 4Bs01            [ 1]  343 	push	#((___str_8 + 0) >> 8)
+      00010E CDr00r00         [ 4]  344 	call	_printf
+      000111 5B 04            [ 2]  345 	addw	sp, #4
+                                    346 ;	src/main.c: 176: tmp = ADC1->CR2;
+      000113 C6 54 02         [ 1]  347 	ld	a, 0x5402
+      000116 5F               [ 1]  348 	clrw	x
+      000117 97               [ 1]  349 	ld	xl, a
+                                    350 ;	src/main.c: 177: printf ("\n\rADC1->CR2: %x",tmp);
+      000118 89               [ 2]  351 	pushw	x
+      000119 4Br94            [ 1]  352 	push	#<(___str_9 + 0)
+      00011B 4Bs01            [ 1]  353 	push	#((___str_9 + 0) >> 8)
+      00011D CDr00r00         [ 4]  354 	call	_printf
+      000120 5B 04            [ 2]  355 	addw	sp, #4
+                                    356 ;	src/main.c: 178: tmp = ADC1->CR3;
+      000122 C6 54 03         [ 1]  357 	ld	a, 0x5403
+      000125 5F               [ 1]  358 	clrw	x
+      000126 97               [ 1]  359 	ld	xl, a
+                                    360 ;	src/main.c: 179: printf ("\n\rADC1->CR3: %x",tmp);   
+      000127 89               [ 2]  361 	pushw	x
+      000128 4BrA4            [ 1]  362 	push	#<(___str_10 + 0)
+      00012A 4Bs01            [ 1]  363 	push	#((___str_10 + 0) >> 8)
+      00012C CDr00r00         [ 4]  364 	call	_printf
+      00012F 5B 04            [ 2]  365 	addw	sp, #4
+                                    366 ;	src/main.c: 180: tmp = ADC1->DRH;
+      000131 C6 54 04         [ 1]  367 	ld	a, 0x5404
+      000134 5F               [ 1]  368 	clrw	x
+      000135 97               [ 1]  369 	ld	xl, a
+                                    370 ;	src/main.c: 181: printf ("\n\rADC1->DRH: %x",tmp);   
+      000136 89               [ 2]  371 	pushw	x
+      000137 4BrB4            [ 1]  372 	push	#<(___str_11 + 0)
+      000139 4Bs01            [ 1]  373 	push	#((___str_11 + 0) >> 8)
+      00013B CDr00r00         [ 4]  374 	call	_printf
+      00013E 5B 04            [ 2]  375 	addw	sp, #4
+                                    376 ;	src/main.c: 182: tmp = ADC1->DRL;
+      000140 C6 54 05         [ 1]  377 	ld	a, 0x5405
+      000143 5F               [ 1]  378 	clrw	x
+      000144 97               [ 1]  379 	ld	xl, a
+                                    380 ;	src/main.c: 183: printf ("\n\rADC1->DRL: %x",tmp); 
+      000145 89               [ 2]  381 	pushw	x
+      000146 4BrC4            [ 1]  382 	push	#<(___str_12 + 0)
+      000148 4Bs01            [ 1]  383 	push	#((___str_12 + 0) >> 8)
+      00014A CDr00r00         [ 4]  384 	call	_printf
+      00014D 5B 04            [ 2]  385 	addw	sp, #4
+                                    386 ;	src/main.c: 184: printf("\n\r") ; 
+      00014F 4BrD4            [ 1]  387 	push	#<(___str_13 + 0)
+      000151 4Bs01            [ 1]  388 	push	#((___str_13 + 0) >> 8)
+      000153 CDr00r00         [ 4]  389 	call	_printf
+      000156 85               [ 2]  390 	popw	x
+                                    391 ;	src/main.c: 185: }
+      000157 81               [ 4]  392 	ret
+                                    393 ;	src/main.c: 194: PUTCHAR_PROTOTYPE
+                                    394 ;	-----------------------------------------
+                                    395 ;	 function putchar
+                                    396 ;	-----------------------------------------
+      000158                        397 _putchar:
+                                    398 ;	src/main.c: 197: UART1_SendData8(c);
+      000158 7B 04            [ 1]  399 	ld	a, (0x04, sp)
+      00015A 88               [ 1]  400 	push	a
+      00015B CDr00r00         [ 4]  401 	call	_UART1_SendData8
+      00015E 84               [ 1]  402 	pop	a
+                                    403 ;	src/main.c: 199: while (UART1_GetFlagStatus(UART1_FLAG_TXE) == RESET);
+      00015F                        404 00101$:
+      00015F 4B 80            [ 1]  405 	push	#0x80
+      000161 4B 00            [ 1]  406 	push	#0x00
+      000163 CDr00r00         [ 4]  407 	call	_UART1_GetFlagStatus
+      000166 85               [ 2]  408 	popw	x
+      000167 4D               [ 1]  409 	tnz	a
+      000168 27 F5            [ 1]  410 	jreq	00101$
+                                    411 ;	src/main.c: 201: return (c);
+      00016A 1E 03            [ 2]  412 	ldw	x, (0x03, sp)
+                                    413 ;	src/main.c: 202: }
+      00016C 81               [ 4]  414 	ret
+                                    415 ;	src/main.c: 209: GETCHAR_PROTOTYPE
+                                    416 ;	-----------------------------------------
+                                    417 ;	 function getchar
+                                    418 ;	-----------------------------------------
+      00016D                        419 _getchar:
+                                    420 ;	src/main.c: 217: while (UART1_GetFlagStatus(UART1_FLAG_RXNE) == RESET);
+      00016D                        421 00101$:
+      00016D 4B 20            [ 1]  422 	push	#0x20
+      00016F 4B 00            [ 1]  423 	push	#0x00
+      000171 CDr00r00         [ 4]  424 	call	_UART1_GetFlagStatus
+      000174 85               [ 2]  425 	popw	x
+      000175 4D               [ 1]  426 	tnz	a
+      000176 27 F5            [ 1]  427 	jreq	00101$
+                                    428 ;	src/main.c: 218: c = UART1_ReceiveData8();
+      000178 CDr00r00         [ 4]  429 	call	_UART1_ReceiveData8
+      00017B 5F               [ 1]  430 	clrw	x
+      00017C 97               [ 1]  431 	ld	xl, a
+                                    432 ;	src/main.c: 219: return (c);
+                                    433 ;	src/main.c: 220: }
+      00017D 81               [ 4]  434 	ret
+                                    435 	.area CODE
+                                    436 	.area CONST
+      000000                        437 ___str_0:
+      000000 0A                     438 	.db 0x0a
+      000001 0D                     439 	.db 0x0d
+      000002 0A                     440 	.db 0x0a
+      000003 0D                     441 	.db 0x0d
+      000004 0A                     442 	.db 0x0a
+      000005 0D                     443 	.db 0x0d
+      000006 0A                     444 	.db 0x0a
+      000007 0D                     445 	.db 0x0d
+      000008 0A                     446 	.db 0x0a
+      000009 0D                     447 	.db 0x0d
+      00000A 00                     448 	.db 0x00
+      00000B                        449 ___str_1:
+      00000B 0A                     450 	.db 0x0a
+      00000C 0D                     451 	.db 0x0d
+      00000D 3D 3D 3D 3D 3D 3D 3D   452 	.ascii "================================    STM8S001    ============"
+             3D 3D 3D 3D 3D 3D 3D
+             3D 3D 3D 3D 3D 3D 3D
+             3D 3D 3D 3D 3D 3D 3D
+             3D 3D 3D 3D 20 20 20
+             20 53 54 4D 38 53 30
+             30 31 20 20 20 20 3D
+             3D 3D 3D 3D 3D 3D 3D
+             3D 3D 3D 3D
+      000049 3D 3D 3D 3D 3D 3D 3D   453 	.ascii "==================="
+             3D 3D 3D 3D 3D 3D 3D
+             3D 3D 3D 3D 3D
+      00005C 00                     454 	.db 0x00
+      00005D                        455 ___str_2:
+      00005D 0A                     456 	.db 0x0a
+      00005E 0D                     457 	.db 0x0d
+      00005F 3D 20 20 41 43 44 20   458 	.ascii "=  ACD Example : Single conversion with interrupt           "
+             45 78 61 6D 70 6C 65
+             20 3A 20 53 69 6E 67
+             6C 65 20 63 6F 6E 76
+             65 72 73 69 6F 6E 20
+             77 69 74 68 20 69 6E
+             74 65 72 72 75 70 74
+             20 20 20 20 20 20 20
+             20 20 20 20
+      00009B 20 20 20 20 20 20 20   459 	.ascii "                  ="
+             20 20 20 20 20 20 20
+             20 20 20 20 3D
+      0000AE 00                     460 	.db 0x00
+      0000AF                        461 ___str_3:
+      0000AF 0A                     462 	.db 0x0a
+      0000B0 0D                     463 	.db 0x0d
+      0000B1 3D 20 20 20 20 20 20   464 	.ascii "=                                                           "
+             20 20 20 20 20 20 20
+             20 20 20 20 20 20 20
+             20 20 20 20 20 20 20
+             20 20 20 20 20 20 20
+             20 20 20 20 20 20 20
+             20 20 20 20 20 20 20
+             20 20 20 20 20 20 20
+             20 20 20 20
+      0000ED 20 20 20 20 20 20 20   465 	.ascii "                  ="
+             20 20 20 20 20 20 20
+             20 20 20 20 3D
+      000100 00                     466 	.db 0x00
+      000101                        467 ___str_4:
+      000101 0A                     468 	.db 0x0a
+      000102 0D                     469 	.db 0x0d
+      000103 3D 3D 3D 3D 3D 3D 3D   470 	.ascii "============================================================"
+             3D 3D 3D 3D 3D 3D 3D
+             3D 3D 3D 3D 3D 3D 3D
+             3D 3D 3D 3D 3D 3D 3D
+             3D 3D 3D 3D 3D 3D 3D
+             3D 3D 3D 3D 3D 3D 3D
+             3D 3D 3D 3D 3D 3D 3D
+             3D 3D 3D 3D 3D 3D 3D
+             3D 3D 3D 3D
+      00013F 3D 3D 3D 3D 3D 3D 3D   471 	.ascii "==================="
+             3D 3D 3D 3D 3D 3D 3D
+             3D 3D 3D 3D 3D
+      000152 00                     472 	.db 0x00
+      000153                        473 ___str_5:
+      000153 0A                     474 	.db 0x0a
+      000154 0D                     475 	.db 0x0d
+      000155 41 44 43 20 72 65 73   476 	.ascii "ADC result:%x"
+             75 6C 74 3A 25 78
+      000162 00                     477 	.db 0x00
+      000163                        478 ___str_6:
+      000163 0A                     479 	.db 0x0a
+      000164 0D                     480 	.db 0x0d
+      000165 3D 3D 3D 3D 3D 3D 3D   481 	.ascii "=========== %x"
+             3D 3D 3D 3D 20 25 78
+      000173 00                     482 	.db 0x00
+      000174                        483 ___str_7:
+      000174 0A                     484 	.db 0x0a
+      000175 0D                     485 	.db 0x0d
+      000176 41 44 43 31 2D 3E 43   486 	.ascii "ADC1->CSR: %x"
+             53 52 3A 20 25 78
+      000183 00                     487 	.db 0x00
+      000184                        488 ___str_8:
+      000184 0A                     489 	.db 0x0a
+      000185 0D                     490 	.db 0x0d
+      000186 41 44 43 31 2D 3E 43   491 	.ascii "ADC1->CR1: %x"
+             52 31 3A 20 25 78
+      000193 00                     492 	.db 0x00
+      000194                        493 ___str_9:
+      000194 0A                     494 	.db 0x0a
+      000195 0D                     495 	.db 0x0d
+      000196 41 44 43 31 2D 3E 43   496 	.ascii "ADC1->CR2: %x"
+             52 32 3A 20 25 78
+      0001A3 00                     497 	.db 0x00
+      0001A4                        498 ___str_10:
+      0001A4 0A                     499 	.db 0x0a
+      0001A5 0D                     500 	.db 0x0d
+      0001A6 41 44 43 31 2D 3E 43   501 	.ascii "ADC1->CR3: %x"
+             52 33 3A 20 25 78
+      0001B3 00                     502 	.db 0x00
+      0001B4                        503 ___str_11:
+      0001B4 0A                     504 	.db 0x0a
+      0001B5 0D                     505 	.db 0x0d
+      0001B6 41 44 43 31 2D 3E 44   506 	.ascii "ADC1->DRH: %x"
+             52 48 3A 20 25 78
+      0001C3 00                     507 	.db 0x00
+      0001C4                        508 ___str_12:
+      0001C4 0A                     509 	.db 0x0a
+      0001C5 0D                     510 	.db 0x0d
+      0001C6 41 44 43 31 2D 3E 44   511 	.ascii "ADC1->DRL: %x"
+             52 4C 3A 20 25 78
+      0001D3 00                     512 	.db 0x00
+      0001D4                        513 ___str_13:
+      0001D4 0A                     514 	.db 0x0a
+      0001D5 0D                     515 	.db 0x0d
+      0001D6 00                     516 	.db 0x00
+                                    517 	.area INITIALIZER
+                                    518 	.area CABS (ABS)

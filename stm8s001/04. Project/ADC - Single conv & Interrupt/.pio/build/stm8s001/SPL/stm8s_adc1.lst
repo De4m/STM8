@@ -1,0 +1,1007 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.8.4 #10766 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module stm8s_adc1
+                                      6 	.optsdcc -mstm8
+                                      7 	
+                                      8 ;--------------------------------------------------------
+                                      9 ; Public variables in this module
+                                     10 ;--------------------------------------------------------
+                                     11 	.globl _ADC1_DeInit
+                                     12 	.globl _ADC1_Init
+                                     13 	.globl _ADC1_Cmd
+                                     14 	.globl _ADC1_ScanModeCmd
+                                     15 	.globl _ADC1_DataBufferCmd
+                                     16 	.globl _ADC1_ITConfig
+                                     17 	.globl _ADC1_PrescalerConfig
+                                     18 	.globl _ADC1_SchmittTriggerConfig
+                                     19 	.globl _ADC1_ConversionConfig
+                                     20 	.globl _ADC1_ExternalTriggerConfig
+                                     21 	.globl _ADC1_StartConversion
+                                     22 	.globl _ADC1_GetConversionValue
+                                     23 	.globl _ADC1_AWDChannelConfig
+                                     24 	.globl _ADC1_SetHighThreshold
+                                     25 	.globl _ADC1_SetLowThreshold
+                                     26 	.globl _ADC1_GetBufferValue
+                                     27 	.globl _ADC1_GetAWDChannelStatus
+                                     28 	.globl _ADC1_GetFlagStatus
+                                     29 	.globl _ADC1_ClearFlag
+                                     30 	.globl _ADC1_GetITStatus
+                                     31 	.globl _ADC1_ClearITPendingBit
+                                     32 ;--------------------------------------------------------
+                                     33 ; ram data
+                                     34 ;--------------------------------------------------------
+                                     35 	.area DATA
+                                     36 ;--------------------------------------------------------
+                                     37 ; ram data
+                                     38 ;--------------------------------------------------------
+                                     39 	.area INITIALIZED
+                                     40 ;--------------------------------------------------------
+                                     41 ; absolute external ram data
+                                     42 ;--------------------------------------------------------
+                                     43 	.area DABS (ABS)
+                                     44 
+                                     45 ; default segment ordering for linker
+                                     46 	.area HOME
+                                     47 	.area GSINIT
+                                     48 	.area GSFINAL
+                                     49 	.area CONST
+                                     50 	.area INITIALIZER
+                                     51 	.area CODE
+                                     52 
+                                     53 ;--------------------------------------------------------
+                                     54 ; global & static initialisations
+                                     55 ;--------------------------------------------------------
+                                     56 	.area HOME
+                                     57 	.area GSINIT
+                                     58 	.area GSFINAL
+                                     59 	.area GSINIT
+                                     60 ;--------------------------------------------------------
+                                     61 ; Home
+                                     62 ;--------------------------------------------------------
+                                     63 	.area HOME
+                                     64 	.area HOME
+                                     65 ;--------------------------------------------------------
+                                     66 ; code
+                                     67 ;--------------------------------------------------------
+                                     68 	.area CODE
+                                     69 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 52: void ADC1_DeInit(void)
+                                     70 ;	-----------------------------------------
+                                     71 ;	 function ADC1_DeInit
+                                     72 ;	-----------------------------------------
+      000000                         73 _ADC1_DeInit:
+                                     74 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 54: ADC1->CSR  = ADC1_CSR_RESET_VALUE;
+      000000 35 00 54 00      [ 1]   75 	mov	0x5400+0, #0x00
+                                     76 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 55: ADC1->CR1  = ADC1_CR1_RESET_VALUE;
+      000004 35 00 54 01      [ 1]   77 	mov	0x5401+0, #0x00
+                                     78 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 56: ADC1->CR2  = ADC1_CR2_RESET_VALUE;
+      000008 35 00 54 02      [ 1]   79 	mov	0x5402+0, #0x00
+                                     80 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 57: ADC1->CR3  = ADC1_CR3_RESET_VALUE;
+      00000C 35 00 54 03      [ 1]   81 	mov	0x5403+0, #0x00
+                                     82 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 58: ADC1->TDRH = ADC1_TDRH_RESET_VALUE;
+      000010 35 00 54 06      [ 1]   83 	mov	0x5406+0, #0x00
+                                     84 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 59: ADC1->TDRL = ADC1_TDRL_RESET_VALUE;
+      000014 35 00 54 07      [ 1]   85 	mov	0x5407+0, #0x00
+                                     86 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 60: ADC1->HTRH = ADC1_HTRH_RESET_VALUE;
+      000018 35 FF 54 08      [ 1]   87 	mov	0x5408+0, #0xff
+                                     88 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 61: ADC1->HTRL = ADC1_HTRL_RESET_VALUE;
+      00001C 35 03 54 09      [ 1]   89 	mov	0x5409+0, #0x03
+                                     90 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 62: ADC1->LTRH = ADC1_LTRH_RESET_VALUE;
+      000020 35 00 54 0A      [ 1]   91 	mov	0x540a+0, #0x00
+                                     92 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 63: ADC1->LTRL = ADC1_LTRL_RESET_VALUE;
+      000024 35 00 54 0B      [ 1]   93 	mov	0x540b+0, #0x00
+                                     94 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 64: ADC1->AWCRH = ADC1_AWCRH_RESET_VALUE;
+      000028 35 00 54 0E      [ 1]   95 	mov	0x540e+0, #0x00
+                                     96 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 65: ADC1->AWCRL = ADC1_AWCRL_RESET_VALUE;
+      00002C 35 00 54 0F      [ 1]   97 	mov	0x540f+0, #0x00
+                                     98 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 66: }
+      000030 81               [ 4]   99 	ret
+                                    100 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 88: void ADC1_Init(ADC1_ConvMode_TypeDef ADC1_ConversionMode, ADC1_Channel_TypeDef ADC1_Channel, ADC1_PresSel_TypeDef ADC1_PrescalerSelection, ADC1_ExtTrig_TypeDef ADC1_ExtTrigger, FunctionalState ADC1_ExtTriggerState, ADC1_Align_TypeDef ADC1_Align, ADC1_SchmittTrigg_TypeDef ADC1_SchmittTriggerChannel, FunctionalState ADC1_SchmittTriggerState)
+                                    101 ;	-----------------------------------------
+                                    102 ;	 function ADC1_Init
+                                    103 ;	-----------------------------------------
+      000031                        104 _ADC1_Init:
+                                    105 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 103: ADC1_ConversionConfig(ADC1_ConversionMode, ADC1_Channel, ADC1_Align);
+      000031 7B 08            [ 1]  106 	ld	a, (0x08, sp)
+      000033 88               [ 1]  107 	push	a
+      000034 7B 05            [ 1]  108 	ld	a, (0x05, sp)
+      000036 88               [ 1]  109 	push	a
+      000037 7B 05            [ 1]  110 	ld	a, (0x05, sp)
+      000039 88               [ 1]  111 	push	a
+      00003A CDr01r43         [ 4]  112 	call	_ADC1_ConversionConfig
+      00003D 5B 03            [ 2]  113 	addw	sp, #3
+                                    114 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 105: ADC1_PrescalerConfig(ADC1_PrescalerSelection);
+      00003F 7B 05            [ 1]  115 	ld	a, (0x05, sp)
+      000041 88               [ 1]  116 	push	a
+      000042 CDr00rB6         [ 4]  117 	call	_ADC1_PrescalerConfig
+      000045 84               [ 1]  118 	pop	a
+                                    119 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 110: ADC1_ExternalTriggerConfig(ADC1_ExtTrigger, ADC1_ExtTriggerState);
+      000046 7B 07            [ 1]  120 	ld	a, (0x07, sp)
+      000048 88               [ 1]  121 	push	a
+      000049 7B 07            [ 1]  122 	ld	a, (0x07, sp)
+      00004B 88               [ 1]  123 	push	a
+      00004C CDr01r76         [ 4]  124 	call	_ADC1_ExternalTriggerConfig
+      00004F 85               [ 2]  125 	popw	x
+                                    126 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 115: ADC1_SchmittTriggerConfig(ADC1_SchmittTriggerChannel, ADC1_SchmittTriggerState);
+      000050 7B 0A            [ 1]  127 	ld	a, (0x0a, sp)
+      000052 88               [ 1]  128 	push	a
+      000053 7B 0A            [ 1]  129 	ld	a, (0x0a, sp)
+      000055 88               [ 1]  130 	push	a
+      000056 CDr00rC7         [ 4]  131 	call	_ADC1_SchmittTriggerConfig
+      000059 85               [ 2]  132 	popw	x
+                                    133 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 118: ADC1->CR1 |= ADC1_CR1_ADON;
+      00005A 72 10 54 01      [ 1]  134 	bset	21505, #0
+                                    135 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 119: }
+      00005E 81               [ 4]  136 	ret
+                                    137 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 126: void ADC1_Cmd(FunctionalState NewState)
+                                    138 ;	-----------------------------------------
+                                    139 ;	 function ADC1_Cmd
+                                    140 ;	-----------------------------------------
+      00005F                        141 _ADC1_Cmd:
+                                    142 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 133: ADC1->CR1 |= ADC1_CR1_ADON;
+      00005F C6 54 01         [ 1]  143 	ld	a, 0x5401
+                                    144 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 131: if (NewState != DISABLE)
+      000062 0D 03            [ 1]  145 	tnz	(0x03, sp)
+      000064 27 06            [ 1]  146 	jreq	00102$
+                                    147 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 133: ADC1->CR1 |= ADC1_CR1_ADON;
+      000066 AA 01            [ 1]  148 	or	a, #0x01
+      000068 C7 54 01         [ 1]  149 	ld	0x5401, a
+      00006B 81               [ 4]  150 	ret
+      00006C                        151 00102$:
+                                    152 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 137: ADC1->CR1 &= (uint8_t)(~ADC1_CR1_ADON);
+      00006C A4 FE            [ 1]  153 	and	a, #0xfe
+      00006E C7 54 01         [ 1]  154 	ld	0x5401, a
+                                    155 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 139: }
+      000071 81               [ 4]  156 	ret
+                                    157 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 146: void ADC1_ScanModeCmd(FunctionalState NewState)
+                                    158 ;	-----------------------------------------
+                                    159 ;	 function ADC1_ScanModeCmd
+                                    160 ;	-----------------------------------------
+      000072                        161 _ADC1_ScanModeCmd:
+                                    162 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 153: ADC1->CR2 |= ADC1_CR2_SCAN;
+      000072 C6 54 02         [ 1]  163 	ld	a, 0x5402
+                                    164 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 151: if (NewState != DISABLE)
+      000075 0D 03            [ 1]  165 	tnz	(0x03, sp)
+      000077 27 06            [ 1]  166 	jreq	00102$
+                                    167 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 153: ADC1->CR2 |= ADC1_CR2_SCAN;
+      000079 AA 02            [ 1]  168 	or	a, #0x02
+      00007B C7 54 02         [ 1]  169 	ld	0x5402, a
+      00007E 81               [ 4]  170 	ret
+      00007F                        171 00102$:
+                                    172 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 157: ADC1->CR2 &= (uint8_t)(~ADC1_CR2_SCAN);
+      00007F A4 FD            [ 1]  173 	and	a, #0xfd
+      000081 C7 54 02         [ 1]  174 	ld	0x5402, a
+                                    175 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 159: }
+      000084 81               [ 4]  176 	ret
+                                    177 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 166: void ADC1_DataBufferCmd(FunctionalState NewState)
+                                    178 ;	-----------------------------------------
+                                    179 ;	 function ADC1_DataBufferCmd
+                                    180 ;	-----------------------------------------
+      000085                        181 _ADC1_DataBufferCmd:
+                                    182 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 173: ADC1->CR3 |= ADC1_CR3_DBUF;
+      000085 C6 54 03         [ 1]  183 	ld	a, 0x5403
+                                    184 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 171: if (NewState != DISABLE)
+      000088 0D 03            [ 1]  185 	tnz	(0x03, sp)
+      00008A 27 06            [ 1]  186 	jreq	00102$
+                                    187 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 173: ADC1->CR3 |= ADC1_CR3_DBUF;
+      00008C AA 80            [ 1]  188 	or	a, #0x80
+      00008E C7 54 03         [ 1]  189 	ld	0x5403, a
+      000091 81               [ 4]  190 	ret
+      000092                        191 00102$:
+                                    192 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 177: ADC1->CR3 &= (uint8_t)(~ADC1_CR3_DBUF);
+      000092 A4 7F            [ 1]  193 	and	a, #0x7f
+      000094 C7 54 03         [ 1]  194 	ld	0x5403, a
+                                    195 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 179: }
+      000097 81               [ 4]  196 	ret
+                                    197 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 190: void ADC1_ITConfig(ADC1_IT_TypeDef ADC1_IT, FunctionalState NewState)
+                                    198 ;	-----------------------------------------
+                                    199 ;	 function ADC1_ITConfig
+                                    200 ;	-----------------------------------------
+      000098                        201 _ADC1_ITConfig:
+      000098 88               [ 1]  202 	push	a
+                                    203 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 199: ADC1->CSR |= (uint8_t)ADC1_IT;
+      000099 C6 54 00         [ 1]  204 	ld	a, 0x5400
+      00009C 6B 01            [ 1]  205 	ld	(0x01, sp), a
+                                    206 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 196: if (NewState != DISABLE)
+      00009E 0D 06            [ 1]  207 	tnz	(0x06, sp)
+      0000A0 27 09            [ 1]  208 	jreq	00102$
+                                    209 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 199: ADC1->CSR |= (uint8_t)ADC1_IT;
+      0000A2 7B 05            [ 1]  210 	ld	a, (0x05, sp)
+      0000A4 1A 01            [ 1]  211 	or	a, (0x01, sp)
+      0000A6 C7 54 00         [ 1]  212 	ld	0x5400, a
+      0000A9 20 09            [ 2]  213 	jra	00104$
+      0000AB                        214 00102$:
+                                    215 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 204: ADC1->CSR &= (uint8_t)((uint16_t)~(uint16_t)ADC1_IT);
+      0000AB 1E 04            [ 2]  216 	ldw	x, (0x04, sp)
+      0000AD 53               [ 2]  217 	cplw	x
+      0000AE 9F               [ 1]  218 	ld	a, xl
+      0000AF 14 01            [ 1]  219 	and	a, (0x01, sp)
+      0000B1 C7 54 00         [ 1]  220 	ld	0x5400, a
+      0000B4                        221 00104$:
+                                    222 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 206: }
+      0000B4 84               [ 1]  223 	pop	a
+      0000B5 81               [ 4]  224 	ret
+                                    225 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 214: void ADC1_PrescalerConfig(ADC1_PresSel_TypeDef ADC1_Prescaler)
+                                    226 ;	-----------------------------------------
+                                    227 ;	 function ADC1_PrescalerConfig
+                                    228 ;	-----------------------------------------
+      0000B6                        229 _ADC1_PrescalerConfig:
+                                    230 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 220: ADC1->CR1 &= (uint8_t)(~ADC1_CR1_SPSEL);
+      0000B6 C6 54 01         [ 1]  231 	ld	a, 0x5401
+      0000B9 A4 8F            [ 1]  232 	and	a, #0x8f
+      0000BB C7 54 01         [ 1]  233 	ld	0x5401, a
+                                    234 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 222: ADC1->CR1 |= (uint8_t)(ADC1_Prescaler);
+      0000BE C6 54 01         [ 1]  235 	ld	a, 0x5401
+      0000C1 1A 03            [ 1]  236 	or	a, (0x03, sp)
+      0000C3 C7 54 01         [ 1]  237 	ld	0x5401, a
+                                    238 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 223: }
+      0000C6 81               [ 4]  239 	ret
+                                    240 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 233: void ADC1_SchmittTriggerConfig(ADC1_SchmittTrigg_TypeDef ADC1_SchmittTriggerChannel, FunctionalState NewState)
+                                    241 ;	-----------------------------------------
+                                    242 ;	 function ADC1_SchmittTriggerConfig
+                                    243 ;	-----------------------------------------
+      0000C7                        244 _ADC1_SchmittTriggerConfig:
+      0000C7 88               [ 1]  245 	push	a
+                                    246 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 239: if (ADC1_SchmittTriggerChannel == ADC1_SCHMITTTRIG_ALL)
+      0000C8 7B 04            [ 1]  247 	ld	a, (0x04, sp)
+      0000CA 4C               [ 1]  248 	inc	a
+      0000CB 26 21            [ 1]  249 	jrne	00114$
+                                    250 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 243: ADC1->TDRL &= (uint8_t)0x0;
+      0000CD C6 54 07         [ 1]  251 	ld	a, 0x5407
+                                    252 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 241: if (NewState != DISABLE)
+      0000D0 0D 05            [ 1]  253 	tnz	(0x05, sp)
+      0000D2 27 0D            [ 1]  254 	jreq	00102$
+                                    255 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 243: ADC1->TDRL &= (uint8_t)0x0;
+      0000D4 35 00 54 07      [ 1]  256 	mov	0x5407+0, #0x00
+                                    257 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 244: ADC1->TDRH &= (uint8_t)0x0;
+      0000D8 C6 54 06         [ 1]  258 	ld	a, 0x5406
+      0000DB 35 00 54 06      [ 1]  259 	mov	0x5406+0, #0x00
+      0000DF 20 60            [ 2]  260 	jra	00116$
+      0000E1                        261 00102$:
+                                    262 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 248: ADC1->TDRL |= (uint8_t)0xFF;
+      0000E1 35 FF 54 07      [ 1]  263 	mov	0x5407+0, #0xff
+                                    264 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 249: ADC1->TDRH |= (uint8_t)0xFF;
+      0000E5 C6 54 06         [ 1]  265 	ld	a, 0x5406
+      0000E8 35 FF 54 06      [ 1]  266 	mov	0x5406+0, #0xff
+      0000EC 20 53            [ 2]  267 	jra	00116$
+      0000EE                        268 00114$:
+                                    269 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 252: else if (ADC1_SchmittTriggerChannel < ADC1_SCHMITTTRIG_CHANNEL8)
+      0000EE 7B 04            [ 1]  270 	ld	a, (0x04, sp)
+      0000F0 A1 08            [ 1]  271 	cp	a, #0x08
+      0000F2 24 25            [ 1]  272 	jrnc	00111$
+                                    273 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 243: ADC1->TDRL &= (uint8_t)0x0;
+      0000F4 C6 54 07         [ 1]  274 	ld	a, 0x5407
+      0000F7 6B 01            [ 1]  275 	ld	(0x01, sp), a
+                                    276 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 256: ADC1->TDRL &= (uint8_t)(~(uint8_t)((uint8_t)0x01 << (uint8_t)ADC1_SchmittTriggerChannel));
+      0000F9 A6 01            [ 1]  277 	ld	a, #0x01
+      0000FB 88               [ 1]  278 	push	a
+      0000FC 7B 05            [ 1]  279 	ld	a, (0x05, sp)
+      0000FE 27 05            [ 1]  280 	jreq	00149$
+      000100                        281 00148$:
+      000100 08 01            [ 1]  282 	sll	(1, sp)
+      000102 4A               [ 1]  283 	dec	a
+      000103 26 FB            [ 1]  284 	jrne	00148$
+      000105                        285 00149$:
+      000105 84               [ 1]  286 	pop	a
+                                    287 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 254: if (NewState != DISABLE)
+      000106 0D 05            [ 1]  288 	tnz	(0x05, sp)
+      000108 27 08            [ 1]  289 	jreq	00105$
+                                    290 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 256: ADC1->TDRL &= (uint8_t)(~(uint8_t)((uint8_t)0x01 << (uint8_t)ADC1_SchmittTriggerChannel));
+      00010A 43               [ 1]  291 	cpl	a
+      00010B 14 01            [ 1]  292 	and	a, (0x01, sp)
+      00010D C7 54 07         [ 1]  293 	ld	0x5407, a
+      000110 20 2F            [ 2]  294 	jra	00116$
+      000112                        295 00105$:
+                                    296 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 260: ADC1->TDRL |= (uint8_t)((uint8_t)0x01 << (uint8_t)ADC1_SchmittTriggerChannel);
+      000112 1A 01            [ 1]  297 	or	a, (0x01, sp)
+      000114 C7 54 07         [ 1]  298 	ld	0x5407, a
+      000117 20 28            [ 2]  299 	jra	00116$
+      000119                        300 00111$:
+                                    301 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 244: ADC1->TDRH &= (uint8_t)0x0;
+      000119 C6 54 06         [ 1]  302 	ld	a, 0x5406
+      00011C 6B 01            [ 1]  303 	ld	(0x01, sp), a
+                                    304 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 267: ADC1->TDRH &= (uint8_t)(~(uint8_t)((uint8_t)0x01 << ((uint8_t)ADC1_SchmittTriggerChannel - (uint8_t)8)));
+      00011E 7B 04            [ 1]  305 	ld	a, (0x04, sp)
+      000120 A0 08            [ 1]  306 	sub	a, #0x08
+      000122 97               [ 1]  307 	ld	xl, a
+      000123 A6 01            [ 1]  308 	ld	a, #0x01
+      000125 88               [ 1]  309 	push	a
+      000126 9F               [ 1]  310 	ld	a, xl
+      000127 4D               [ 1]  311 	tnz	a
+      000128 27 05            [ 1]  312 	jreq	00152$
+      00012A                        313 00151$:
+      00012A 08 01            [ 1]  314 	sll	(1, sp)
+      00012C 4A               [ 1]  315 	dec	a
+      00012D 26 FB            [ 1]  316 	jrne	00151$
+      00012F                        317 00152$:
+      00012F 84               [ 1]  318 	pop	a
+                                    319 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 265: if (NewState != DISABLE)
+      000130 0D 05            [ 1]  320 	tnz	(0x05, sp)
+      000132 27 08            [ 1]  321 	jreq	00108$
+                                    322 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 267: ADC1->TDRH &= (uint8_t)(~(uint8_t)((uint8_t)0x01 << ((uint8_t)ADC1_SchmittTriggerChannel - (uint8_t)8)));
+      000134 43               [ 1]  323 	cpl	a
+      000135 14 01            [ 1]  324 	and	a, (0x01, sp)
+      000137 C7 54 06         [ 1]  325 	ld	0x5406, a
+      00013A 20 05            [ 2]  326 	jra	00116$
+      00013C                        327 00108$:
+                                    328 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 271: ADC1->TDRH |= (uint8_t)((uint8_t)0x01 << ((uint8_t)ADC1_SchmittTriggerChannel - (uint8_t)8));
+      00013C 1A 01            [ 1]  329 	or	a, (0x01, sp)
+      00013E C7 54 06         [ 1]  330 	ld	0x5406, a
+      000141                        331 00116$:
+                                    332 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 274: }
+      000141 84               [ 1]  333 	pop	a
+      000142 81               [ 4]  334 	ret
+                                    335 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 286: void ADC1_ConversionConfig(ADC1_ConvMode_TypeDef ADC1_ConversionMode, ADC1_Channel_TypeDef ADC1_Channel, ADC1_Align_TypeDef ADC1_Align)
+                                    336 ;	-----------------------------------------
+                                    337 ;	 function ADC1_ConversionConfig
+                                    338 ;	-----------------------------------------
+      000143                        339 _ADC1_ConversionConfig:
+                                    340 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 294: ADC1->CR2 &= (uint8_t)(~ADC1_CR2_ALIGN);
+      000143 72 17 54 02      [ 1]  341 	bres	21506, #3
+                                    342 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 296: ADC1->CR2 |= (uint8_t)(ADC1_Align);
+      000147 C6 54 02         [ 1]  343 	ld	a, 0x5402
+      00014A 1A 05            [ 1]  344 	or	a, (0x05, sp)
+      00014C C7 54 02         [ 1]  345 	ld	0x5402, a
+                                    346 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 301: ADC1->CR1 |= ADC1_CR1_CONT;
+      00014F C6 54 01         [ 1]  347 	ld	a, 0x5401
+                                    348 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 298: if (ADC1_ConversionMode == ADC1_CONVERSIONMODE_CONTINUOUS)
+      000152 88               [ 1]  349 	push	a
+      000153 7B 04            [ 1]  350 	ld	a, (0x04, sp)
+      000155 4A               [ 1]  351 	dec	a
+      000156 84               [ 1]  352 	pop	a
+      000157 26 07            [ 1]  353 	jrne	00102$
+                                    354 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 301: ADC1->CR1 |= ADC1_CR1_CONT;
+      000159 AA 02            [ 1]  355 	or	a, #0x02
+      00015B C7 54 01         [ 1]  356 	ld	0x5401, a
+      00015E 20 05            [ 2]  357 	jra	00103$
+      000160                        358 00102$:
+                                    359 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 306: ADC1->CR1 &= (uint8_t)(~ADC1_CR1_CONT);
+      000160 A4 FD            [ 1]  360 	and	a, #0xfd
+      000162 C7 54 01         [ 1]  361 	ld	0x5401, a
+      000165                        362 00103$:
+                                    363 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 310: ADC1->CSR &= (uint8_t)(~ADC1_CSR_CH);
+      000165 C6 54 00         [ 1]  364 	ld	a, 0x5400
+      000168 A4 F0            [ 1]  365 	and	a, #0xf0
+      00016A C7 54 00         [ 1]  366 	ld	0x5400, a
+                                    367 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 312: ADC1->CSR |= (uint8_t)(ADC1_Channel);
+      00016D C6 54 00         [ 1]  368 	ld	a, 0x5400
+      000170 1A 04            [ 1]  369 	or	a, (0x04, sp)
+      000172 C7 54 00         [ 1]  370 	ld	0x5400, a
+                                    371 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 313: }
+      000175 81               [ 4]  372 	ret
+                                    373 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 325: void ADC1_ExternalTriggerConfig(ADC1_ExtTrig_TypeDef ADC1_ExtTrigger, FunctionalState NewState)
+                                    374 ;	-----------------------------------------
+                                    375 ;	 function ADC1_ExternalTriggerConfig
+                                    376 ;	-----------------------------------------
+      000176                        377 _ADC1_ExternalTriggerConfig:
+                                    378 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 332: ADC1->CR2 &= (uint8_t)(~ADC1_CR2_EXTSEL);
+      000176 C6 54 02         [ 1]  379 	ld	a, 0x5402
+      000179 A4 CF            [ 1]  380 	and	a, #0xcf
+      00017B C7 54 02         [ 1]  381 	ld	0x5402, a
+      00017E C6 54 02         [ 1]  382 	ld	a, 0x5402
+                                    383 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 334: if (NewState != DISABLE)
+      000181 0D 04            [ 1]  384 	tnz	(0x04, sp)
+      000183 27 07            [ 1]  385 	jreq	00102$
+                                    386 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 337: ADC1->CR2 |= (uint8_t)(ADC1_CR2_EXTTRIG);
+      000185 AA 40            [ 1]  387 	or	a, #0x40
+      000187 C7 54 02         [ 1]  388 	ld	0x5402, a
+      00018A 20 05            [ 2]  389 	jra	00103$
+      00018C                        390 00102$:
+                                    391 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 342: ADC1->CR2 &= (uint8_t)(~ADC1_CR2_EXTTRIG);
+      00018C A4 BF            [ 1]  392 	and	a, #0xbf
+      00018E C7 54 02         [ 1]  393 	ld	0x5402, a
+      000191                        394 00103$:
+                                    395 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 346: ADC1->CR2 |= (uint8_t)(ADC1_ExtTrigger);
+      000191 C6 54 02         [ 1]  396 	ld	a, 0x5402
+      000194 1A 03            [ 1]  397 	or	a, (0x03, sp)
+      000196 C7 54 02         [ 1]  398 	ld	0x5402, a
+                                    399 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 347: }
+      000199 81               [ 4]  400 	ret
+                                    401 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 358: void ADC1_StartConversion(void)
+                                    402 ;	-----------------------------------------
+                                    403 ;	 function ADC1_StartConversion
+                                    404 ;	-----------------------------------------
+      00019A                        405 _ADC1_StartConversion:
+                                    406 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 360: ADC1->CR1 |= ADC1_CR1_ADON;
+      00019A 72 10 54 01      [ 1]  407 	bset	21505, #0
+                                    408 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 361: }
+      00019E 81               [ 4]  409 	ret
+                                    410 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 370: uint16_t ADC1_GetConversionValue(void)
+                                    411 ;	-----------------------------------------
+                                    412 ;	 function ADC1_GetConversionValue
+                                    413 ;	-----------------------------------------
+      00019F                        414 _ADC1_GetConversionValue:
+      00019F 52 04            [ 2]  415 	sub	sp, #4
+                                    416 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 375: if ((ADC1->CR2 & ADC1_CR2_ALIGN) != 0) /* Right alignment */
+      0001A1 C6 54 02         [ 1]  417 	ld	a, 0x5402
+      0001A4 A5 08            [ 1]  418 	bcp	a, #0x08
+      0001A6 27 1B            [ 1]  419 	jreq	00102$
+                                    420 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 378: templ = ADC1->DRL;
+      0001A8 C6 54 05         [ 1]  421 	ld	a, 0x5405
+      0001AB 97               [ 1]  422 	ld	xl, a
+                                    423 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 380: temph = ADC1->DRH;
+      0001AC C6 54 04         [ 1]  424 	ld	a, 0x5404
+                                    425 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 382: temph = (uint16_t)(templ | (uint16_t)(temph << (uint8_t)8));
+      0001AF 0F 02            [ 1]  426 	clr	(0x02, sp)
+      0001B1 41               [ 1]  427 	exg	a, xl
+      0001B2 6B 04            [ 1]  428 	ld	(0x04, sp), a
+      0001B4 41               [ 1]  429 	exg	a, xl
+      0001B5 0F 03            [ 1]  430 	clr	(0x03, sp)
+      0001B7 1A 03            [ 1]  431 	or	a, (0x03, sp)
+      0001B9 95               [ 1]  432 	ld	xh, a
+      0001BA 7B 04            [ 1]  433 	ld	a, (0x04, sp)
+      0001BC 1A 02            [ 1]  434 	or	a, (0x02, sp)
+      0001BE 97               [ 1]  435 	ld	xl, a
+      0001BF 1F 03            [ 2]  436 	ldw	(0x03, sp), x
+      0001C1 20 1D            [ 2]  437 	jra	00103$
+      0001C3                        438 00102$:
+                                    439 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 387: temph = ADC1->DRH;
+      0001C3 C6 54 04         [ 1]  440 	ld	a, 0x5404
+      0001C6 5F               [ 1]  441 	clrw	x
+      0001C7 97               [ 1]  442 	ld	xl, a
+      0001C8 51               [ 1]  443 	exgw	x, y
+                                    444 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 389: templ = ADC1->DRL;
+      0001C9 C6 54 05         [ 1]  445 	ld	a, 0x5405
+                                    446 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 391: temph = (uint16_t)((uint16_t)((uint16_t)templ << 6) | (uint16_t)((uint16_t)temph << 8));
+      0001CC 5F               [ 1]  447 	clrw	x
+      0001CD 97               [ 1]  448 	ld	xl, a
+      0001CE 58               [ 2]  449 	sllw	x
+      0001CF 58               [ 2]  450 	sllw	x
+      0001D0 58               [ 2]  451 	sllw	x
+      0001D1 58               [ 2]  452 	sllw	x
+      0001D2 58               [ 2]  453 	sllw	x
+      0001D3 58               [ 2]  454 	sllw	x
+      0001D4 1F 03            [ 2]  455 	ldw	(0x03, sp), x
+      0001D6 7B 04            [ 1]  456 	ld	a, (0x04, sp)
+      0001D8 97               [ 1]  457 	ld	xl, a
+      0001D9 90 9F            [ 1]  458 	ld	a, yl
+      0001DB 1A 03            [ 1]  459 	or	a, (0x03, sp)
+      0001DD 95               [ 1]  460 	ld	xh, a
+      0001DE 1F 03            [ 2]  461 	ldw	(0x03, sp), x
+      0001E0                        462 00103$:
+                                    463 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 394: return ((uint16_t)temph);
+      0001E0 1E 03            [ 2]  464 	ldw	x, (0x03, sp)
+                                    465 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 395: }
+      0001E2 5B 04            [ 2]  466 	addw	sp, #4
+      0001E4 81               [ 4]  467 	ret
+                                    468 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 405: void ADC1_AWDChannelConfig(ADC1_Channel_TypeDef Channel, FunctionalState NewState)
+                                    469 ;	-----------------------------------------
+                                    470 ;	 function ADC1_AWDChannelConfig
+                                    471 ;	-----------------------------------------
+      0001E5                        472 _ADC1_AWDChannelConfig:
+      0001E5 88               [ 1]  473 	push	a
+                                    474 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 411: if (Channel < (uint8_t)8)
+      0001E6 7B 04            [ 1]  475 	ld	a, (0x04, sp)
+      0001E8 A1 08            [ 1]  476 	cp	a, #0x08
+      0001EA 24 25            [ 1]  477 	jrnc	00108$
+                                    478 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 415: ADC1->AWCRL |= (uint8_t)((uint8_t)1 << Channel);
+      0001EC C6 54 0F         [ 1]  479 	ld	a, 0x540f
+      0001EF 6B 01            [ 1]  480 	ld	(0x01, sp), a
+      0001F1 A6 01            [ 1]  481 	ld	a, #0x01
+      0001F3 88               [ 1]  482 	push	a
+      0001F4 7B 05            [ 1]  483 	ld	a, (0x05, sp)
+      0001F6 27 05            [ 1]  484 	jreq	00129$
+      0001F8                        485 00128$:
+      0001F8 08 01            [ 1]  486 	sll	(1, sp)
+      0001FA 4A               [ 1]  487 	dec	a
+      0001FB 26 FB            [ 1]  488 	jrne	00128$
+      0001FD                        489 00129$:
+      0001FD 84               [ 1]  490 	pop	a
+                                    491 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 413: if (NewState != DISABLE)
+      0001FE 0D 05            [ 1]  492 	tnz	(0x05, sp)
+      000200 27 07            [ 1]  493 	jreq	00102$
+                                    494 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 415: ADC1->AWCRL |= (uint8_t)((uint8_t)1 << Channel);
+      000202 1A 01            [ 1]  495 	or	a, (0x01, sp)
+      000204 C7 54 0F         [ 1]  496 	ld	0x540f, a
+      000207 20 30            [ 2]  497 	jra	00110$
+      000209                        498 00102$:
+                                    499 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 419: ADC1->AWCRL &= (uint8_t)~(uint8_t)((uint8_t)1 << Channel);
+      000209 43               [ 1]  500 	cpl	a
+      00020A 14 01            [ 1]  501 	and	a, (0x01, sp)
+      00020C C7 54 0F         [ 1]  502 	ld	0x540f, a
+      00020F 20 28            [ 2]  503 	jra	00110$
+      000211                        504 00108$:
+                                    505 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 426: ADC1->AWCRH |= (uint8_t)((uint8_t)1 << (Channel - (uint8_t)8));
+      000211 C6 54 0E         [ 1]  506 	ld	a, 0x540e
+      000214 6B 01            [ 1]  507 	ld	(0x01, sp), a
+      000216 7B 04            [ 1]  508 	ld	a, (0x04, sp)
+      000218 A0 08            [ 1]  509 	sub	a, #0x08
+      00021A 97               [ 1]  510 	ld	xl, a
+      00021B A6 01            [ 1]  511 	ld	a, #0x01
+      00021D 88               [ 1]  512 	push	a
+      00021E 9F               [ 1]  513 	ld	a, xl
+      00021F 4D               [ 1]  514 	tnz	a
+      000220 27 05            [ 1]  515 	jreq	00132$
+      000222                        516 00131$:
+      000222 08 01            [ 1]  517 	sll	(1, sp)
+      000224 4A               [ 1]  518 	dec	a
+      000225 26 FB            [ 1]  519 	jrne	00131$
+      000227                        520 00132$:
+      000227 84               [ 1]  521 	pop	a
+                                    522 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 424: if (NewState != DISABLE)
+      000228 0D 05            [ 1]  523 	tnz	(0x05, sp)
+      00022A 27 07            [ 1]  524 	jreq	00105$
+                                    525 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 426: ADC1->AWCRH |= (uint8_t)((uint8_t)1 << (Channel - (uint8_t)8));
+      00022C 1A 01            [ 1]  526 	or	a, (0x01, sp)
+      00022E C7 54 0E         [ 1]  527 	ld	0x540e, a
+      000231 20 06            [ 2]  528 	jra	00110$
+      000233                        529 00105$:
+                                    530 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 430: ADC1->AWCRH &= (uint8_t)~(uint8_t)((uint8_t)1 << (uint8_t)(Channel - (uint8_t)8));
+      000233 43               [ 1]  531 	cpl	a
+      000234 14 01            [ 1]  532 	and	a, (0x01, sp)
+      000236 C7 54 0E         [ 1]  533 	ld	0x540e, a
+      000239                        534 00110$:
+                                    535 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 433: }
+      000239 84               [ 1]  536 	pop	a
+      00023A 81               [ 4]  537 	ret
+                                    538 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 441: void ADC1_SetHighThreshold(uint16_t Threshold)
+                                    539 ;	-----------------------------------------
+                                    540 ;	 function ADC1_SetHighThreshold
+                                    541 ;	-----------------------------------------
+      00023B                        542 _ADC1_SetHighThreshold:
+                                    543 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 443: ADC1->HTRH = (uint8_t)(Threshold >> (uint8_t)2);
+      00023B 1E 03            [ 2]  544 	ldw	x, (0x03, sp)
+      00023D 54               [ 2]  545 	srlw	x
+      00023E 54               [ 2]  546 	srlw	x
+      00023F 9F               [ 1]  547 	ld	a, xl
+      000240 C7 54 08         [ 1]  548 	ld	0x5408, a
+                                    549 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 444: ADC1->HTRL = (uint8_t)Threshold;
+      000243 7B 04            [ 1]  550 	ld	a, (0x04, sp)
+      000245 C7 54 09         [ 1]  551 	ld	0x5409, a
+                                    552 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 445: }
+      000248 81               [ 4]  553 	ret
+                                    554 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 453: void ADC1_SetLowThreshold(uint16_t Threshold)
+                                    555 ;	-----------------------------------------
+                                    556 ;	 function ADC1_SetLowThreshold
+                                    557 ;	-----------------------------------------
+      000249                        558 _ADC1_SetLowThreshold:
+                                    559 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 455: ADC1->LTRL = (uint8_t)Threshold;
+      000249 7B 04            [ 1]  560 	ld	a, (0x04, sp)
+      00024B C7 54 0B         [ 1]  561 	ld	0x540b, a
+                                    562 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 456: ADC1->LTRH = (uint8_t)(Threshold >> (uint8_t)2);
+      00024E 1E 03            [ 2]  563 	ldw	x, (0x03, sp)
+      000250 54               [ 2]  564 	srlw	x
+      000251 54               [ 2]  565 	srlw	x
+      000252 9F               [ 1]  566 	ld	a, xl
+      000253 C7 54 0A         [ 1]  567 	ld	0x540a, a
+                                    568 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 457: }
+      000256 81               [ 4]  569 	ret
+                                    570 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 466: uint16_t ADC1_GetBufferValue(uint8_t Buffer)
+                                    571 ;	-----------------------------------------
+                                    572 ;	 function ADC1_GetBufferValue
+                                    573 ;	-----------------------------------------
+      000257                        574 _ADC1_GetBufferValue:
+      000257 52 04            [ 2]  575 	sub	sp, #4
+                                    576 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 474: if ((ADC1->CR2 & ADC1_CR2_ALIGN) != 0) /* Right alignment */
+      000259 C6 54 02         [ 1]  577 	ld	a, 0x5402
+      00025C 6B 04            [ 1]  578 	ld	(0x04, sp), a
+                                    579 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 477: templ = *(uint8_t*)(uint16_t)((uint16_t)ADC1_BaseAddress + (uint8_t)(Buffer << 1) + 1);
+      00025E 7B 07            [ 1]  580 	ld	a, (0x07, sp)
+      000260 48               [ 1]  581 	sll	a
+      000261 5F               [ 1]  582 	clrw	x
+      000262 97               [ 1]  583 	ld	xl, a
+      000263 51               [ 1]  584 	exgw	x, y
+      000264 93               [ 1]  585 	ldw	x, y
+      000265 1C 53 E1         [ 2]  586 	addw	x, #0x53e1
+                                    587 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 479: temph = *(uint8_t*)(uint16_t)((uint16_t)ADC1_BaseAddress + (uint8_t)(Buffer << 1));
+      000268 72 A9 53 E0      [ 2]  588 	addw	y, #0x53e0
+                                    589 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 477: templ = *(uint8_t*)(uint16_t)((uint16_t)ADC1_BaseAddress + (uint8_t)(Buffer << 1) + 1);
+                                    590 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 479: temph = *(uint8_t*)(uint16_t)((uint16_t)ADC1_BaseAddress + (uint8_t)(Buffer << 1));
+                                    591 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 477: templ = *(uint8_t*)(uint16_t)((uint16_t)ADC1_BaseAddress + (uint8_t)(Buffer << 1) + 1);
+      00026C F6               [ 1]  592 	ld	a, (x)
+      00026D 97               [ 1]  593 	ld	xl, a
+                                    594 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 479: temph = *(uint8_t*)(uint16_t)((uint16_t)ADC1_BaseAddress + (uint8_t)(Buffer << 1));
+      00026E 90 F6            [ 1]  595 	ld	a, (y)
+                                    596 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 474: if ((ADC1->CR2 & ADC1_CR2_ALIGN) != 0) /* Right alignment */
+      000270 88               [ 1]  597 	push	a
+      000271 7B 05            [ 1]  598 	ld	a, (0x05, sp)
+      000273 A5 08            [ 1]  599 	bcp	a, #0x08
+      000275 84               [ 1]  600 	pop	a
+      000276 27 14            [ 1]  601 	jreq	00102$
+                                    602 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 477: templ = *(uint8_t*)(uint16_t)((uint16_t)ADC1_BaseAddress + (uint8_t)(Buffer << 1) + 1);
+                                    603 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 479: temph = *(uint8_t*)(uint16_t)((uint16_t)ADC1_BaseAddress + (uint8_t)(Buffer << 1));
+                                    604 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 481: temph = (uint16_t)(templ | (uint16_t)(temph << (uint8_t)8));
+      000278 0F 02            [ 1]  605 	clr	(0x02, sp)
+      00027A 41               [ 1]  606 	exg	a, xl
+      00027B 6B 04            [ 1]  607 	ld	(0x04, sp), a
+      00027D 41               [ 1]  608 	exg	a, xl
+      00027E 0F 03            [ 1]  609 	clr	(0x03, sp)
+      000280 1A 03            [ 1]  610 	or	a, (0x03, sp)
+      000282 95               [ 1]  611 	ld	xh, a
+      000283 7B 04            [ 1]  612 	ld	a, (0x04, sp)
+      000285 1A 02            [ 1]  613 	or	a, (0x02, sp)
+      000287 97               [ 1]  614 	ld	xl, a
+      000288 1F 03            [ 2]  615 	ldw	(0x03, sp), x
+      00028A 20 15            [ 2]  616 	jra	00103$
+      00028C                        617 00102$:
+                                    618 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 486: temph = *(uint8_t*)(uint16_t)((uint16_t)ADC1_BaseAddress + (uint8_t)(Buffer << 1));
+                                    619 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 488: templ = *(uint8_t*)(uint16_t)((uint16_t)ADC1_BaseAddress + (uint8_t)(Buffer << 1) + 1);
+                                    620 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 490: temph = (uint16_t)((uint16_t)((uint16_t)templ << 6) | (uint16_t)(temph << 8));
+      00028C 02               [ 1]  621 	rlwa	x
+      00028D 4F               [ 1]  622 	clr	a
+      00028E 01               [ 1]  623 	rrwa	x
+      00028F 58               [ 2]  624 	sllw	x
+      000290 58               [ 2]  625 	sllw	x
+      000291 58               [ 2]  626 	sllw	x
+      000292 58               [ 2]  627 	sllw	x
+      000293 58               [ 2]  628 	sllw	x
+      000294 58               [ 2]  629 	sllw	x
+      000295 1F 01            [ 2]  630 	ldw	(0x01, sp), x
+      000297 97               [ 1]  631 	ld	xl, a
+      000298 7B 02            [ 1]  632 	ld	a, (0x02, sp)
+      00029A 6B 04            [ 1]  633 	ld	(0x04, sp), a
+      00029C 9F               [ 1]  634 	ld	a, xl
+      00029D 1A 01            [ 1]  635 	or	a, (0x01, sp)
+      00029F 6B 03            [ 1]  636 	ld	(0x03, sp), a
+      0002A1                        637 00103$:
+                                    638 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 493: return ((uint16_t)temph);
+      0002A1 1E 03            [ 2]  639 	ldw	x, (0x03, sp)
+                                    640 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 494: }
+      0002A3 5B 04            [ 2]  641 	addw	sp, #4
+      0002A5 81               [ 4]  642 	ret
+                                    643 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 502: FlagStatus ADC1_GetAWDChannelStatus(ADC1_Channel_TypeDef Channel)
+                                    644 ;	-----------------------------------------
+                                    645 ;	 function ADC1_GetAWDChannelStatus
+                                    646 ;	-----------------------------------------
+      0002A6                        647 _ADC1_GetAWDChannelStatus:
+      0002A6 88               [ 1]  648 	push	a
+                                    649 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 509: if (Channel < (uint8_t)8)
+      0002A7 7B 04            [ 1]  650 	ld	a, (0x04, sp)
+      0002A9 A1 08            [ 1]  651 	cp	a, #0x08
+      0002AB 24 16            [ 1]  652 	jrnc	00102$
+                                    653 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 511: status = (uint8_t)(ADC1->AWSRL & (uint8_t)((uint8_t)1 << Channel));
+      0002AD C6 54 0D         [ 1]  654 	ld	a, 0x540d
+      0002B0 88               [ 1]  655 	push	a
+      0002B1 A6 01            [ 1]  656 	ld	a, #0x01
+      0002B3 6B 02            [ 1]  657 	ld	(0x02, sp), a
+      0002B5 7B 05            [ 1]  658 	ld	a, (0x05, sp)
+      0002B7 27 05            [ 1]  659 	jreq	00113$
+      0002B9                        660 00112$:
+      0002B9 08 02            [ 1]  661 	sll	(0x02, sp)
+      0002BB 4A               [ 1]  662 	dec	a
+      0002BC 26 FB            [ 1]  663 	jrne	00112$
+      0002BE                        664 00113$:
+      0002BE 84               [ 1]  665 	pop	a
+      0002BF 14 01            [ 1]  666 	and	a, (0x01, sp)
+      0002C1 20 19            [ 2]  667 	jra	00103$
+      0002C3                        668 00102$:
+                                    669 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 515: status = (uint8_t)(ADC1->AWSRH & (uint8_t)((uint8_t)1 << (Channel - (uint8_t)8)));
+      0002C3 C6 54 0C         [ 1]  670 	ld	a, 0x540c
+      0002C6 97               [ 1]  671 	ld	xl, a
+      0002C7 7B 04            [ 1]  672 	ld	a, (0x04, sp)
+      0002C9 A0 08            [ 1]  673 	sub	a, #0x08
+      0002CB 88               [ 1]  674 	push	a
+      0002CC A6 01            [ 1]  675 	ld	a, #0x01
+      0002CE 6B 02            [ 1]  676 	ld	(0x02, sp), a
+      0002D0 84               [ 1]  677 	pop	a
+      0002D1 4D               [ 1]  678 	tnz	a
+      0002D2 27 05            [ 1]  679 	jreq	00115$
+      0002D4                        680 00114$:
+      0002D4 08 01            [ 1]  681 	sll	(0x01, sp)
+      0002D6 4A               [ 1]  682 	dec	a
+      0002D7 26 FB            [ 1]  683 	jrne	00114$
+      0002D9                        684 00115$:
+      0002D9 9F               [ 1]  685 	ld	a, xl
+      0002DA 14 01            [ 1]  686 	and	a, (0x01, sp)
+      0002DC                        687 00103$:
+                                    688 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 518: return ((FlagStatus)status);
+                                    689 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 519: }
+      0002DC 5B 01            [ 2]  690 	addw	sp, #1
+      0002DE 81               [ 4]  691 	ret
+                                    692 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 527: FlagStatus ADC1_GetFlagStatus(ADC1_Flag_TypeDef Flag)
+                                    693 ;	-----------------------------------------
+                                    694 ;	 function ADC1_GetFlagStatus
+                                    695 ;	-----------------------------------------
+      0002DF                        696 _ADC1_GetFlagStatus:
+      0002DF 89               [ 2]  697 	pushw	x
+                                    698 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 535: if ((Flag & 0x0F) == 0x01)
+      0002E0 7B 05            [ 1]  699 	ld	a, (0x05, sp)
+      0002E2 6B 02            [ 1]  700 	ld	(0x02, sp), a
+      0002E4 0F 01            [ 1]  701 	clr	(0x01, sp)
+      0002E6 88               [ 1]  702 	push	a
+      0002E7 7B 03            [ 1]  703 	ld	a, (0x03, sp)
+      0002E9 A4 0F            [ 1]  704 	and	a, #0x0f
+      0002EB 97               [ 1]  705 	ld	xl, a
+      0002EC 4F               [ 1]  706 	clr	a
+      0002ED 95               [ 1]  707 	ld	xh, a
+      0002EE 84               [ 1]  708 	pop	a
+      0002EF 5A               [ 2]  709 	decw	x
+      0002F0 26 07            [ 1]  710 	jrne	00108$
+                                    711 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 538: flagstatus = (uint8_t)(ADC1->CR3 & ADC1_CR3_OVR);
+      0002F2 C6 54 03         [ 1]  712 	ld	a, 0x5403
+      0002F5 A4 40            [ 1]  713 	and	a, #0x40
+      0002F7 20 49            [ 2]  714 	jra	00109$
+      0002F9                        715 00108$:
+                                    716 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 540: else if ((Flag & 0xF0) == 0x10)
+      0002F9 7B 02            [ 1]  717 	ld	a, (0x02, sp)
+      0002FB A4 F0            [ 1]  718 	and	a, #0xf0
+      0002FD 97               [ 1]  719 	ld	xl, a
+      0002FE 4F               [ 1]  720 	clr	a
+      0002FF 95               [ 1]  721 	ld	xh, a
+      000300 A3 00 10         [ 2]  722 	cpw	x, #0x0010
+      000303 26 38            [ 1]  723 	jrne	00105$
+                                    724 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 543: temp = (uint8_t)(Flag & (uint8_t)0x0F);
+      000305 7B 05            [ 1]  725 	ld	a, (0x05, sp)
+      000307 A4 0F            [ 1]  726 	and	a, #0x0f
+                                    727 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 544: if (temp < 8)
+      000309 97               [ 1]  728 	ld	xl, a
+      00030A A1 08            [ 1]  729 	cp	a, #0x08
+      00030C 24 16            [ 1]  730 	jrnc	00102$
+                                    731 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 546: flagstatus = (uint8_t)(ADC1->AWSRL & (uint8_t)((uint8_t)1 << temp));
+      00030E C6 54 0D         [ 1]  732 	ld	a, 0x540d
+      000311 6B 02            [ 1]  733 	ld	(0x02, sp), a
+      000313 A6 01            [ 1]  734 	ld	a, #0x01
+      000315 88               [ 1]  735 	push	a
+      000316 9F               [ 1]  736 	ld	a, xl
+      000317 4D               [ 1]  737 	tnz	a
+      000318 27 05            [ 1]  738 	jreq	00135$
+      00031A                        739 00134$:
+      00031A 08 01            [ 1]  740 	sll	(1, sp)
+      00031C 4A               [ 1]  741 	dec	a
+      00031D 26 FB            [ 1]  742 	jrne	00134$
+      00031F                        743 00135$:
+      00031F 84               [ 1]  744 	pop	a
+      000320 14 02            [ 1]  745 	and	a, (0x02, sp)
+      000322 20 1E            [ 2]  746 	jra	00109$
+      000324                        747 00102$:
+                                    748 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 550: flagstatus = (uint8_t)(ADC1->AWSRH & (uint8_t)((uint8_t)1 << (temp - 8)));
+      000324 C6 54 0C         [ 1]  749 	ld	a, 0x540c
+      000327 6B 02            [ 1]  750 	ld	(0x02, sp), a
+      000329 1D 00 08         [ 2]  751 	subw	x, #8
+      00032C A6 01            [ 1]  752 	ld	a, #0x01
+      00032E 88               [ 1]  753 	push	a
+      00032F 9F               [ 1]  754 	ld	a, xl
+      000330 4D               [ 1]  755 	tnz	a
+      000331 27 05            [ 1]  756 	jreq	00137$
+      000333                        757 00136$:
+      000333 08 01            [ 1]  758 	sll	(1, sp)
+      000335 4A               [ 1]  759 	dec	a
+      000336 26 FB            [ 1]  760 	jrne	00136$
+      000338                        761 00137$:
+      000338 84               [ 1]  762 	pop	a
+      000339 14 02            [ 1]  763 	and	a, (0x02, sp)
+      00033B 20 05            [ 2]  764 	jra	00109$
+      00033D                        765 00105$:
+                                    766 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 555: flagstatus = (uint8_t)(ADC1->CSR & Flag);
+      00033D C6 54 00         [ 1]  767 	ld	a, 0x5400
+      000340 14 05            [ 1]  768 	and	a, (0x05, sp)
+      000342                        769 00109$:
+                                    770 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 557: return ((FlagStatus)flagstatus);
+                                    771 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 559: }
+      000342 85               [ 2]  772 	popw	x
+      000343 81               [ 4]  773 	ret
+                                    774 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 567: void ADC1_ClearFlag(ADC1_Flag_TypeDef Flag)
+                                    775 ;	-----------------------------------------
+                                    776 ;	 function ADC1_ClearFlag
+                                    777 ;	-----------------------------------------
+      000344                        778 _ADC1_ClearFlag:
+      000344 89               [ 2]  779 	pushw	x
+                                    780 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 574: if ((Flag & 0x0F) == 0x01)
+      000345 7B 05            [ 1]  781 	ld	a, (0x05, sp)
+      000347 6B 02            [ 1]  782 	ld	(0x02, sp), a
+      000349 0F 01            [ 1]  783 	clr	(0x01, sp)
+      00034B 88               [ 1]  784 	push	a
+      00034C 7B 03            [ 1]  785 	ld	a, (0x03, sp)
+      00034E A4 0F            [ 1]  786 	and	a, #0x0f
+      000350 97               [ 1]  787 	ld	xl, a
+      000351 4F               [ 1]  788 	clr	a
+      000352 95               [ 1]  789 	ld	xh, a
+      000353 84               [ 1]  790 	pop	a
+      000354 5A               [ 2]  791 	decw	x
+      000355 26 06            [ 1]  792 	jrne	00108$
+                                    793 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 577: ADC1->CR3 &= (uint8_t)(~ADC1_CR3_OVR);
+      000357 72 1D 54 03      [ 1]  794 	bres	21507, #6
+      00035B 20 59            [ 2]  795 	jra	00110$
+      00035D                        796 00108$:
+                                    797 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 579: else if ((Flag & 0xF0) == 0x10)
+      00035D 7B 02            [ 1]  798 	ld	a, (0x02, sp)
+      00035F A4 F0            [ 1]  799 	and	a, #0xf0
+      000361 97               [ 1]  800 	ld	xl, a
+      000362 4F               [ 1]  801 	clr	a
+      000363 95               [ 1]  802 	ld	xh, a
+      000364 A3 00 10         [ 2]  803 	cpw	x, #0x0010
+      000367 26 40            [ 1]  804 	jrne	00105$
+                                    805 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 582: temp = (uint8_t)(Flag & (uint8_t)0x0F);
+      000369 7B 05            [ 1]  806 	ld	a, (0x05, sp)
+      00036B A4 0F            [ 1]  807 	and	a, #0x0f
+                                    808 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 583: if (temp < 8)
+      00036D 97               [ 1]  809 	ld	xl, a
+      00036E A1 08            [ 1]  810 	cp	a, #0x08
+      000370 24 1A            [ 1]  811 	jrnc	00102$
+                                    812 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 585: ADC1->AWSRL &= (uint8_t)~(uint8_t)((uint8_t)1 << temp);
+      000372 C6 54 0D         [ 1]  813 	ld	a, 0x540d
+      000375 6B 02            [ 1]  814 	ld	(0x02, sp), a
+      000377 A6 01            [ 1]  815 	ld	a, #0x01
+      000379 88               [ 1]  816 	push	a
+      00037A 9F               [ 1]  817 	ld	a, xl
+      00037B 4D               [ 1]  818 	tnz	a
+      00037C 27 05            [ 1]  819 	jreq	00135$
+      00037E                        820 00134$:
+      00037E 08 01            [ 1]  821 	sll	(1, sp)
+      000380 4A               [ 1]  822 	dec	a
+      000381 26 FB            [ 1]  823 	jrne	00134$
+      000383                        824 00135$:
+      000383 84               [ 1]  825 	pop	a
+      000384 43               [ 1]  826 	cpl	a
+      000385 14 02            [ 1]  827 	and	a, (0x02, sp)
+      000387 C7 54 0D         [ 1]  828 	ld	0x540d, a
+      00038A 20 2A            [ 2]  829 	jra	00110$
+      00038C                        830 00102$:
+                                    831 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 589: ADC1->AWSRH &= (uint8_t)~(uint8_t)((uint8_t)1 << (temp - 8));
+      00038C C6 54 0C         [ 1]  832 	ld	a, 0x540c
+      00038F 6B 02            [ 1]  833 	ld	(0x02, sp), a
+      000391 1D 00 08         [ 2]  834 	subw	x, #8
+      000394 A6 01            [ 1]  835 	ld	a, #0x01
+      000396 88               [ 1]  836 	push	a
+      000397 9F               [ 1]  837 	ld	a, xl
+      000398 4D               [ 1]  838 	tnz	a
+      000399 27 05            [ 1]  839 	jreq	00137$
+      00039B                        840 00136$:
+      00039B 08 01            [ 1]  841 	sll	(1, sp)
+      00039D 4A               [ 1]  842 	dec	a
+      00039E 26 FB            [ 1]  843 	jrne	00136$
+      0003A0                        844 00137$:
+      0003A0 84               [ 1]  845 	pop	a
+      0003A1 43               [ 1]  846 	cpl	a
+      0003A2 14 02            [ 1]  847 	and	a, (0x02, sp)
+      0003A4 C7 54 0C         [ 1]  848 	ld	0x540c, a
+      0003A7 20 0D            [ 2]  849 	jra	00110$
+      0003A9                        850 00105$:
+                                    851 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 594: ADC1->CSR &= (uint8_t) (~Flag);
+      0003A9 C6 54 00         [ 1]  852 	ld	a, 0x5400
+      0003AC 6B 02            [ 1]  853 	ld	(0x02, sp), a
+      0003AE 7B 05            [ 1]  854 	ld	a, (0x05, sp)
+      0003B0 43               [ 1]  855 	cpl	a
+      0003B1 14 02            [ 1]  856 	and	a, (0x02, sp)
+      0003B3 C7 54 00         [ 1]  857 	ld	0x5400, a
+      0003B6                        858 00110$:
+                                    859 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 596: }
+      0003B6 85               [ 2]  860 	popw	x
+      0003B7 81               [ 4]  861 	ret
+                                    862 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 616: ITStatus ADC1_GetITStatus(ADC1_IT_TypeDef ITPendingBit)
+                                    863 ;	-----------------------------------------
+                                    864 ;	 function ADC1_GetITStatus
+                                    865 ;	-----------------------------------------
+      0003B8                        866 _ADC1_GetITStatus:
+      0003B8 88               [ 1]  867 	push	a
+                                    868 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 624: if (((uint16_t)ITPendingBit & 0xF0) == 0x10)
+      0003B9 7B 05            [ 1]  869 	ld	a, (0x05, sp)
+      0003BB A4 F0            [ 1]  870 	and	a, #0xf0
+      0003BD 97               [ 1]  871 	ld	xl, a
+      0003BE 4F               [ 1]  872 	clr	a
+      0003BF 95               [ 1]  873 	ld	xh, a
+                                    874 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 627: temp = (uint8_t)((uint16_t)ITPendingBit & 0x0F);
+      0003C0 7B 05            [ 1]  875 	ld	a, (0x05, sp)
+                                    876 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 624: if (((uint16_t)ITPendingBit & 0xF0) == 0x10)
+      0003C2 A3 00 10         [ 2]  877 	cpw	x, #0x0010
+      0003C5 26 36            [ 1]  878 	jrne	00105$
+                                    879 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 627: temp = (uint8_t)((uint16_t)ITPendingBit & 0x0F);
+      0003C7 A4 0F            [ 1]  880 	and	a, #0x0f
+                                    881 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 628: if (temp < 8)
+      0003C9 97               [ 1]  882 	ld	xl, a
+      0003CA A1 08            [ 1]  883 	cp	a, #0x08
+      0003CC 24 16            [ 1]  884 	jrnc	00102$
+                                    885 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 630: itstatus = (ITStatus)(ADC1->AWSRL & (uint8_t)((uint8_t)1 << temp));
+      0003CE C6 54 0D         [ 1]  886 	ld	a, 0x540d
+      0003D1 88               [ 1]  887 	push	a
+      0003D2 A6 01            [ 1]  888 	ld	a, #0x01
+      0003D4 6B 02            [ 1]  889 	ld	(0x02, sp), a
+      0003D6 9F               [ 1]  890 	ld	a, xl
+      0003D7 4D               [ 1]  891 	tnz	a
+      0003D8 27 05            [ 1]  892 	jreq	00124$
+      0003DA                        893 00123$:
+      0003DA 08 02            [ 1]  894 	sll	(0x02, sp)
+      0003DC 4A               [ 1]  895 	dec	a
+      0003DD 26 FB            [ 1]  896 	jrne	00123$
+      0003DF                        897 00124$:
+      0003DF 84               [ 1]  898 	pop	a
+      0003E0 14 01            [ 1]  899 	and	a, (0x01, sp)
+      0003E2 20 23            [ 2]  900 	jra	00106$
+      0003E4                        901 00102$:
+                                    902 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 634: itstatus = (ITStatus)(ADC1->AWSRH & (uint8_t)((uint8_t)1 << (temp - 8)));
+      0003E4 C6 54 0C         [ 1]  903 	ld	a, 0x540c
+      0003E7 6B 01            [ 1]  904 	ld	(0x01, sp), a
+      0003E9 1D 00 08         [ 2]  905 	subw	x, #8
+      0003EC A6 01            [ 1]  906 	ld	a, #0x01
+      0003EE 88               [ 1]  907 	push	a
+      0003EF 9F               [ 1]  908 	ld	a, xl
+      0003F0 4D               [ 1]  909 	tnz	a
+      0003F1 27 05            [ 1]  910 	jreq	00126$
+      0003F3                        911 00125$:
+      0003F3 08 01            [ 1]  912 	sll	(1, sp)
+      0003F5 4A               [ 1]  913 	dec	a
+      0003F6 26 FB            [ 1]  914 	jrne	00125$
+      0003F8                        915 00126$:
+      0003F8 84               [ 1]  916 	pop	a
+      0003F9 14 01            [ 1]  917 	and	a, (0x01, sp)
+      0003FB 20 0A            [ 2]  918 	jra	00106$
+      0003FD                        919 00105$:
+                                    920 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 639: itstatus = (ITStatus)(ADC1->CSR & (uint8_t)ITPendingBit);
+      0003FD AE 54 00         [ 2]  921 	ldw	x, #0x5400
+      000400 88               [ 1]  922 	push	a
+      000401 F6               [ 1]  923 	ld	a, (x)
+      000402 6B 02            [ 1]  924 	ld	(0x02, sp), a
+      000404 84               [ 1]  925 	pop	a
+      000405 14 01            [ 1]  926 	and	a, (0x01, sp)
+      000407                        927 00106$:
+                                    928 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 641: return ((ITStatus)itstatus);
+                                    929 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 642: }
+      000407 5B 01            [ 2]  930 	addw	sp, #1
+      000409 81               [ 4]  931 	ret
+                                    932 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 662: void ADC1_ClearITPendingBit(ADC1_IT_TypeDef ITPendingBit)
+                                    933 ;	-----------------------------------------
+                                    934 ;	 function ADC1_ClearITPendingBit
+                                    935 ;	-----------------------------------------
+      00040A                        936 _ADC1_ClearITPendingBit:
+      00040A 88               [ 1]  937 	push	a
+                                    938 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 669: if (((uint16_t)ITPendingBit & 0xF0) == 0x10)
+      00040B 7B 05            [ 1]  939 	ld	a, (0x05, sp)
+      00040D A4 F0            [ 1]  940 	and	a, #0xf0
+      00040F 97               [ 1]  941 	ld	xl, a
+      000410 4F               [ 1]  942 	clr	a
+      000411 95               [ 1]  943 	ld	xh, a
+      000412 A3 00 10         [ 2]  944 	cpw	x, #0x0010
+      000415 26 40            [ 1]  945 	jrne	00105$
+                                    946 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 672: temp = (uint8_t)((uint16_t)ITPendingBit & 0x0F);
+      000417 7B 05            [ 1]  947 	ld	a, (0x05, sp)
+      000419 A4 0F            [ 1]  948 	and	a, #0x0f
+                                    949 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 673: if (temp < 8)
+      00041B 97               [ 1]  950 	ld	xl, a
+      00041C A1 08            [ 1]  951 	cp	a, #0x08
+      00041E 24 1A            [ 1]  952 	jrnc	00102$
+                                    953 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 675: ADC1->AWSRL &= (uint8_t)~(uint8_t)((uint8_t)1 << temp);
+      000420 C6 54 0D         [ 1]  954 	ld	a, 0x540d
+      000423 6B 01            [ 1]  955 	ld	(0x01, sp), a
+      000425 A6 01            [ 1]  956 	ld	a, #0x01
+      000427 88               [ 1]  957 	push	a
+      000428 9F               [ 1]  958 	ld	a, xl
+      000429 4D               [ 1]  959 	tnz	a
+      00042A 27 05            [ 1]  960 	jreq	00124$
+      00042C                        961 00123$:
+      00042C 08 01            [ 1]  962 	sll	(1, sp)
+      00042E 4A               [ 1]  963 	dec	a
+      00042F 26 FB            [ 1]  964 	jrne	00123$
+      000431                        965 00124$:
+      000431 84               [ 1]  966 	pop	a
+      000432 43               [ 1]  967 	cpl	a
+      000433 14 01            [ 1]  968 	and	a, (0x01, sp)
+      000435 C7 54 0D         [ 1]  969 	ld	0x540d, a
+      000438 20 2A            [ 2]  970 	jra	00107$
+      00043A                        971 00102$:
+                                    972 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 679: ADC1->AWSRH &= (uint8_t)~(uint8_t)((uint8_t)1 << (temp - 8));
+      00043A C6 54 0C         [ 1]  973 	ld	a, 0x540c
+      00043D 6B 01            [ 1]  974 	ld	(0x01, sp), a
+      00043F 1D 00 08         [ 2]  975 	subw	x, #8
+      000442 A6 01            [ 1]  976 	ld	a, #0x01
+      000444 88               [ 1]  977 	push	a
+      000445 9F               [ 1]  978 	ld	a, xl
+      000446 4D               [ 1]  979 	tnz	a
+      000447 27 05            [ 1]  980 	jreq	00126$
+      000449                        981 00125$:
+      000449 08 01            [ 1]  982 	sll	(1, sp)
+      00044B 4A               [ 1]  983 	dec	a
+      00044C 26 FB            [ 1]  984 	jrne	00125$
+      00044E                        985 00126$:
+      00044E 84               [ 1]  986 	pop	a
+      00044F 43               [ 1]  987 	cpl	a
+      000450 14 01            [ 1]  988 	and	a, (0x01, sp)
+      000452 C7 54 0C         [ 1]  989 	ld	0x540c, a
+      000455 20 0D            [ 2]  990 	jra	00107$
+      000457                        991 00105$:
+                                    992 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 684: ADC1->CSR &= (uint8_t)((uint16_t)~(uint16_t)ITPendingBit);
+      000457 C6 54 00         [ 1]  993 	ld	a, 0x5400
+      00045A 1E 04            [ 2]  994 	ldw	x, (0x04, sp)
+      00045C 53               [ 2]  995 	cplw	x
+      00045D 89               [ 2]  996 	pushw	x
+      00045E 14 02            [ 1]  997 	and	a, (2, sp)
+      000460 85               [ 2]  998 	popw	x
+      000461 C7 54 00         [ 1]  999 	ld	0x5400, a
+      000464                       1000 00107$:
+                                   1001 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_adc1.c: 686: }
+      000464 84               [ 1] 1002 	pop	a
+      000465 81               [ 4] 1003 	ret
+                                   1004 	.area CODE
+                                   1005 	.area CONST
+                                   1006 	.area INITIALIZER
+                                   1007 	.area CABS (ABS)

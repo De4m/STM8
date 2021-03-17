@@ -1,0 +1,931 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.8.4 #10766 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module stm8s_uart1
+                                      6 	.optsdcc -mstm8
+                                      7 	
+                                      8 ;--------------------------------------------------------
+                                      9 ; Public variables in this module
+                                     10 ;--------------------------------------------------------
+                                     11 	.globl _CLK_GetClockFreq
+                                     12 	.globl _UART1_DeInit
+                                     13 	.globl _UART1_Init
+                                     14 	.globl _UART1_Cmd
+                                     15 	.globl _UART1_ITConfig
+                                     16 	.globl _UART1_HalfDuplexCmd
+                                     17 	.globl _UART1_IrDAConfig
+                                     18 	.globl _UART1_IrDACmd
+                                     19 	.globl _UART1_LINBreakDetectionConfig
+                                     20 	.globl _UART1_LINCmd
+                                     21 	.globl _UART1_SmartCardCmd
+                                     22 	.globl _UART1_SmartCardNACKCmd
+                                     23 	.globl _UART1_WakeUpConfig
+                                     24 	.globl _UART1_ReceiverWakeUpCmd
+                                     25 	.globl _UART1_ReceiveData8
+                                     26 	.globl _UART1_ReceiveData9
+                                     27 	.globl _UART1_SendData8
+                                     28 	.globl _UART1_SendData9
+                                     29 	.globl _UART1_SendBreak
+                                     30 	.globl _UART1_SetAddress
+                                     31 	.globl _UART1_SetGuardTime
+                                     32 	.globl _UART1_SetPrescaler
+                                     33 	.globl _UART1_GetFlagStatus
+                                     34 	.globl _UART1_ClearFlag
+                                     35 	.globl _UART1_GetITStatus
+                                     36 	.globl _UART1_ClearITPendingBit
+                                     37 ;--------------------------------------------------------
+                                     38 ; ram data
+                                     39 ;--------------------------------------------------------
+                                     40 	.area DATA
+                                     41 ;--------------------------------------------------------
+                                     42 ; ram data
+                                     43 ;--------------------------------------------------------
+                                     44 	.area INITIALIZED
+                                     45 ;--------------------------------------------------------
+                                     46 ; absolute external ram data
+                                     47 ;--------------------------------------------------------
+                                     48 	.area DABS (ABS)
+                                     49 
+                                     50 ; default segment ordering for linker
+                                     51 	.area HOME
+                                     52 	.area GSINIT
+                                     53 	.area GSFINAL
+                                     54 	.area CONST
+                                     55 	.area INITIALIZER
+                                     56 	.area CODE
+                                     57 
+                                     58 ;--------------------------------------------------------
+                                     59 ; global & static initialisations
+                                     60 ;--------------------------------------------------------
+                                     61 	.area HOME
+                                     62 	.area GSINIT
+                                     63 	.area GSFINAL
+                                     64 	.area GSINIT
+                                     65 ;--------------------------------------------------------
+                                     66 ; Home
+                                     67 ;--------------------------------------------------------
+                                     68 	.area HOME
+                                     69 	.area HOME
+                                     70 ;--------------------------------------------------------
+                                     71 ; code
+                                     72 ;--------------------------------------------------------
+                                     73 	.area CODE
+                                     74 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 53: void UART1_DeInit(void)
+                                     75 ;	-----------------------------------------
+                                     76 ;	 function UART1_DeInit
+                                     77 ;	-----------------------------------------
+      000000                         78 _UART1_DeInit:
+                                     79 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 57: (void)UART1->SR;
+      000000 C6 52 30         [ 1]   80 	ld	a, 0x5230
+                                     81 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 58: (void)UART1->DR;
+      000003 C6 52 31         [ 1]   82 	ld	a, 0x5231
+                                     83 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 60: UART1->BRR2 = UART1_BRR2_RESET_VALUE;  /* Set UART1_BRR2 to reset value 0x00 */
+      000006 35 00 52 33      [ 1]   84 	mov	0x5233+0, #0x00
+                                     85 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 61: UART1->BRR1 = UART1_BRR1_RESET_VALUE;  /* Set UART1_BRR1 to reset value 0x00 */
+      00000A 35 00 52 32      [ 1]   86 	mov	0x5232+0, #0x00
+                                     87 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 63: UART1->CR1 = UART1_CR1_RESET_VALUE;  /* Set UART1_CR1 to reset value 0x00 */
+      00000E 35 00 52 34      [ 1]   88 	mov	0x5234+0, #0x00
+                                     89 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 64: UART1->CR2 = UART1_CR2_RESET_VALUE;  /* Set UART1_CR2 to reset value 0x00 */
+      000012 35 00 52 35      [ 1]   90 	mov	0x5235+0, #0x00
+                                     91 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 65: UART1->CR3 = UART1_CR3_RESET_VALUE;  /* Set UART1_CR3 to reset value 0x00 */
+      000016 35 00 52 36      [ 1]   92 	mov	0x5236+0, #0x00
+                                     93 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 66: UART1->CR4 = UART1_CR4_RESET_VALUE;  /* Set UART1_CR4 to reset value 0x00 */
+      00001A 35 00 52 37      [ 1]   94 	mov	0x5237+0, #0x00
+                                     95 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 67: UART1->CR5 = UART1_CR5_RESET_VALUE;  /* Set UART1_CR5 to reset value 0x00 */
+      00001E 35 00 52 38      [ 1]   96 	mov	0x5238+0, #0x00
+                                     97 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 69: UART1->GTR = UART1_GTR_RESET_VALUE;
+      000022 35 00 52 39      [ 1]   98 	mov	0x5239+0, #0x00
+                                     99 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 70: UART1->PSCR = UART1_PSCR_RESET_VALUE;
+      000026 35 00 52 3A      [ 1]  100 	mov	0x523a+0, #0x00
+                                    101 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 71: }
+      00002A 81               [ 4]  102 	ret
+                                    103 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 90: void UART1_Init(uint32_t BaudRate, UART1_WordLength_TypeDef WordLength, 
+                                    104 ;	-----------------------------------------
+                                    105 ;	 function UART1_Init
+                                    106 ;	-----------------------------------------
+      00002B                        107 _UART1_Init:
+      00002B 52 11            [ 2]  108 	sub	sp, #17
+                                    109 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 105: UART1->CR1 &= (uint8_t)(~UART1_CR1_M);  
+      00002D 72 19 52 34      [ 1]  110 	bres	21044, #4
+                                    111 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 108: UART1->CR1 |= (uint8_t)WordLength;
+      000031 C6 52 34         [ 1]  112 	ld	a, 0x5234
+      000034 1A 18            [ 1]  113 	or	a, (0x18, sp)
+      000036 C7 52 34         [ 1]  114 	ld	0x5234, a
+                                    115 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 111: UART1->CR3 &= (uint8_t)(~UART1_CR3_STOP);  
+      000039 C6 52 36         [ 1]  116 	ld	a, 0x5236
+      00003C A4 CF            [ 1]  117 	and	a, #0xcf
+      00003E C7 52 36         [ 1]  118 	ld	0x5236, a
+                                    119 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 113: UART1->CR3 |= (uint8_t)StopBits;  
+      000041 C6 52 36         [ 1]  120 	ld	a, 0x5236
+      000044 1A 19            [ 1]  121 	or	a, (0x19, sp)
+      000046 C7 52 36         [ 1]  122 	ld	0x5236, a
+                                    123 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 116: UART1->CR1 &= (uint8_t)(~(UART1_CR1_PCEN | UART1_CR1_PS  ));  
+      000049 C6 52 34         [ 1]  124 	ld	a, 0x5234
+      00004C A4 F9            [ 1]  125 	and	a, #0xf9
+      00004E C7 52 34         [ 1]  126 	ld	0x5234, a
+                                    127 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 118: UART1->CR1 |= (uint8_t)Parity;  
+      000051 C6 52 34         [ 1]  128 	ld	a, 0x5234
+      000054 1A 1A            [ 1]  129 	or	a, (0x1a, sp)
+      000056 C7 52 34         [ 1]  130 	ld	0x5234, a
+                                    131 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 121: UART1->BRR1 &= (uint8_t)(~UART1_BRR1_DIVM);  
+      000059 C6 52 32         [ 1]  132 	ld	a, 0x5232
+      00005C 35 00 52 32      [ 1]  133 	mov	0x5232+0, #0x00
+                                    134 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 123: UART1->BRR2 &= (uint8_t)(~UART1_BRR2_DIVM);  
+      000060 C6 52 33         [ 1]  135 	ld	a, 0x5233
+      000063 A4 0F            [ 1]  136 	and	a, #0x0f
+      000065 C7 52 33         [ 1]  137 	ld	0x5233, a
+                                    138 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 125: UART1->BRR2 &= (uint8_t)(~UART1_BRR2_DIVF);  
+      000068 C6 52 33         [ 1]  139 	ld	a, 0x5233
+      00006B A4 F0            [ 1]  140 	and	a, #0xf0
+      00006D C7 52 33         [ 1]  141 	ld	0x5233, a
+                                    142 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 128: BaudRate_Mantissa    = ((uint32_t)CLK_GetClockFreq() / (BaudRate << 4));
+      000070 CDr00r00         [ 4]  143 	call	_CLK_GetClockFreq
+      000073 1F 10            [ 2]  144 	ldw	(0x10, sp), x
+      000075 1E 14            [ 2]  145 	ldw	x, (0x14, sp)
+      000077 1F 0A            [ 2]  146 	ldw	(0x0a, sp), x
+      000079 1E 16            [ 2]  147 	ldw	x, (0x16, sp)
+      00007B A6 04            [ 1]  148 	ld	a, #0x04
+      00007D                        149 00127$:
+      00007D 58               [ 2]  150 	sllw	x
+      00007E 09 0B            [ 1]  151 	rlc	(0x0b, sp)
+      000080 09 0A            [ 1]  152 	rlc	(0x0a, sp)
+      000082 4A               [ 1]  153 	dec	a
+      000083 26 F8            [ 1]  154 	jrne	00127$
+      000085 1F 0C            [ 2]  155 	ldw	(0x0c, sp), x
+      000087 89               [ 2]  156 	pushw	x
+      000088 1E 0C            [ 2]  157 	ldw	x, (0x0c, sp)
+      00008A 89               [ 2]  158 	pushw	x
+      00008B 1E 14            [ 2]  159 	ldw	x, (0x14, sp)
+      00008D 89               [ 2]  160 	pushw	x
+      00008E 90 89            [ 2]  161 	pushw	y
+      000090 CDr00r00         [ 4]  162 	call	__divulong
+      000093 5B 08            [ 2]  163 	addw	sp, #8
+      000095 1F 10            [ 2]  164 	ldw	(0x10, sp), x
+      000097 17 0E            [ 2]  165 	ldw	(0x0e, sp), y
+      000099 16 10            [ 2]  166 	ldw	y, (0x10, sp)
+      00009B 17 03            [ 2]  167 	ldw	(0x03, sp), y
+      00009D 16 0E            [ 2]  168 	ldw	y, (0x0e, sp)
+      00009F 17 01            [ 2]  169 	ldw	(0x01, sp), y
+                                    170 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 129: BaudRate_Mantissa100 = (((uint32_t)CLK_GetClockFreq() * 100) / (BaudRate << 4));
+      0000A1 CDr00r00         [ 4]  171 	call	_CLK_GetClockFreq
+      0000A4 1F 10            [ 2]  172 	ldw	(0x10, sp), x
+      0000A6 17 0E            [ 2]  173 	ldw	(0x0e, sp), y
+      0000A8 1E 10            [ 2]  174 	ldw	x, (0x10, sp)
+      0000AA 89               [ 2]  175 	pushw	x
+      0000AB 1E 10            [ 2]  176 	ldw	x, (0x10, sp)
+      0000AD 89               [ 2]  177 	pushw	x
+      0000AE 4B 64            [ 1]  178 	push	#0x64
+      0000B0 5F               [ 1]  179 	clrw	x
+      0000B1 89               [ 2]  180 	pushw	x
+      0000B2 4B 00            [ 1]  181 	push	#0x00
+      0000B4 CDr00r00         [ 4]  182 	call	__mullong
+      0000B7 5B 08            [ 2]  183 	addw	sp, #8
+      0000B9 1F 10            [ 2]  184 	ldw	(0x10, sp), x
+      0000BB 1E 0C            [ 2]  185 	ldw	x, (0x0c, sp)
+      0000BD 89               [ 2]  186 	pushw	x
+      0000BE 1E 0C            [ 2]  187 	ldw	x, (0x0c, sp)
+      0000C0 89               [ 2]  188 	pushw	x
+      0000C1 1E 14            [ 2]  189 	ldw	x, (0x14, sp)
+      0000C3 89               [ 2]  190 	pushw	x
+      0000C4 90 89            [ 2]  191 	pushw	y
+      0000C6 CDr00r00         [ 4]  192 	call	__divulong
+      0000C9 5B 08            [ 2]  193 	addw	sp, #8
+      0000CB 1F 07            [ 2]  194 	ldw	(0x07, sp), x
+      0000CD 17 05            [ 2]  195 	ldw	(0x05, sp), y
+                                    196 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 131: UART1->BRR2 |= (uint8_t)((uint8_t)(((BaudRate_Mantissa100 - (BaudRate_Mantissa * 100)) << 4) / 100) & (uint8_t)0x0F); 
+      0000CF C6 52 33         [ 1]  197 	ld	a, 0x5233
+      0000D2 6B 09            [ 1]  198 	ld	(0x09, sp), a
+      0000D4 1E 03            [ 2]  199 	ldw	x, (0x03, sp)
+      0000D6 89               [ 2]  200 	pushw	x
+      0000D7 1E 03            [ 2]  201 	ldw	x, (0x03, sp)
+      0000D9 89               [ 2]  202 	pushw	x
+      0000DA 4B 64            [ 1]  203 	push	#0x64
+      0000DC 5F               [ 1]  204 	clrw	x
+      0000DD 89               [ 2]  205 	pushw	x
+      0000DE 4B 00            [ 1]  206 	push	#0x00
+      0000E0 CDr00r00         [ 4]  207 	call	__mullong
+      0000E3 5B 08            [ 2]  208 	addw	sp, #8
+      0000E5 1F 0C            [ 2]  209 	ldw	(0x0c, sp), x
+      0000E7 17 0A            [ 2]  210 	ldw	(0x0a, sp), y
+      0000E9 1E 07            [ 2]  211 	ldw	x, (0x07, sp)
+      0000EB 72 F0 0C         [ 2]  212 	subw	x, (0x0c, sp)
+      0000EE 1F 10            [ 2]  213 	ldw	(0x10, sp), x
+      0000F0 7B 06            [ 1]  214 	ld	a, (0x06, sp)
+      0000F2 12 0B            [ 1]  215 	sbc	a, (0x0b, sp)
+      0000F4 6B 0F            [ 1]  216 	ld	(0x0f, sp), a
+      0000F6 7B 05            [ 1]  217 	ld	a, (0x05, sp)
+      0000F8 12 0A            [ 1]  218 	sbc	a, (0x0a, sp)
+      0000FA 6B 0E            [ 1]  219 	ld	(0x0e, sp), a
+      0000FC 1E 10            [ 2]  220 	ldw	x, (0x10, sp)
+      0000FE 16 0E            [ 2]  221 	ldw	y, (0x0e, sp)
+      000100 A6 04            [ 1]  222 	ld	a, #0x04
+      000102                        223 00129$:
+      000102 58               [ 2]  224 	sllw	x
+      000103 90 59            [ 2]  225 	rlcw	y
+      000105 4A               [ 1]  226 	dec	a
+      000106 26 FA            [ 1]  227 	jrne	00129$
+      000108 4B 64            [ 1]  228 	push	#0x64
+      00010A 4B 00            [ 1]  229 	push	#0x00
+      00010C 4B 00            [ 1]  230 	push	#0x00
+      00010E 4B 00            [ 1]  231 	push	#0x00
+      000110 89               [ 2]  232 	pushw	x
+      000111 90 89            [ 2]  233 	pushw	y
+      000113 CDr00r00         [ 4]  234 	call	__divulong
+      000116 5B 08            [ 2]  235 	addw	sp, #8
+      000118 9F               [ 1]  236 	ld	a, xl
+      000119 A4 0F            [ 1]  237 	and	a, #0x0f
+      00011B 1A 09            [ 1]  238 	or	a, (0x09, sp)
+      00011D C7 52 33         [ 1]  239 	ld	0x5233, a
+                                    240 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 133: UART1->BRR2 |= (uint8_t)((BaudRate_Mantissa >> 4) & (uint8_t)0xF0); 
+      000120 C6 52 33         [ 1]  241 	ld	a, 0x5233
+      000123 6B 11            [ 1]  242 	ld	(0x11, sp), a
+      000125 1E 03            [ 2]  243 	ldw	x, (0x03, sp)
+      000127 A6 10            [ 1]  244 	ld	a, #0x10
+      000129 62               [ 2]  245 	div	x, a
+      00012A 9F               [ 1]  246 	ld	a, xl
+      00012B A4 F0            [ 1]  247 	and	a, #0xf0
+      00012D 1A 11            [ 1]  248 	or	a, (0x11, sp)
+      00012F C7 52 33         [ 1]  249 	ld	0x5233, a
+                                    250 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 135: UART1->BRR1 |= (uint8_t)BaudRate_Mantissa;           
+      000132 C6 52 32         [ 1]  251 	ld	a, 0x5232
+      000135 6B 11            [ 1]  252 	ld	(0x11, sp), a
+      000137 7B 04            [ 1]  253 	ld	a, (0x04, sp)
+      000139 1A 11            [ 1]  254 	or	a, (0x11, sp)
+      00013B C7 52 32         [ 1]  255 	ld	0x5232, a
+                                    256 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 138: UART1->CR2 &= (uint8_t)~(UART1_CR2_TEN | UART1_CR2_REN); 
+      00013E C6 52 35         [ 1]  257 	ld	a, 0x5235
+      000141 A4 F3            [ 1]  258 	and	a, #0xf3
+      000143 C7 52 35         [ 1]  259 	ld	0x5235, a
+                                    260 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 140: UART1->CR3 &= (uint8_t)~(UART1_CR3_CPOL | UART1_CR3_CPHA | UART1_CR3_LBCL); 
+      000146 C6 52 36         [ 1]  261 	ld	a, 0x5236
+      000149 A4 F8            [ 1]  262 	and	a, #0xf8
+      00014B C7 52 36         [ 1]  263 	ld	0x5236, a
+                                    264 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 142: UART1->CR3 |= (uint8_t)((uint8_t)SyncMode & (uint8_t)(UART1_CR3_CPOL | 
+      00014E C6 52 36         [ 1]  265 	ld	a, 0x5236
+      000151 6B 11            [ 1]  266 	ld	(0x11, sp), a
+      000153 7B 1B            [ 1]  267 	ld	a, (0x1b, sp)
+      000155 A4 07            [ 1]  268 	and	a, #0x07
+      000157 1A 11            [ 1]  269 	or	a, (0x11, sp)
+      000159 C7 52 36         [ 1]  270 	ld	0x5236, a
+                                    271 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 138: UART1->CR2 &= (uint8_t)~(UART1_CR2_TEN | UART1_CR2_REN); 
+      00015C C6 52 35         [ 1]  272 	ld	a, 0x5235
+                                    273 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 145: if ((uint8_t)(Mode & UART1_MODE_TX_ENABLE))
+      00015F 88               [ 1]  274 	push	a
+      000160 7B 1D            [ 1]  275 	ld	a, (0x1d, sp)
+      000162 A5 04            [ 1]  276 	bcp	a, #0x04
+      000164 84               [ 1]  277 	pop	a
+      000165 27 07            [ 1]  278 	jreq	00102$
+                                    279 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 148: UART1->CR2 |= (uint8_t)UART1_CR2_TEN;  
+      000167 AA 08            [ 1]  280 	or	a, #0x08
+      000169 C7 52 35         [ 1]  281 	ld	0x5235, a
+      00016C 20 05            [ 2]  282 	jra	00103$
+      00016E                        283 00102$:
+                                    284 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 153: UART1->CR2 &= (uint8_t)(~UART1_CR2_TEN);  
+      00016E A4 F7            [ 1]  285 	and	a, #0xf7
+      000170 C7 52 35         [ 1]  286 	ld	0x5235, a
+      000173                        287 00103$:
+                                    288 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 138: UART1->CR2 &= (uint8_t)~(UART1_CR2_TEN | UART1_CR2_REN); 
+      000173 C6 52 35         [ 1]  289 	ld	a, 0x5235
+                                    290 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 155: if ((uint8_t)(Mode & UART1_MODE_RX_ENABLE))
+      000176 88               [ 1]  291 	push	a
+      000177 7B 1D            [ 1]  292 	ld	a, (0x1d, sp)
+      000179 A5 08            [ 1]  293 	bcp	a, #0x08
+      00017B 84               [ 1]  294 	pop	a
+      00017C 27 07            [ 1]  295 	jreq	00105$
+                                    296 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 158: UART1->CR2 |= (uint8_t)UART1_CR2_REN;  
+      00017E AA 04            [ 1]  297 	or	a, #0x04
+      000180 C7 52 35         [ 1]  298 	ld	0x5235, a
+      000183 20 05            [ 2]  299 	jra	00106$
+      000185                        300 00105$:
+                                    301 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 163: UART1->CR2 &= (uint8_t)(~UART1_CR2_REN);  
+      000185 A4 FB            [ 1]  302 	and	a, #0xfb
+      000187 C7 52 35         [ 1]  303 	ld	0x5235, a
+      00018A                        304 00106$:
+                                    305 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 111: UART1->CR3 &= (uint8_t)(~UART1_CR3_STOP);  
+      00018A C6 52 36         [ 1]  306 	ld	a, 0x5236
+                                    307 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 167: if ((uint8_t)(SyncMode & UART1_SYNCMODE_CLOCK_DISABLE))
+      00018D 0D 1B            [ 1]  308 	tnz	(0x1b, sp)
+      00018F 2A 07            [ 1]  309 	jrpl	00108$
+                                    310 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 170: UART1->CR3 &= (uint8_t)(~UART1_CR3_CKEN); 
+      000191 A4 F7            [ 1]  311 	and	a, #0xf7
+      000193 C7 52 36         [ 1]  312 	ld	0x5236, a
+      000196 20 0D            [ 2]  313 	jra	00110$
+      000198                        314 00108$:
+                                    315 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 174: UART1->CR3 |= (uint8_t)((uint8_t)SyncMode & UART1_CR3_CKEN);
+      000198 88               [ 1]  316 	push	a
+      000199 7B 1C            [ 1]  317 	ld	a, (0x1c, sp)
+      00019B A4 08            [ 1]  318 	and	a, #0x08
+      00019D 6B 12            [ 1]  319 	ld	(0x12, sp), a
+      00019F 84               [ 1]  320 	pop	a
+      0001A0 1A 11            [ 1]  321 	or	a, (0x11, sp)
+      0001A2 C7 52 36         [ 1]  322 	ld	0x5236, a
+      0001A5                        323 00110$:
+                                    324 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 176: }
+      0001A5 5B 11            [ 2]  325 	addw	sp, #17
+      0001A7 81               [ 4]  326 	ret
+                                    327 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 184: void UART1_Cmd(FunctionalState NewState)
+                                    328 ;	-----------------------------------------
+                                    329 ;	 function UART1_Cmd
+                                    330 ;	-----------------------------------------
+      0001A8                        331 _UART1_Cmd:
+                                    332 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 189: UART1->CR1 &= (uint8_t)(~UART1_CR1_UARTD); 
+      0001A8 C6 52 34         [ 1]  333 	ld	a, 0x5234
+                                    334 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 186: if (NewState != DISABLE)
+      0001AB 0D 03            [ 1]  335 	tnz	(0x03, sp)
+      0001AD 27 06            [ 1]  336 	jreq	00102$
+                                    337 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 189: UART1->CR1 &= (uint8_t)(~UART1_CR1_UARTD); 
+      0001AF A4 DF            [ 1]  338 	and	a, #0xdf
+      0001B1 C7 52 34         [ 1]  339 	ld	0x5234, a
+      0001B4 81               [ 4]  340 	ret
+      0001B5                        341 00102$:
+                                    342 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 194: UART1->CR1 |= UART1_CR1_UARTD;  
+      0001B5 AA 20            [ 1]  343 	or	a, #0x20
+      0001B7 C7 52 34         [ 1]  344 	ld	0x5234, a
+                                    345 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 196: }
+      0001BA 81               [ 4]  346 	ret
+                                    347 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 211: void UART1_ITConfig(UART1_IT_TypeDef UART1_IT, FunctionalState NewState)
+                                    348 ;	-----------------------------------------
+                                    349 ;	 function UART1_ITConfig
+                                    350 ;	-----------------------------------------
+      0001BB                        351 _UART1_ITConfig:
+      0001BB 89               [ 2]  352 	pushw	x
+                                    353 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 220: uartreg = (uint8_t)((uint16_t)UART1_IT >> 0x08);
+      0001BC 7B 05            [ 1]  354 	ld	a, (0x05, sp)
+      0001BE 97               [ 1]  355 	ld	xl, a
+                                    356 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 222: itpos = (uint8_t)((uint8_t)1 << (uint8_t)((uint8_t)UART1_IT & (uint8_t)0x0F));
+      0001BF 7B 06            [ 1]  357 	ld	a, (0x06, sp)
+      0001C1 A4 0F            [ 1]  358 	and	a, #0x0f
+      0001C3 88               [ 1]  359 	push	a
+      0001C4 A6 01            [ 1]  360 	ld	a, #0x01
+      0001C6 6B 03            [ 1]  361 	ld	(0x03, sp), a
+      0001C8 84               [ 1]  362 	pop	a
+      0001C9 4D               [ 1]  363 	tnz	a
+      0001CA 27 05            [ 1]  364 	jreq	00144$
+      0001CC                        365 00143$:
+      0001CC 08 02            [ 1]  366 	sll	(0x02, sp)
+      0001CE 4A               [ 1]  367 	dec	a
+      0001CF 26 FB            [ 1]  368 	jrne	00143$
+      0001D1                        369 00144$:
+                                    370 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 227: if (uartreg == 0x01)
+      0001D1 9F               [ 1]  371 	ld	a, xl
+      0001D2 4A               [ 1]  372 	dec	a
+      0001D3 26 05            [ 1]  373 	jrne	00146$
+      0001D5 A6 01            [ 1]  374 	ld	a, #0x01
+      0001D7 6B 01            [ 1]  375 	ld	(0x01, sp), a
+      0001D9 C1                     376 	.byte 0xc1
+      0001DA                        377 00146$:
+      0001DA 0F 01            [ 1]  378 	clr	(0x01, sp)
+      0001DC                        379 00147$:
+                                    380 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 231: else if (uartreg == 0x02)
+      0001DC 9F               [ 1]  381 	ld	a, xl
+      0001DD A0 02            [ 1]  382 	sub	a, #0x02
+      0001DF 26 02            [ 1]  383 	jrne	00149$
+      0001E1 4C               [ 1]  384 	inc	a
+      0001E2 21                     385 	.byte 0x21
+      0001E3                        386 00149$:
+      0001E3 4F               [ 1]  387 	clr	a
+      0001E4                        388 00150$:
+                                    389 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 224: if (NewState != DISABLE)
+      0001E4 0D 07            [ 1]  390 	tnz	(0x07, sp)
+      0001E6 27 25            [ 1]  391 	jreq	00114$
+                                    392 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 227: if (uartreg == 0x01)
+      0001E8 0D 01            [ 1]  393 	tnz	(0x01, sp)
+      0001EA 27 0A            [ 1]  394 	jreq	00105$
+                                    395 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 229: UART1->CR1 |= itpos;
+      0001EC C6 52 34         [ 1]  396 	ld	a, 0x5234
+      0001EF 1A 02            [ 1]  397 	or	a, (0x02, sp)
+      0001F1 C7 52 34         [ 1]  398 	ld	0x5234, a
+      0001F4 20 3C            [ 2]  399 	jra	00116$
+      0001F6                        400 00105$:
+                                    401 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 231: else if (uartreg == 0x02)
+      0001F6 4D               [ 1]  402 	tnz	a
+      0001F7 27 0A            [ 1]  403 	jreq	00102$
+                                    404 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 233: UART1->CR2 |= itpos;
+      0001F9 C6 52 35         [ 1]  405 	ld	a, 0x5235
+      0001FC 1A 02            [ 1]  406 	or	a, (0x02, sp)
+      0001FE C7 52 35         [ 1]  407 	ld	0x5235, a
+      000201 20 2F            [ 2]  408 	jra	00116$
+      000203                        409 00102$:
+                                    410 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 237: UART1->CR4 |= itpos;
+      000203 C6 52 37         [ 1]  411 	ld	a, 0x5237
+      000206 1A 02            [ 1]  412 	or	a, (0x02, sp)
+      000208 C7 52 37         [ 1]  413 	ld	0x5237, a
+      00020B 20 25            [ 2]  414 	jra	00116$
+      00020D                        415 00114$:
+                                    416 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 245: UART1->CR1 &= (uint8_t)(~itpos);
+      00020D 03 02            [ 1]  417 	cpl	(0x02, sp)
+                                    418 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 243: if (uartreg == 0x01)
+      00020F 0D 01            [ 1]  419 	tnz	(0x01, sp)
+      000211 27 0A            [ 1]  420 	jreq	00111$
+                                    421 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 245: UART1->CR1 &= (uint8_t)(~itpos);
+      000213 C6 52 34         [ 1]  422 	ld	a, 0x5234
+      000216 14 02            [ 1]  423 	and	a, (0x02, sp)
+      000218 C7 52 34         [ 1]  424 	ld	0x5234, a
+      00021B 20 15            [ 2]  425 	jra	00116$
+      00021D                        426 00111$:
+                                    427 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 247: else if (uartreg == 0x02)
+      00021D 4D               [ 1]  428 	tnz	a
+      00021E 27 0A            [ 1]  429 	jreq	00108$
+                                    430 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 249: UART1->CR2 &= (uint8_t)(~itpos);
+      000220 C6 52 35         [ 1]  431 	ld	a, 0x5235
+      000223 14 02            [ 1]  432 	and	a, (0x02, sp)
+      000225 C7 52 35         [ 1]  433 	ld	0x5235, a
+      000228 20 08            [ 2]  434 	jra	00116$
+      00022A                        435 00108$:
+                                    436 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 253: UART1->CR4 &= (uint8_t)(~itpos);
+      00022A C6 52 37         [ 1]  437 	ld	a, 0x5237
+      00022D 14 02            [ 1]  438 	and	a, (0x02, sp)
+      00022F C7 52 37         [ 1]  439 	ld	0x5237, a
+      000232                        440 00116$:
+                                    441 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 257: }
+      000232 85               [ 2]  442 	popw	x
+      000233 81               [ 4]  443 	ret
+                                    444 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 265: void UART1_HalfDuplexCmd(FunctionalState NewState)
+                                    445 ;	-----------------------------------------
+                                    446 ;	 function UART1_HalfDuplexCmd
+                                    447 ;	-----------------------------------------
+      000234                        448 _UART1_HalfDuplexCmd:
+                                    449 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 271: UART1->CR5 |= UART1_CR5_HDSEL;  /**< UART1 Half Duplex Enable  */
+      000234 C6 52 38         [ 1]  450 	ld	a, 0x5238
+                                    451 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 269: if (NewState != DISABLE)
+      000237 0D 03            [ 1]  452 	tnz	(0x03, sp)
+      000239 27 06            [ 1]  453 	jreq	00102$
+                                    454 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 271: UART1->CR5 |= UART1_CR5_HDSEL;  /**< UART1 Half Duplex Enable  */
+      00023B AA 08            [ 1]  455 	or	a, #0x08
+      00023D C7 52 38         [ 1]  456 	ld	0x5238, a
+      000240 81               [ 4]  457 	ret
+      000241                        458 00102$:
+                                    459 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 275: UART1->CR5 &= (uint8_t)~UART1_CR5_HDSEL; /**< UART1 Half Duplex Disable */
+      000241 A4 F7            [ 1]  460 	and	a, #0xf7
+      000243 C7 52 38         [ 1]  461 	ld	0x5238, a
+                                    462 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 277: }
+      000246 81               [ 4]  463 	ret
+                                    464 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 285: void UART1_IrDAConfig(UART1_IrDAMode_TypeDef UART1_IrDAMode)
+                                    465 ;	-----------------------------------------
+                                    466 ;	 function UART1_IrDAConfig
+                                    467 ;	-----------------------------------------
+      000247                        468 _UART1_IrDAConfig:
+                                    469 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 291: UART1->CR5 |= UART1_CR5_IRLP;
+      000247 C6 52 38         [ 1]  470 	ld	a, 0x5238
+                                    471 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 289: if (UART1_IrDAMode != UART1_IRDAMODE_NORMAL)
+      00024A 0D 03            [ 1]  472 	tnz	(0x03, sp)
+      00024C 27 06            [ 1]  473 	jreq	00102$
+                                    474 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 291: UART1->CR5 |= UART1_CR5_IRLP;
+      00024E AA 04            [ 1]  475 	or	a, #0x04
+      000250 C7 52 38         [ 1]  476 	ld	0x5238, a
+      000253 81               [ 4]  477 	ret
+      000254                        478 00102$:
+                                    479 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 295: UART1->CR5 &= ((uint8_t)~UART1_CR5_IRLP);
+      000254 A4 FB            [ 1]  480 	and	a, #0xfb
+      000256 C7 52 38         [ 1]  481 	ld	0x5238, a
+                                    482 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 297: }
+      000259 81               [ 4]  483 	ret
+                                    484 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 305: void UART1_IrDACmd(FunctionalState NewState)
+                                    485 ;	-----------------------------------------
+                                    486 ;	 function UART1_IrDACmd
+                                    487 ;	-----------------------------------------
+      00025A                        488 _UART1_IrDACmd:
+                                    489 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 313: UART1->CR5 |= UART1_CR5_IREN;
+      00025A C6 52 38         [ 1]  490 	ld	a, 0x5238
+                                    491 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 310: if (NewState != DISABLE)
+      00025D 0D 03            [ 1]  492 	tnz	(0x03, sp)
+      00025F 27 06            [ 1]  493 	jreq	00102$
+                                    494 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 313: UART1->CR5 |= UART1_CR5_IREN;
+      000261 AA 02            [ 1]  495 	or	a, #0x02
+      000263 C7 52 38         [ 1]  496 	ld	0x5238, a
+      000266 81               [ 4]  497 	ret
+      000267                        498 00102$:
+                                    499 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 318: UART1->CR5 &= ((uint8_t)~UART1_CR5_IREN);
+      000267 A4 FD            [ 1]  500 	and	a, #0xfd
+      000269 C7 52 38         [ 1]  501 	ld	0x5238, a
+                                    502 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 320: }
+      00026C 81               [ 4]  503 	ret
+                                    504 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 329: void UART1_LINBreakDetectionConfig(UART1_LINBreakDetectionLength_TypeDef UART1_LINBreakDetectionLength)
+                                    505 ;	-----------------------------------------
+                                    506 ;	 function UART1_LINBreakDetectionConfig
+                                    507 ;	-----------------------------------------
+      00026D                        508 _UART1_LINBreakDetectionConfig:
+                                    509 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 335: UART1->CR4 |= UART1_CR4_LBDL;
+      00026D C6 52 37         [ 1]  510 	ld	a, 0x5237
+                                    511 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 333: if (UART1_LINBreakDetectionLength != UART1_LINBREAKDETECTIONLENGTH_10BITS)
+      000270 0D 03            [ 1]  512 	tnz	(0x03, sp)
+      000272 27 06            [ 1]  513 	jreq	00102$
+                                    514 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 335: UART1->CR4 |= UART1_CR4_LBDL;
+      000274 AA 20            [ 1]  515 	or	a, #0x20
+      000276 C7 52 37         [ 1]  516 	ld	0x5237, a
+      000279 81               [ 4]  517 	ret
+      00027A                        518 00102$:
+                                    519 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 339: UART1->CR4 &= ((uint8_t)~UART1_CR4_LBDL);
+      00027A A4 DF            [ 1]  520 	and	a, #0xdf
+      00027C C7 52 37         [ 1]  521 	ld	0x5237, a
+                                    522 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 341: }
+      00027F 81               [ 4]  523 	ret
+                                    524 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 349: void UART1_LINCmd(FunctionalState NewState)
+                                    525 ;	-----------------------------------------
+                                    526 ;	 function UART1_LINCmd
+                                    527 ;	-----------------------------------------
+      000280                        528 _UART1_LINCmd:
+                                    529 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 356: UART1->CR3 |= UART1_CR3_LINEN;
+      000280 C6 52 36         [ 1]  530 	ld	a, 0x5236
+                                    531 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 353: if (NewState != DISABLE)
+      000283 0D 03            [ 1]  532 	tnz	(0x03, sp)
+      000285 27 06            [ 1]  533 	jreq	00102$
+                                    534 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 356: UART1->CR3 |= UART1_CR3_LINEN;
+      000287 AA 40            [ 1]  535 	or	a, #0x40
+      000289 C7 52 36         [ 1]  536 	ld	0x5236, a
+      00028C 81               [ 4]  537 	ret
+      00028D                        538 00102$:
+                                    539 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 361: UART1->CR3 &= ((uint8_t)~UART1_CR3_LINEN);
+      00028D A4 BF            [ 1]  540 	and	a, #0xbf
+      00028F C7 52 36         [ 1]  541 	ld	0x5236, a
+                                    542 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 363: }
+      000292 81               [ 4]  543 	ret
+                                    544 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 371: void UART1_SmartCardCmd(FunctionalState NewState)
+                                    545 ;	-----------------------------------------
+                                    546 ;	 function UART1_SmartCardCmd
+                                    547 ;	-----------------------------------------
+      000293                        548 _UART1_SmartCardCmd:
+                                    549 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 378: UART1->CR5 |= UART1_CR5_SCEN;
+      000293 C6 52 38         [ 1]  550 	ld	a, 0x5238
+                                    551 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 375: if (NewState != DISABLE)
+      000296 0D 03            [ 1]  552 	tnz	(0x03, sp)
+      000298 27 06            [ 1]  553 	jreq	00102$
+                                    554 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 378: UART1->CR5 |= UART1_CR5_SCEN;
+      00029A AA 20            [ 1]  555 	or	a, #0x20
+      00029C C7 52 38         [ 1]  556 	ld	0x5238, a
+      00029F 81               [ 4]  557 	ret
+      0002A0                        558 00102$:
+                                    559 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 383: UART1->CR5 &= ((uint8_t)(~UART1_CR5_SCEN));
+      0002A0 A4 DF            [ 1]  560 	and	a, #0xdf
+      0002A2 C7 52 38         [ 1]  561 	ld	0x5238, a
+                                    562 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 385: }
+      0002A5 81               [ 4]  563 	ret
+                                    564 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 394: void UART1_SmartCardNACKCmd(FunctionalState NewState)
+                                    565 ;	-----------------------------------------
+                                    566 ;	 function UART1_SmartCardNACKCmd
+                                    567 ;	-----------------------------------------
+      0002A6                        568 _UART1_SmartCardNACKCmd:
+                                    569 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 401: UART1->CR5 |= UART1_CR5_NACK;
+      0002A6 C6 52 38         [ 1]  570 	ld	a, 0x5238
+                                    571 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 398: if (NewState != DISABLE)
+      0002A9 0D 03            [ 1]  572 	tnz	(0x03, sp)
+      0002AB 27 06            [ 1]  573 	jreq	00102$
+                                    574 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 401: UART1->CR5 |= UART1_CR5_NACK;
+      0002AD AA 10            [ 1]  575 	or	a, #0x10
+      0002AF C7 52 38         [ 1]  576 	ld	0x5238, a
+      0002B2 81               [ 4]  577 	ret
+      0002B3                        578 00102$:
+                                    579 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 406: UART1->CR5 &= ((uint8_t)~(UART1_CR5_NACK));
+      0002B3 A4 EF            [ 1]  580 	and	a, #0xef
+      0002B5 C7 52 38         [ 1]  581 	ld	0x5238, a
+                                    582 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 408: }
+      0002B8 81               [ 4]  583 	ret
+                                    584 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 416: void UART1_WakeUpConfig(UART1_WakeUp_TypeDef UART1_WakeUp)
+                                    585 ;	-----------------------------------------
+                                    586 ;	 function UART1_WakeUpConfig
+                                    587 ;	-----------------------------------------
+      0002B9                        588 _UART1_WakeUpConfig:
+                                    589 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 420: UART1->CR1 &= ((uint8_t)~UART1_CR1_WAKE);
+      0002B9 72 17 52 34      [ 1]  590 	bres	21044, #3
+                                    591 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 421: UART1->CR1 |= (uint8_t)UART1_WakeUp;
+      0002BD C6 52 34         [ 1]  592 	ld	a, 0x5234
+      0002C0 1A 03            [ 1]  593 	or	a, (0x03, sp)
+      0002C2 C7 52 34         [ 1]  594 	ld	0x5234, a
+                                    595 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 422: }
+      0002C5 81               [ 4]  596 	ret
+                                    597 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 430: void UART1_ReceiverWakeUpCmd(FunctionalState NewState)
+                                    598 ;	-----------------------------------------
+                                    599 ;	 function UART1_ReceiverWakeUpCmd
+                                    600 ;	-----------------------------------------
+      0002C6                        601 _UART1_ReceiverWakeUpCmd:
+                                    602 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 437: UART1->CR2 |= UART1_CR2_RWU;
+      0002C6 C6 52 35         [ 1]  603 	ld	a, 0x5235
+                                    604 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 434: if (NewState != DISABLE)
+      0002C9 0D 03            [ 1]  605 	tnz	(0x03, sp)
+      0002CB 27 06            [ 1]  606 	jreq	00102$
+                                    607 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 437: UART1->CR2 |= UART1_CR2_RWU;
+      0002CD AA 02            [ 1]  608 	or	a, #0x02
+      0002CF C7 52 35         [ 1]  609 	ld	0x5235, a
+      0002D2 81               [ 4]  610 	ret
+      0002D3                        611 00102$:
+                                    612 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 442: UART1->CR2 &= ((uint8_t)~UART1_CR2_RWU);
+      0002D3 A4 FD            [ 1]  613 	and	a, #0xfd
+      0002D5 C7 52 35         [ 1]  614 	ld	0x5235, a
+                                    615 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 444: }
+      0002D8 81               [ 4]  616 	ret
+                                    617 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 451: uint8_t UART1_ReceiveData8(void)
+                                    618 ;	-----------------------------------------
+                                    619 ;	 function UART1_ReceiveData8
+                                    620 ;	-----------------------------------------
+      0002D9                        621 _UART1_ReceiveData8:
+                                    622 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 453: return ((uint8_t)UART1->DR);
+      0002D9 C6 52 31         [ 1]  623 	ld	a, 0x5231
+                                    624 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 454: }
+      0002DC 81               [ 4]  625 	ret
+                                    626 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 461: uint16_t UART1_ReceiveData9(void)
+                                    627 ;	-----------------------------------------
+                                    628 ;	 function UART1_ReceiveData9
+                                    629 ;	-----------------------------------------
+      0002DD                        630 _UART1_ReceiveData9:
+      0002DD 89               [ 2]  631 	pushw	x
+                                    632 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 465: temp = (uint16_t)(((uint16_t)( (uint16_t)UART1->CR1 & (uint16_t)UART1_CR1_R8)) << 1);
+      0002DE C6 52 34         [ 1]  633 	ld	a, 0x5234
+      0002E1 A4 80            [ 1]  634 	and	a, #0x80
+      0002E3 97               [ 1]  635 	ld	xl, a
+      0002E4 4F               [ 1]  636 	clr	a
+      0002E5 95               [ 1]  637 	ld	xh, a
+      0002E6 58               [ 2]  638 	sllw	x
+                                    639 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 466: return (uint16_t)( (((uint16_t) UART1->DR) | temp ) & ((uint16_t)0x01FF));
+      0002E7 C6 52 31         [ 1]  640 	ld	a, 0x5231
+      0002EA 6B 02            [ 1]  641 	ld	(0x02, sp), a
+      0002EC 0F 01            [ 1]  642 	clr	(0x01, sp)
+      0002EE 9F               [ 1]  643 	ld	a, xl
+      0002EF 1A 02            [ 1]  644 	or	a, (0x02, sp)
+      0002F1 02               [ 1]  645 	rlwa	x
+      0002F2 1A 01            [ 1]  646 	or	a, (0x01, sp)
+      0002F4 A4 01            [ 1]  647 	and	a, #0x01
+      0002F6 95               [ 1]  648 	ld	xh, a
+                                    649 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 467: }
+      0002F7 5B 02            [ 2]  650 	addw	sp, #2
+      0002F9 81               [ 4]  651 	ret
+                                    652 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 474: void UART1_SendData8(uint8_t Data)
+                                    653 ;	-----------------------------------------
+                                    654 ;	 function UART1_SendData8
+                                    655 ;	-----------------------------------------
+      0002FA                        656 _UART1_SendData8:
+                                    657 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 477: UART1->DR = Data;
+      0002FA AE 52 31         [ 2]  658 	ldw	x, #0x5231
+      0002FD 7B 03            [ 1]  659 	ld	a, (0x03, sp)
+      0002FF F7               [ 1]  660 	ld	(x), a
+                                    661 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 478: }
+      000300 81               [ 4]  662 	ret
+                                    663 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 486: void UART1_SendData9(uint16_t Data)
+                                    664 ;	-----------------------------------------
+                                    665 ;	 function UART1_SendData9
+                                    666 ;	-----------------------------------------
+      000301                        667 _UART1_SendData9:
+      000301 88               [ 1]  668 	push	a
+                                    669 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 489: UART1->CR1 &= ((uint8_t)~UART1_CR1_T8);
+      000302 72 1D 52 34      [ 1]  670 	bres	21044, #6
+                                    671 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 491: UART1->CR1 |= (uint8_t)(((uint8_t)(Data >> 2)) & UART1_CR1_T8);
+      000306 C6 52 34         [ 1]  672 	ld	a, 0x5234
+      000309 6B 01            [ 1]  673 	ld	(0x01, sp), a
+      00030B 1E 04            [ 2]  674 	ldw	x, (0x04, sp)
+      00030D 54               [ 2]  675 	srlw	x
+      00030E 54               [ 2]  676 	srlw	x
+      00030F 9F               [ 1]  677 	ld	a, xl
+      000310 A4 40            [ 1]  678 	and	a, #0x40
+      000312 1A 01            [ 1]  679 	or	a, (0x01, sp)
+      000314 C7 52 34         [ 1]  680 	ld	0x5234, a
+                                    681 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 493: UART1->DR   = (uint8_t)(Data);
+      000317 7B 05            [ 1]  682 	ld	a, (0x05, sp)
+      000319 C7 52 31         [ 1]  683 	ld	0x5231, a
+                                    684 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 494: }
+      00031C 84               [ 1]  685 	pop	a
+      00031D 81               [ 4]  686 	ret
+                                    687 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 501: void UART1_SendBreak(void)
+                                    688 ;	-----------------------------------------
+                                    689 ;	 function UART1_SendBreak
+                                    690 ;	-----------------------------------------
+      00031E                        691 _UART1_SendBreak:
+                                    692 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 503: UART1->CR2 |= UART1_CR2_SBK;
+      00031E 72 10 52 35      [ 1]  693 	bset	21045, #0
+                                    694 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 504: }
+      000322 81               [ 4]  695 	ret
+                                    696 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 511: void UART1_SetAddress(uint8_t UART1_Address)
+                                    697 ;	-----------------------------------------
+                                    698 ;	 function UART1_SetAddress
+                                    699 ;	-----------------------------------------
+      000323                        700 _UART1_SetAddress:
+                                    701 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 517: UART1->CR4 &= ((uint8_t)~UART1_CR4_ADD);
+      000323 C6 52 37         [ 1]  702 	ld	a, 0x5237
+      000326 A4 F0            [ 1]  703 	and	a, #0xf0
+      000328 C7 52 37         [ 1]  704 	ld	0x5237, a
+                                    705 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 519: UART1->CR4 |= UART1_Address;
+      00032B C6 52 37         [ 1]  706 	ld	a, 0x5237
+      00032E 1A 03            [ 1]  707 	or	a, (0x03, sp)
+      000330 C7 52 37         [ 1]  708 	ld	0x5237, a
+                                    709 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 520: }
+      000333 81               [ 4]  710 	ret
+                                    711 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 528: void UART1_SetGuardTime(uint8_t UART1_GuardTime)
+                                    712 ;	-----------------------------------------
+                                    713 ;	 function UART1_SetGuardTime
+                                    714 ;	-----------------------------------------
+      000334                        715 _UART1_SetGuardTime:
+                                    716 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 531: UART1->GTR = UART1_GuardTime;
+      000334 AE 52 39         [ 2]  717 	ldw	x, #0x5239
+      000337 7B 03            [ 1]  718 	ld	a, (0x03, sp)
+      000339 F7               [ 1]  719 	ld	(x), a
+                                    720 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 532: }
+      00033A 81               [ 4]  721 	ret
+                                    722 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 556: void UART1_SetPrescaler(uint8_t UART1_Prescaler)
+                                    723 ;	-----------------------------------------
+                                    724 ;	 function UART1_SetPrescaler
+                                    725 ;	-----------------------------------------
+      00033B                        726 _UART1_SetPrescaler:
+                                    727 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 559: UART1->PSCR = UART1_Prescaler;
+      00033B AE 52 3A         [ 2]  728 	ldw	x, #0x523a
+      00033E 7B 03            [ 1]  729 	ld	a, (0x03, sp)
+      000340 F7               [ 1]  730 	ld	(x), a
+                                    731 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 560: }
+      000341 81               [ 4]  732 	ret
+                                    733 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 568: FlagStatus UART1_GetFlagStatus(UART1_Flag_TypeDef UART1_FLAG)
+                                    734 ;	-----------------------------------------
+                                    735 ;	 function UART1_GetFlagStatus
+                                    736 ;	-----------------------------------------
+      000342                        737 _UART1_GetFlagStatus:
+      000342 88               [ 1]  738 	push	a
+                                    739 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 579: if ((UART1->CR4 & (uint8_t)UART1_FLAG) != (uint8_t)0x00)
+      000343 7B 05            [ 1]  740 	ld	a, (0x05, sp)
+      000345 6B 01            [ 1]  741 	ld	(0x01, sp), a
+                                    742 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 577: if (UART1_FLAG == UART1_FLAG_LBDF)
+      000347 1E 04            [ 2]  743 	ldw	x, (0x04, sp)
+      000349 A3 02 10         [ 2]  744 	cpw	x, #0x0210
+      00034C 26 0E            [ 1]  745 	jrne	00114$
+                                    746 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 579: if ((UART1->CR4 & (uint8_t)UART1_FLAG) != (uint8_t)0x00)
+      00034E C6 52 37         [ 1]  747 	ld	a, 0x5237
+      000351 14 01            [ 1]  748 	and	a, (0x01, sp)
+      000353 27 04            [ 1]  749 	jreq	00102$
+                                    750 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 582: status = SET;
+      000355 A6 01            [ 1]  751 	ld	a, #0x01
+      000357 20 23            [ 2]  752 	jra	00115$
+      000359                        753 00102$:
+                                    754 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 587: status = RESET;
+      000359 4F               [ 1]  755 	clr	a
+      00035A 20 20            [ 2]  756 	jra	00115$
+      00035C                        757 00114$:
+                                    758 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 590: else if (UART1_FLAG == UART1_FLAG_SBK)
+      00035C 1E 04            [ 2]  759 	ldw	x, (0x04, sp)
+      00035E A3 01 01         [ 2]  760 	cpw	x, #0x0101
+      000361 26 0E            [ 1]  761 	jrne	00111$
+                                    762 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 592: if ((UART1->CR2 & (uint8_t)UART1_FLAG) != (uint8_t)0x00)
+      000363 C6 52 35         [ 1]  763 	ld	a, 0x5235
+      000366 14 01            [ 1]  764 	and	a, (0x01, sp)
+      000368 27 04            [ 1]  765 	jreq	00105$
+                                    766 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 595: status = SET;
+      00036A A6 01            [ 1]  767 	ld	a, #0x01
+      00036C 20 0E            [ 2]  768 	jra	00115$
+      00036E                        769 00105$:
+                                    770 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 600: status = RESET;
+      00036E 4F               [ 1]  771 	clr	a
+      00036F 20 0B            [ 2]  772 	jra	00115$
+      000371                        773 00111$:
+                                    774 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 605: if ((UART1->SR & (uint8_t)UART1_FLAG) != (uint8_t)0x00)
+      000371 C6 52 30         [ 1]  775 	ld	a, 0x5230
+      000374 14 01            [ 1]  776 	and	a, (0x01, sp)
+      000376 27 03            [ 1]  777 	jreq	00108$
+                                    778 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 608: status = SET;
+      000378 A6 01            [ 1]  779 	ld	a, #0x01
+                                    780 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 613: status = RESET;
+      00037A 21                     781 	.byte 0x21
+      00037B                        782 00108$:
+      00037B 4F               [ 1]  783 	clr	a
+      00037C                        784 00115$:
+                                    785 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 617: return status;
+                                    786 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 618: }
+      00037C 5B 01            [ 2]  787 	addw	sp, #1
+      00037E 81               [ 4]  788 	ret
+                                    789 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 646: void UART1_ClearFlag(UART1_Flag_TypeDef UART1_FLAG)
+                                    790 ;	-----------------------------------------
+                                    791 ;	 function UART1_ClearFlag
+                                    792 ;	-----------------------------------------
+      00037F                        793 _UART1_ClearFlag:
+                                    794 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 651: if (UART1_FLAG == UART1_FLAG_RXNE)
+      00037F 1E 03            [ 2]  795 	ldw	x, (0x03, sp)
+      000381 A3 00 20         [ 2]  796 	cpw	x, #0x0020
+      000384 26 05            [ 1]  797 	jrne	00102$
+                                    798 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 653: UART1->SR = (uint8_t)~(UART1_SR_RXNE);
+      000386 35 DF 52 30      [ 1]  799 	mov	0x5230+0, #0xdf
+      00038A 81               [ 4]  800 	ret
+      00038B                        801 00102$:
+                                    802 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 658: UART1->CR4 &= (uint8_t)~(UART1_CR4_LBDF);
+      00038B 72 19 52 37      [ 1]  803 	bres	21047, #4
+                                    804 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 660: }
+      00038F 81               [ 4]  805 	ret
+                                    806 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 675: ITStatus UART1_GetITStatus(UART1_IT_TypeDef UART1_IT)
+                                    807 ;	-----------------------------------------
+                                    808 ;	 function UART1_GetITStatus
+                                    809 ;	-----------------------------------------
+      000390                        810 _UART1_GetITStatus:
+      000390 89               [ 2]  811 	pushw	x
+                                    812 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 687: itpos = (uint8_t)((uint8_t)1 << (uint8_t)((uint8_t)UART1_IT & (uint8_t)0x0F));
+      000391 7B 06            [ 1]  813 	ld	a, (0x06, sp)
+      000393 97               [ 1]  814 	ld	xl, a
+      000394 A4 0F            [ 1]  815 	and	a, #0x0f
+      000396 88               [ 1]  816 	push	a
+      000397 A6 01            [ 1]  817 	ld	a, #0x01
+      000399 6B 02            [ 1]  818 	ld	(0x02, sp), a
+      00039B 84               [ 1]  819 	pop	a
+      00039C 4D               [ 1]  820 	tnz	a
+      00039D 27 05            [ 1]  821 	jreq	00162$
+      00039F                        822 00161$:
+      00039F 08 01            [ 1]  823 	sll	(0x01, sp)
+      0003A1 4A               [ 1]  824 	dec	a
+      0003A2 26 FB            [ 1]  825 	jrne	00161$
+      0003A4                        826 00162$:
+                                    827 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 689: itmask1 = (uint8_t)((uint8_t)UART1_IT >> (uint8_t)4);
+      0003A4 9F               [ 1]  828 	ld	a, xl
+      0003A5 4E               [ 1]  829 	swap	a
+      0003A6 A4 0F            [ 1]  830 	and	a, #0x0f
+                                    831 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 691: itmask2 = (uint8_t)((uint8_t)1 << itmask1);
+      0003A8 88               [ 1]  832 	push	a
+      0003A9 A6 01            [ 1]  833 	ld	a, #0x01
+      0003AB 6B 03            [ 1]  834 	ld	(0x03, sp), a
+      0003AD 84               [ 1]  835 	pop	a
+      0003AE 4D               [ 1]  836 	tnz	a
+      0003AF 27 05            [ 1]  837 	jreq	00164$
+      0003B1                        838 00163$:
+      0003B1 08 02            [ 1]  839 	sll	(0x02, sp)
+      0003B3 4A               [ 1]  840 	dec	a
+      0003B4 26 FB            [ 1]  841 	jrne	00163$
+      0003B6                        842 00164$:
+                                    843 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 695: if (UART1_IT == UART1_IT_PE)
+      0003B6 1E 05            [ 2]  844 	ldw	x, (0x05, sp)
+      0003B8 A3 01 00         [ 2]  845 	cpw	x, #0x0100
+      0003BB 26 18            [ 1]  846 	jrne	00117$
+                                    847 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 698: enablestatus = (uint8_t)((uint8_t)UART1->CR1 & itmask2);
+      0003BD C6 52 34         [ 1]  848 	ld	a, 0x5234
+      0003C0 14 02            [ 1]  849 	and	a, (0x02, sp)
+      0003C2 97               [ 1]  850 	ld	xl, a
+                                    851 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 701: if (((UART1->SR & itpos) != (uint8_t)0x00) && enablestatus)
+      0003C3 C6 52 30         [ 1]  852 	ld	a, 0x5230
+      0003C6 14 01            [ 1]  853 	and	a, (0x01, sp)
+      0003C8 27 08            [ 1]  854 	jreq	00102$
+      0003CA 9F               [ 1]  855 	ld	a, xl
+      0003CB 4D               [ 1]  856 	tnz	a
+      0003CC 27 04            [ 1]  857 	jreq	00102$
+                                    858 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 704: pendingbitstatus = SET;
+      0003CE A6 01            [ 1]  859 	ld	a, #0x01
+      0003D0 20 37            [ 2]  860 	jra	00118$
+      0003D2                        861 00102$:
+                                    862 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 709: pendingbitstatus = RESET;
+      0003D2 4F               [ 1]  863 	clr	a
+      0003D3 20 34            [ 2]  864 	jra	00118$
+      0003D5                        865 00117$:
+                                    866 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 713: else if (UART1_IT == UART1_IT_LBDF)
+      0003D5 1E 05            [ 2]  867 	ldw	x, (0x05, sp)
+      0003D7 A3 03 46         [ 2]  868 	cpw	x, #0x0346
+      0003DA 26 18            [ 1]  869 	jrne	00114$
+                                    870 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 716: enablestatus = (uint8_t)((uint8_t)UART1->CR4 & itmask2);
+      0003DC C6 52 37         [ 1]  871 	ld	a, 0x5237
+      0003DF 14 02            [ 1]  872 	and	a, (0x02, sp)
+      0003E1 97               [ 1]  873 	ld	xl, a
+                                    874 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 718: if (((UART1->CR4 & itpos) != (uint8_t)0x00) && enablestatus)
+      0003E2 C6 52 37         [ 1]  875 	ld	a, 0x5237
+      0003E5 14 01            [ 1]  876 	and	a, (0x01, sp)
+      0003E7 27 08            [ 1]  877 	jreq	00106$
+      0003E9 9F               [ 1]  878 	ld	a, xl
+      0003EA 4D               [ 1]  879 	tnz	a
+      0003EB 27 04            [ 1]  880 	jreq	00106$
+                                    881 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 721: pendingbitstatus = SET;
+      0003ED A6 01            [ 1]  882 	ld	a, #0x01
+      0003EF 20 18            [ 2]  883 	jra	00118$
+      0003F1                        884 00106$:
+                                    885 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 726: pendingbitstatus = RESET;
+      0003F1 4F               [ 1]  886 	clr	a
+      0003F2 20 15            [ 2]  887 	jra	00118$
+      0003F4                        888 00114$:
+                                    889 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 732: enablestatus = (uint8_t)((uint8_t)UART1->CR2 & itmask2);
+      0003F4 C6 52 35         [ 1]  890 	ld	a, 0x5235
+      0003F7 14 02            [ 1]  891 	and	a, (0x02, sp)
+      0003F9 97               [ 1]  892 	ld	xl, a
+                                    893 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 734: if (((UART1->SR & itpos) != (uint8_t)0x00) && enablestatus)
+      0003FA C6 52 30         [ 1]  894 	ld	a, 0x5230
+      0003FD 14 01            [ 1]  895 	and	a, (0x01, sp)
+      0003FF 27 07            [ 1]  896 	jreq	00110$
+      000401 9F               [ 1]  897 	ld	a, xl
+      000402 4D               [ 1]  898 	tnz	a
+      000403 27 03            [ 1]  899 	jreq	00110$
+                                    900 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 737: pendingbitstatus = SET;
+      000405 A6 01            [ 1]  901 	ld	a, #0x01
+                                    902 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 742: pendingbitstatus = RESET;
+      000407 21                     903 	.byte 0x21
+      000408                        904 00110$:
+      000408 4F               [ 1]  905 	clr	a
+      000409                        906 00118$:
+                                    907 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 747: return  pendingbitstatus;
+                                    908 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 748: }
+      000409 85               [ 2]  909 	popw	x
+      00040A 81               [ 4]  910 	ret
+                                    911 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 775: void UART1_ClearITPendingBit(UART1_IT_TypeDef UART1_IT)
+                                    912 ;	-----------------------------------------
+                                    913 ;	 function UART1_ClearITPendingBit
+                                    914 ;	-----------------------------------------
+      00040B                        915 _UART1_ClearITPendingBit:
+                                    916 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 780: if (UART1_IT == UART1_IT_RXNE)
+      00040B 1E 03            [ 2]  917 	ldw	x, (0x03, sp)
+      00040D A3 02 55         [ 2]  918 	cpw	x, #0x0255
+      000410 26 05            [ 1]  919 	jrne	00102$
+                                    920 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 782: UART1->SR = (uint8_t)~(UART1_SR_RXNE);
+      000412 35 DF 52 30      [ 1]  921 	mov	0x5230+0, #0xdf
+      000416 81               [ 4]  922 	ret
+      000417                        923 00102$:
+                                    924 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 787: UART1->CR4 &= (uint8_t)~(UART1_CR4_LBDF);
+      000417 72 19 52 37      [ 1]  925 	bres	21047, #4
+                                    926 ;	/home/de4m/.platformio/packages/framework-ststm8spl/Libraries/STM8S_StdPeriph_Driver/src/stm8s_uart1.c: 789: }
+      00041B 81               [ 4]  927 	ret
+                                    928 	.area CODE
+                                    929 	.area CONST
+                                    930 	.area INITIALIZER
+                                    931 	.area CABS (ABS)

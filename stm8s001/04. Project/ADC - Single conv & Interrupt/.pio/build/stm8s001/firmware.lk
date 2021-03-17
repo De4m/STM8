@@ -1,0 +1,20 @@
+-muwx
+-i .pio/build/stm8s001/firmware.ihx
+-Y
+-I 0x0400
+-C 0x2000
+-b HOME = 0x8000
+-b DATA = 0x0001
+-b SSEG = 0xffffffff
+-k /home/de4m/.platformio/packages/toolchain-sdcc/share/sdcc/lib/stm8
+-l stm8
+.pio/build/stm8s001/SPL/stm8s_adc1.rel
+.pio/build/stm8s001/SPL/stm8s_clk.rel
+.pio/build/stm8s001/SPL/stm8s_exti.rel
+.pio/build/stm8s001/SPL/stm8s_flash.rel
+.pio/build/stm8s001/SPL/stm8s_gpio.rel
+.pio/build/stm8s001/SPL/stm8s_uart1.rel
+.pio/build/stm8s001/src/main.rel
+.pio/build/stm8s001/src/stm8s_it.rel
+
+-e

@@ -23,7 +23,10 @@
   * limitations under the License.
   *
   ******************************************************************************
-  */ 
+  *
+  *   Command to upload fimware:  clear;pio run -t clean; pio run -t upload
+  *
+  */
 
 
 /* Includes ------------------------------------------------------------------*/

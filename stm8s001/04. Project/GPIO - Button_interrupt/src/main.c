@@ -64,10 +64,7 @@ void main(void)
   /* Initialize the Interrupt sensitivity ------------------------------------*/
   EXTI_SetExtIntSensitivity(EXTI_PORT_GPIOD, EXTI_SENSITIVITY_FALL_ONLY);
   //EXTI_SetTLISensitivity(EXTI_TLISENSITIVITY_FALL_ONLY);
-  //Int_Flag=FALSE;
 
-  //GPIO_WriteLow(LED_GPIO_PORT, (GPIO_Pin_TypeDef)LED_GPIO_PIN);
-  //_delay_ms(2000);
 
   /* Infinite loop */
   while (1)

@@ -164,7 +164,7 @@ INTERRUPT_HANDLER(EXTI_PORTD_IRQHandler, 6)
         Int_Flag = 1;
     }
     _delay_us(80);
-    enableInterrupts();
+    
 }
 
 

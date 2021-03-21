@@ -33,6 +33,8 @@
 /* Private define ------------------------------------------------------------*/
 /* Evalboard I/Os configuration ----------------------------------------------*/
 /* Private function prototypes -----------------------------------------------*/
+static void System_Config(void);
+static void TIM1_Config(void);
 /* Private functions ---------------------------------------------------------*/
 /* Private function prototypes -----------------------------------------------*/
 /* Public functions ----------------------------------------------------------*/

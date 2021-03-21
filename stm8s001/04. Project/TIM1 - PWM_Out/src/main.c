@@ -32,8 +32,13 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "stm8s.h"
+#include "stm8s_tim1.h"
 
 /* Private defines -----------------------------------------------------------*/
+#define TIM1_PRESCALER_1  (0)
+#define TIM1_PERIOD (4095)
+#define CCR2_Val  ((uint16_t)2500)
+
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
@@ -56,11 +61,39 @@ void main(void)
     __endasm;
 
 
+    System_Config();
     /* Infinite loop */
     while (1)
     {
     }
   
+}
+
+static void System_Config(void)
+{
+    TIM1_Config();
+}
+
+static void TIM1_Config(void)
+{
+    TIM1_DeInit();
+    TIM1_TimeBaseInit(  TIM1_PRESCALER_1, 
+                        TIM1_COUNTERMODE_UP, 
+                        TIM1_PERIOD,  
+                        0);
+    
+    /*TIM1_Pulse = CCR2_Val*/
+    TIM1_OC4Init(   TIM1_OCMODE_PWM2, 
+                    TIM1_OUTPUTSTATE_ENABLE, 
+                    CCR2_Val, 
+                    TIM1_OCPOLARITY_LOW,
+                    TIM1_OCIDLESTATE_SET);
+
+    /* TIM1 counter enable */
+    TIM1_Cmd(ENABLE);
+
+    /* TIM1 Main Output Enable */
+    TIM1_CtrlPWMOutputs(ENABLE);
 }
 
 #ifdef USE_FULL_ASSERT

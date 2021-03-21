@@ -1,0 +1,162 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.8.4 #10766 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module main
+                                      6 	.optsdcc -mstm8
+                                      7 	
+                                      8 ;--------------------------------------------------------
+                                      9 ; Public variables in this module
+                                     10 ;--------------------------------------------------------
+                                     11 	.globl _main
+                                     12 	.globl _TIM1_CtrlPWMOutputs
+                                     13 	.globl _TIM1_Cmd
+                                     14 	.globl _TIM1_OC4Init
+                                     15 	.globl _TIM1_TimeBaseInit
+                                     16 	.globl _TIM1_DeInit
+                                     17 ;--------------------------------------------------------
+                                     18 ; ram data
+                                     19 ;--------------------------------------------------------
+                                     20 	.area DATA
+                                     21 ;--------------------------------------------------------
+                                     22 ; ram data
+                                     23 ;--------------------------------------------------------
+                                     24 	.area INITIALIZED
+                                     25 ;--------------------------------------------------------
+                                     26 ; Stack segment in internal ram 
+                                     27 ;--------------------------------------------------------
+                                     28 	.area	SSEG
+      000000                         29 __start__stack:
+      000000                         30 	.ds	1
+                                     31 
+                                     32 ;--------------------------------------------------------
+                                     33 ; absolute external ram data
+                                     34 ;--------------------------------------------------------
+                                     35 	.area DABS (ABS)
+                                     36 
+                                     37 ; default segment ordering for linker
+                                     38 	.area HOME
+                                     39 	.area GSINIT
+                                     40 	.area GSFINAL
+                                     41 	.area CONST
+                                     42 	.area INITIALIZER
+                                     43 	.area CODE
+                                     44 
+                                     45 ;--------------------------------------------------------
+                                     46 ; interrupt vector 
+                                     47 ;--------------------------------------------------------
+                                     48 	.area HOME
+      000000                         49 __interrupt_vect:
+      000000 82v00u00u00             50 	int s_GSINIT ; reset
+                                     51 ;--------------------------------------------------------
+                                     52 ; global & static initialisations
+                                     53 ;--------------------------------------------------------
+                                     54 	.area HOME
+                                     55 	.area GSINIT
+                                     56 	.area GSFINAL
+                                     57 	.area GSINIT
+      000000                         58 __sdcc_gs_init_startup:
+      000000                         59 __sdcc_init_data:
+                                     60 ; stm8_genXINIT() start
+      000000 AEr00r00         [ 2]   61 	ldw x, #l_DATA
+      000003 27 07            [ 1]   62 	jreq	00002$
+      000005                         63 00001$:
+      000005 72 4FuFFuFF      [ 1]   64 	clr (s_DATA - 1, x)
+      000009 5A               [ 2]   65 	decw x
+      00000A 26 F9            [ 1]   66 	jrne	00001$
+      00000C                         67 00002$:
+      00000C AEr00r00         [ 2]   68 	ldw	x, #l_INITIALIZER
+      00000F 27 09            [ 1]   69 	jreq	00004$
+      000011                         70 00003$:
+      000011 D6uFFuFF         [ 1]   71 	ld	a, (s_INITIALIZER - 1, x)
+      000014 D7uFFuFF         [ 1]   72 	ld	(s_INITIALIZED - 1, x), a
+      000017 5A               [ 2]   73 	decw	x
+      000018 26 F7            [ 1]   74 	jrne	00003$
+      00001A                         75 00004$:
+                                     76 ; stm8_genXINIT() end
+                                     77 	.area GSFINAL
+      000000 CCr00r04         [ 2]   78 	jp	__sdcc_program_startup
+                                     79 ;--------------------------------------------------------
+                                     80 ; Home
+                                     81 ;--------------------------------------------------------
+                                     82 	.area HOME
+                                     83 	.area HOME
+      000004                         84 __sdcc_program_startup:
+      000004 CCr00r00         [ 2]   85 	jp	_main
+                                     86 ;	return from main will return to caller
+                                     87 ;--------------------------------------------------------
+                                     88 ; code
+                                     89 ;--------------------------------------------------------
+                                     90 	.area CODE
+                                     91 ;	src/main.c: 45: void main(void)
+                                     92 ;	-----------------------------------------
+                                     93 ;	 function main
+                                     94 ;	-----------------------------------------
+      000000                         95 _main:
+                                     96 ;	src/main.c: 61: __endasm;
+      000000 89               [ 2]   97 	pushw	x
+      000001 88               [ 1]   98 	push	a
+      000002 AE FF FF         [ 2]   99 	ldw	x, #0xFFFF
+      000005                        100 	      loop1:
+      000005 A6 32            [ 1]  101 	ld a, #50
+      000007                        102 	      loop2:
+      000007 4A               [ 1]  103 	dec a
+      000008 26 FD            [ 1]  104 	jrne	loop2
+      00000A 5A               [ 2]  105 	decw	x
+      00000B 26 F8            [ 1]  106 	jrne	loop1
+      00000D 84               [ 1]  107 	pop	a
+      00000E 85               [ 2]  108 	popw	x
+                                    109 ;	src/main.c: 64: System_Config();
+      00000F CDr00r15         [ 4]  110 	call	_System_Config
+                                    111 ;	src/main.c: 66: while (1)
+      000012                        112 00102$:
+      000012 20 FE            [ 2]  113 	jra	00102$
+                                    114 ;	src/main.c: 70: }
+      000014 81               [ 4]  115 	ret
+                                    116 ;	src/main.c: 72: static void System_Config(void)
+                                    117 ;	-----------------------------------------
+                                    118 ;	 function System_Config
+                                    119 ;	-----------------------------------------
+      000015                        120 _System_Config:
+                                    121 ;	src/main.c: 74: TIM1_Config();
+                                    122 ;	src/main.c: 75: }
+      000015 CCr00r18         [ 2]  123 	jp	_TIM1_Config
+                                    124 ;	src/main.c: 77: static void TIM1_Config(void)
+                                    125 ;	-----------------------------------------
+                                    126 ;	 function TIM1_Config
+                                    127 ;	-----------------------------------------
+      000018                        128 _TIM1_Config:
+                                    129 ;	src/main.c: 79: TIM1_DeInit();
+      000018 CDr00r00         [ 4]  130 	call	_TIM1_DeInit
+                                    131 ;	src/main.c: 80: TIM1_TimeBaseInit(  TIM1_PRESCALER_1, 
+      00001B 4B 00            [ 1]  132 	push	#0x00
+      00001D 4B FF            [ 1]  133 	push	#0xff
+      00001F 4B 0F            [ 1]  134 	push	#0x0f
+      000021 4B 00            [ 1]  135 	push	#0x00
+      000023 5F               [ 1]  136 	clrw	x
+      000024 89               [ 2]  137 	pushw	x
+      000025 CDr00r00         [ 4]  138 	call	_TIM1_TimeBaseInit
+      000028 5B 06            [ 2]  139 	addw	sp, #6
+                                    140 ;	src/main.c: 86: TIM1_OC4Init(   TIM1_OCMODE_PWM2, 
+      00002A 4B 55            [ 1]  141 	push	#0x55
+      00002C 4B 22            [ 1]  142 	push	#0x22
+      00002E 4B C4            [ 1]  143 	push	#0xc4
+      000030 4B 09            [ 1]  144 	push	#0x09
+      000032 4B 11            [ 1]  145 	push	#0x11
+      000034 4B 70            [ 1]  146 	push	#0x70
+      000036 CDr00r00         [ 4]  147 	call	_TIM1_OC4Init
+      000039 5B 06            [ 2]  148 	addw	sp, #6
+                                    149 ;	src/main.c: 93: TIM1_Cmd(ENABLE);
+      00003B 4B 01            [ 1]  150 	push	#0x01
+      00003D CDr00r00         [ 4]  151 	call	_TIM1_Cmd
+      000040 84               [ 1]  152 	pop	a
+                                    153 ;	src/main.c: 96: TIM1_CtrlPWMOutputs(ENABLE);
+      000041 4B 01            [ 1]  154 	push	#0x01
+      000043 CDr00r00         [ 4]  155 	call	_TIM1_CtrlPWMOutputs
+      000046 84               [ 1]  156 	pop	a
+                                    157 ;	src/main.c: 97: }
+      000047 81               [ 4]  158 	ret
+                                    159 	.area CODE
+                                    160 	.area CONST
+                                    161 	.area INITIALIZER
+                                    162 	.area CABS (ABS)

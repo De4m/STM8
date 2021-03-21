@@ -32,6 +32,9 @@
 /* Private typedef -----------------------------------------------------------*/
 /* Private define ------------------------------------------------------------*/
 /* Evalboard I/Os configuration ----------------------------------------------*/
+#define OUT_GPIO_PORT GPIOA         // Pin 5
+#define OUT_GPIO_PIN GPIO_PIN_3
+
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 /* Private function prototypes -----------------------------------------------*/

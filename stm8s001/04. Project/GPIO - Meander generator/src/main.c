@@ -32,6 +32,8 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "stm8s.h"
+#include "stdlib.h"
+#include "ctype.h"
 
 /* Private defines -----------------------------------------------------------*/
 /* Private function prototypes -----------------------------------------------*/
@@ -55,10 +57,30 @@ void main(void)
       popw x
     __endasm;
 
+    /* Configure the Fcpu to DIV1*/
+    CLK_SYSCLKConfig(CLK_PRESCALER_CPUDIV1);
+    
+    /* Configure the HSI prescaler to the optimal value */
+    CLK_SYSCLKConfig(CLK_PRESCALER_HSIDIV1);
+    
+    /* Output Fcpu on CLK_CCO pin */
+    CLK_CCOConfig(CLK_OUTPUT_CPU);
 
+    /* Reset all GPIO in default mode */
+    GPIO_DeInit(OUT_GPIO_PORT);
+
+    /* Initialize I/Os in Output Mode */
+    GPIO_Init(OUT_GPIO_PORT, (GPIO_Pin_TypeDef)OUT_GPIO_PIN, GPIO_MODE_OUT_PP_LOW_FAST);
+    
     /* Infinite loop */
     while (1)
     {
+        OUT_GPIO_PORT->ODR |= (uint8_t)OUT_GPIO_PIN;
+        nop();nop();nop();nop();nop();nop();nop();nop();nop();nop();nop();nop();
+        OUT_GPIO_PORT->ODR &= (uint8_t)(~OUT_GPIO_PIN);
+        nop();nop();nop();nop();nop();nop();nop();nop();nop();nop();nop();
+        //GPIO_WriteHigh(OUT_GPIO_PORT,OUT_GPIO_PIN);
+        //GPIO_WriteLow(OUT_GPIO_PORT,OUT_GPIO_PIN);
     }
   
 }

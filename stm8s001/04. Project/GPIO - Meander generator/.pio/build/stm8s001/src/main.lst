@@ -1,0 +1,176 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.8.4 #10766 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module main
+                                      6 	.optsdcc -mstm8
+                                      7 	
+                                      8 ;--------------------------------------------------------
+                                      9 ; Public variables in this module
+                                     10 ;--------------------------------------------------------
+                                     11 	.globl _main
+                                     12 	.globl _rand
+                                     13 	.globl _GPIO_Init
+                                     14 	.globl _GPIO_DeInit
+                                     15 	.globl _CLK_SYSCLKConfig
+                                     16 	.globl _CLK_CCOConfig
+                                     17 ;--------------------------------------------------------
+                                     18 ; ram data
+                                     19 ;--------------------------------------------------------
+                                     20 	.area DATA
+                                     21 ;--------------------------------------------------------
+                                     22 ; ram data
+                                     23 ;--------------------------------------------------------
+                                     24 	.area INITIALIZED
+                                     25 ;--------------------------------------------------------
+                                     26 ; Stack segment in internal ram 
+                                     27 ;--------------------------------------------------------
+                                     28 	.area	SSEG
+      000000                         29 __start__stack:
+      000000                         30 	.ds	1
+                                     31 
+                                     32 ;--------------------------------------------------------
+                                     33 ; absolute external ram data
+                                     34 ;--------------------------------------------------------
+                                     35 	.area DABS (ABS)
+                                     36 
+                                     37 ; default segment ordering for linker
+                                     38 	.area HOME
+                                     39 	.area GSINIT
+                                     40 	.area GSFINAL
+                                     41 	.area CONST
+                                     42 	.area INITIALIZER
+                                     43 	.area CODE
+                                     44 
+                                     45 ;--------------------------------------------------------
+                                     46 ; interrupt vector 
+                                     47 ;--------------------------------------------------------
+                                     48 	.area HOME
+      000000                         49 __interrupt_vect:
+      000000 82v00u00u00             50 	int s_GSINIT ; reset
+                                     51 ;--------------------------------------------------------
+                                     52 ; global & static initialisations
+                                     53 ;--------------------------------------------------------
+                                     54 	.area HOME
+                                     55 	.area GSINIT
+                                     56 	.area GSFINAL
+                                     57 	.area GSINIT
+      000000                         58 __sdcc_gs_init_startup:
+      000000                         59 __sdcc_init_data:
+                                     60 ; stm8_genXINIT() start
+      000000 AEr00r00         [ 2]   61 	ldw x, #l_DATA
+      000003 27 07            [ 1]   62 	jreq	00002$
+      000005                         63 00001$:
+      000005 72 4FuFFuFF      [ 1]   64 	clr (s_DATA - 1, x)
+      000009 5A               [ 2]   65 	decw x
+      00000A 26 F9            [ 1]   66 	jrne	00001$
+      00000C                         67 00002$:
+      00000C AEr00r00         [ 2]   68 	ldw	x, #l_INITIALIZER
+      00000F 27 09            [ 1]   69 	jreq	00004$
+      000011                         70 00003$:
+      000011 D6uFFuFF         [ 1]   71 	ld	a, (s_INITIALIZER - 1, x)
+      000014 D7uFFuFF         [ 1]   72 	ld	(s_INITIALIZED - 1, x), a
+      000017 5A               [ 2]   73 	decw	x
+      000018 26 F7            [ 1]   74 	jrne	00003$
+      00001A                         75 00004$:
+                                     76 ; stm8_genXINIT() end
+                                     77 	.area GSFINAL
+      000000 CCr00r04         [ 2]   78 	jp	__sdcc_program_startup
+                                     79 ;--------------------------------------------------------
+                                     80 ; Home
+                                     81 ;--------------------------------------------------------
+                                     82 	.area HOME
+                                     83 	.area HOME
+      000004                         84 __sdcc_program_startup:
+      000004 CCr00r00         [ 2]   85 	jp	_main
+                                     86 ;	return from main will return to caller
+                                     87 ;--------------------------------------------------------
+                                     88 ; code
+                                     89 ;--------------------------------------------------------
+                                     90 	.area CODE
+                                     91 ;	src/main.c: 42: void main(void)
+                                     92 ;	-----------------------------------------
+                                     93 ;	 function main
+                                     94 ;	-----------------------------------------
+      000000                         95 _main:
+                                     96 ;	src/main.c: 58: __endasm;
+      000000 89               [ 2]   97 	pushw	x
+      000001 88               [ 1]   98 	push	a
+      000002 AE FF FF         [ 2]   99 	ldw	x, #0xFFFF
+      000005                        100 	      loop1:
+      000005 A6 32            [ 1]  101 	ld a, #50
+      000007                        102 	      loop2:
+      000007 4A               [ 1]  103 	dec a
+      000008 26 FD            [ 1]  104 	jrne	loop2
+      00000A 5A               [ 2]  105 	decw	x
+      00000B 26 F8            [ 1]  106 	jrne	loop1
+      00000D 84               [ 1]  107 	pop	a
+      00000E 85               [ 2]  108 	popw	x
+                                    109 ;	src/main.c: 61: CLK_SYSCLKConfig(CLK_PRESCALER_CPUDIV1);
+      00000F 4B 80            [ 1]  110 	push	#0x80
+      000011 CDr00r00         [ 4]  111 	call	_CLK_SYSCLKConfig
+      000014 84               [ 1]  112 	pop	a
+                                    113 ;	src/main.c: 64: CLK_SYSCLKConfig(CLK_PRESCALER_HSIDIV1);
+      000015 4B 00            [ 1]  114 	push	#0x00
+      000017 CDr00r00         [ 4]  115 	call	_CLK_SYSCLKConfig
+      00001A 84               [ 1]  116 	pop	a
+                                    117 ;	src/main.c: 67: CLK_CCOConfig(CLK_OUTPUT_CPU);
+      00001B 4B 08            [ 1]  118 	push	#0x08
+      00001D CDr00r00         [ 4]  119 	call	_CLK_CCOConfig
+      000020 84               [ 1]  120 	pop	a
+                                    121 ;	src/main.c: 70: GPIO_DeInit(OUT_GPIO_PORT);
+      000021 4B 00            [ 1]  122 	push	#0x00
+      000023 4B 50            [ 1]  123 	push	#0x50
+      000025 CDr00r00         [ 4]  124 	call	_GPIO_DeInit
+      000028 85               [ 2]  125 	popw	x
+                                    126 ;	src/main.c: 73: GPIO_Init(OUT_GPIO_PORT, (GPIO_Pin_TypeDef)OUT_GPIO_PIN, GPIO_MODE_OUT_PP_LOW_FAST);
+      000029 4B E0            [ 1]  127 	push	#0xe0
+      00002B 4B 08            [ 1]  128 	push	#0x08
+      00002D 4B 00            [ 1]  129 	push	#0x00
+      00002F 4B 50            [ 1]  130 	push	#0x50
+      000031 CDr00r00         [ 4]  131 	call	_GPIO_Init
+      000034 5B 04            [ 2]  132 	addw	sp, #4
+                                    133 ;	src/main.c: 76: rand();
+      000036 CDr00r00         [ 4]  134 	call	_rand
+                                    135 ;	src/main.c: 81: while (1)
+      000039                        136 00102$:
+                                    137 ;	src/main.c: 83: OUT_GPIO_PORT->ODR |= (uint8_t)OUT_GPIO_PIN;
+      000039 C6 50 00         [ 1]  138 	ld	a, 0x5000
+      00003C AA 08            [ 1]  139 	or	a, #0x08
+      00003E C7 50 00         [ 1]  140 	ld	0x5000, a
+                                    141 ;	src/main.c: 84: nop();nop();nop();nop();nop();nop();nop();nop();nop();nop();nop();nop();
+      000041 9D               [ 1]  142 	nop
+      000042 9D               [ 1]  143 	nop
+      000043 9D               [ 1]  144 	nop
+      000044 9D               [ 1]  145 	nop
+      000045 9D               [ 1]  146 	nop
+      000046 9D               [ 1]  147 	nop
+      000047 9D               [ 1]  148 	nop
+      000048 9D               [ 1]  149 	nop
+      000049 9D               [ 1]  150 	nop
+      00004A 9D               [ 1]  151 	nop
+      00004B 9D               [ 1]  152 	nop
+      00004C 9D               [ 1]  153 	nop
+                                    154 ;	src/main.c: 85: OUT_GPIO_PORT->ODR &= (uint8_t)(~OUT_GPIO_PIN);
+      00004D C6 50 00         [ 1]  155 	ld	a, 0x5000
+      000050 A4 F7            [ 1]  156 	and	a, #0xf7
+      000052 C7 50 00         [ 1]  157 	ld	0x5000, a
+                                    158 ;	src/main.c: 86: nop();nop();nop();nop();nop();nop();nop();nop();nop();nop();nop();
+      000055 9D               [ 1]  159 	nop
+      000056 9D               [ 1]  160 	nop
+      000057 9D               [ 1]  161 	nop
+      000058 9D               [ 1]  162 	nop
+      000059 9D               [ 1]  163 	nop
+      00005A 9D               [ 1]  164 	nop
+      00005B 9D               [ 1]  165 	nop
+      00005C 9D               [ 1]  166 	nop
+      00005D 9D               [ 1]  167 	nop
+      00005E 9D               [ 1]  168 	nop
+      00005F 9D               [ 1]  169 	nop
+      000060 20 D7            [ 2]  170 	jra	00102$
+                                    171 ;	src/main.c: 91: }
+      000062 81               [ 4]  172 	ret
+                                    173 	.area CODE
+                                    174 	.area CONST
+                                    175 	.area INITIALIZER
+                                    176 	.area CABS (ABS)

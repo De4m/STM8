@@ -1,0 +1,24 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "../../01. DataSheet"
+		},
+		{
+			"path": "../../02. SPL/Libraries/STM8S_StdPeriph_Driver"
+		},
+		{
+			"path": "../../02. SPL/Project/STM8S_StdPeriph_Examples"
+		}
+	],
+	"settings": {
+		"files.associations": {
+			"stm8s.h": "c",
+			"main.h": "c",
+			"stm8s_gpio.h": "c",
+			"stm8s_beep.h": "c"
+		}
+	}
+}

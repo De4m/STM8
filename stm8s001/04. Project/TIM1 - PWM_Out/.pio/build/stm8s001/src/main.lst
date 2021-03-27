@@ -130,8 +130,8 @@
       000018 CDr00r00         [ 4]  130 	call	_TIM1_DeInit
                                     131 ;	src/main.c: 80: TIM1_TimeBaseInit(  TIM1_PRESCALER_1, 
       00001B 4B 00            [ 1]  132 	push	#0x00
-      00001D 4B FF            [ 1]  133 	push	#0xff
-      00001F 4B 0F            [ 1]  134 	push	#0x0f
+      00001D 4B 40            [ 1]  133 	push	#0x40
+      00001F 4B 9C            [ 1]  134 	push	#0x9c
       000021 4B 00            [ 1]  135 	push	#0x00
       000023 5F               [ 1]  136 	clrw	x
       000024 89               [ 2]  137 	pushw	x
@@ -140,8 +140,8 @@
                                     140 ;	src/main.c: 86: TIM1_OC4Init(   TIM1_OCMODE_PWM2, 
       00002A 4B 55            [ 1]  141 	push	#0x55
       00002C 4B 22            [ 1]  142 	push	#0x22
-      00002E 4B C4            [ 1]  143 	push	#0xc4
-      000030 4B 09            [ 1]  144 	push	#0x09
+      00002E 4B 20            [ 1]  143 	push	#0x20
+      000030 4B 4E            [ 1]  144 	push	#0x4e
       000032 4B 11            [ 1]  145 	push	#0x11
       000034 4B 70            [ 1]  146 	push	#0x70
       000036 CDr00r00         [ 4]  147 	call	_TIM1_OC4Init

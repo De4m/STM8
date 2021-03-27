@@ -1,0 +1,272 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 3.8.4 #10766 (Linux)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module main
+                                      6 	.optsdcc -mstm8
+                                      7 	
+                                      8 ;--------------------------------------------------------
+                                      9 ; Public variables in this module
+                                     10 ;--------------------------------------------------------
+                                     11 	.globl _main
+                                     12 	.globl _TIM1_CtrlPWMOutputs
+                                     13 	.globl _TIM1_Cmd
+                                     14 	.globl _TIM1_OC4Init
+                                     15 	.globl _TIM1_TimeBaseInit
+                                     16 	.globl _TIM1_DeInit
+                                     17 	.globl _CCR_Val
+                                     18 ;--------------------------------------------------------
+                                     19 ; ram data
+                                     20 ;--------------------------------------------------------
+                                     21 	.area DATA
+                                     22 ;--------------------------------------------------------
+                                     23 ; ram data
+                                     24 ;--------------------------------------------------------
+                                     25 	.area INITIALIZED
+      000000                         26 _CCR_Val::
+      000000                         27 	.ds 2
+                                     28 ;--------------------------------------------------------
+                                     29 ; Stack segment in internal ram 
+                                     30 ;--------------------------------------------------------
+                                     31 	.area	SSEG
+      000000                         32 __start__stack:
+      000000                         33 	.ds	1
+                                     34 
+                                     35 ;--------------------------------------------------------
+                                     36 ; absolute external ram data
+                                     37 ;--------------------------------------------------------
+                                     38 	.area DABS (ABS)
+                                     39 
+                                     40 ; default segment ordering for linker
+                                     41 	.area HOME
+                                     42 	.area GSINIT
+                                     43 	.area GSFINAL
+                                     44 	.area CONST
+                                     45 	.area INITIALIZER
+                                     46 	.area CODE
+                                     47 
+                                     48 ;--------------------------------------------------------
+                                     49 ; interrupt vector 
+                                     50 ;--------------------------------------------------------
+                                     51 	.area HOME
+      000000                         52 __interrupt_vect:
+      000000 82v00u00u00             53 	int s_GSINIT ; reset
+                                     54 ;--------------------------------------------------------
+                                     55 ; global & static initialisations
+                                     56 ;--------------------------------------------------------
+                                     57 	.area HOME
+                                     58 	.area GSINIT
+                                     59 	.area GSFINAL
+                                     60 	.area GSINIT
+      000000                         61 __sdcc_gs_init_startup:
+      000000                         62 __sdcc_init_data:
+                                     63 ; stm8_genXINIT() start
+      000000 AEr00r00         [ 2]   64 	ldw x, #l_DATA
+      000003 27 07            [ 1]   65 	jreq	00002$
+      000005                         66 00001$:
+      000005 72 4FuFFuFF      [ 1]   67 	clr (s_DATA - 1, x)
+      000009 5A               [ 2]   68 	decw x
+      00000A 26 F9            [ 1]   69 	jrne	00001$
+      00000C                         70 00002$:
+      00000C AEr00r00         [ 2]   71 	ldw	x, #l_INITIALIZER
+      00000F 27 09            [ 1]   72 	jreq	00004$
+      000011                         73 00003$:
+      000011 D6uFFuFF         [ 1]   74 	ld	a, (s_INITIALIZER - 1, x)
+      000014 D7uFFuFF         [ 1]   75 	ld	(s_INITIALIZED - 1, x), a
+      000017 5A               [ 2]   76 	decw	x
+      000018 26 F7            [ 1]   77 	jrne	00003$
+      00001A                         78 00004$:
+                                     79 ; stm8_genXINIT() end
+                                     80 	.area GSFINAL
+      000000 CCr00r04         [ 2]   81 	jp	__sdcc_program_startup
+                                     82 ;--------------------------------------------------------
+                                     83 ; Home
+                                     84 ;--------------------------------------------------------
+                                     85 	.area HOME
+                                     86 	.area HOME
+      000004                         87 __sdcc_program_startup:
+      000004 CCr00r66         [ 2]   88 	jp	_main
+                                     89 ;	return from main will return to caller
+                                     90 ;--------------------------------------------------------
+                                     91 ; code
+                                     92 ;--------------------------------------------------------
+                                     93 	.area CODE
+                                     94 ;	include/delay.h: 21: static void _delay_cycl( unsigned short __ticks )
+                                     95 ;	-----------------------------------------
+                                     96 ;	 function _delay_cycl
+                                     97 ;	-----------------------------------------
+      000000                         98 __delay_cycl:
+                                     99 ;	include/delay.h: 27: __endasm;
+      000000 9D               [ 1]  100 	nop
+      000001 9D               [ 1]  101 	nop
+                                    102 ;	include/delay.h: 29: do {
+      000002 1E 03            [ 2]  103 	ldw	x, (0x03, sp)
+      000004                        104 00101$:
+                                    105 ;	include/delay.h: 30: __ticks--;
+      000004 5A               [ 2]  106 	decw	x
+                                    107 ;	include/delay.h: 31: } while ( __ticks );
+      000005 5D               [ 2]  108 	tnzw	x
+      000006 26 FC            [ 1]  109 	jrne	00101$
+                                    110 ;	include/delay.h: 34: __endasm;
+      000008 9D               [ 1]  111 	nop
+                                    112 ;	include/delay.h: 36: }
+      000009 81               [ 4]  113 	ret
+                                    114 ;	include/delay.h: 38: static void _delay_us( unsigned short __us )
+                                    115 ;	-----------------------------------------
+                                    116 ;	 function _delay_us
+                                    117 ;	-----------------------------------------
+      00000A                        118 __delay_us:
+                                    119 ;	include/delay.h: 40: _delay_cycl((unsigned short)(T_COUNT(__us));
+      00000A 16 03            [ 2]  120 	ldw	y, (0x03, sp)
+      00000C 5F               [ 1]  121 	clrw	x
+      00000D 90 89            [ 2]  122 	pushw	y
+      00000F 89               [ 2]  123 	pushw	x
+      000010 4B 00            [ 1]  124 	push	#0x00
+      000012 4B 24            [ 1]  125 	push	#0x24
+      000014 4B F4            [ 1]  126 	push	#0xf4
+      000016 4B 00            [ 1]  127 	push	#0x00
+      000018 CDr00r00         [ 4]  128 	call	__mullong
+      00001B 5B 08            [ 2]  129 	addw	sp, #8
+      00001D 4B 40            [ 1]  130 	push	#0x40
+      00001F 4B 42            [ 1]  131 	push	#0x42
+      000021 4B 0F            [ 1]  132 	push	#0x0f
+      000023 4B 00            [ 1]  133 	push	#0x00
+      000025 89               [ 2]  134 	pushw	x
+      000026 90 89            [ 2]  135 	pushw	y
+      000028 CDr00r00         [ 4]  136 	call	__divulong
+      00002B 5B 08            [ 2]  137 	addw	sp, #8
+      00002D 51               [ 1]  138 	exgw	x, y
+      00002E 72 A2 00 05      [ 2]  139 	subw	y, #0x0005
+      000032 9F               [ 1]  140 	ld	a, xl
+      000033 A2 00            [ 1]  141 	sbc	a, #0x00
+      000035 02               [ 1]  142 	rlwa	x
+      000036 A2 00            [ 1]  143 	sbc	a, #0x00
+      000038 95               [ 1]  144 	ld	xh, a
+      000039 4B 05            [ 1]  145 	push	#0x05
+      00003B 4B 00            [ 1]  146 	push	#0x00
+      00003D 4B 00            [ 1]  147 	push	#0x00
+      00003F 4B 00            [ 1]  148 	push	#0x00
+      000041 90 89            [ 2]  149 	pushw	y
+      000043 89               [ 2]  150 	pushw	x
+      000044 CDr00r00         [ 4]  151 	call	__divulong
+      000047 5B 08            [ 2]  152 	addw	sp, #8
+      000049 89               [ 2]  153 	pushw	x
+      00004A CDr00r00         [ 4]  154 	call	__delay_cycl
+      00004D 85               [ 2]  155 	popw	x
+                                    156 ;	include/delay.h: 41: }
+      00004E 81               [ 4]  157 	ret
+                                    158 ;	include/delay.h: 43: static  void _delay_ms( unsigned short __ms )
+                                    159 ;	-----------------------------------------
+                                    160 ;	 function _delay_ms
+                                    161 ;	-----------------------------------------
+      00004F                        162 __delay_ms:
+                                    163 ;	include/delay.h: 45: while ( __ms-- )
+      00004F 1E 03            [ 2]  164 	ldw	x, (0x03, sp)
+      000051                        165 00101$:
+      000051 90 93            [ 1]  166 	ldw	y, x
+      000053 5A               [ 2]  167 	decw	x
+      000054 90 5D            [ 2]  168 	tnzw	y
+      000056 26 01            [ 1]  169 	jrne	00117$
+      000058 81               [ 4]  170 	ret
+      000059                        171 00117$:
+                                    172 ;	include/delay.h: 47: _delay_us( 1000 );
+      000059 89               [ 2]  173 	pushw	x
+      00005A 4B E8            [ 1]  174 	push	#0xe8
+      00005C 4B 03            [ 1]  175 	push	#0x03
+      00005E CDr00r0A         [ 4]  176 	call	__delay_us
+      000061 85               [ 2]  177 	popw	x
+      000062 85               [ 2]  178 	popw	x
+      000063 20 EC            [ 2]  179 	jra	00101$
+                                    180 ;	include/delay.h: 49: }
+      000065 81               [ 4]  181 	ret
+                                    182 ;	src/main.c: 47: void main(void)
+                                    183 ;	-----------------------------------------
+                                    184 ;	 function main
+                                    185 ;	-----------------------------------------
+      000066                        186 _main:
+                                    187 ;	src/main.c: 63: __endasm;
+      000066 89               [ 2]  188 	pushw	x
+      000067 88               [ 1]  189 	push	a
+      000068 AE FF FF         [ 2]  190 	ldw	x, #0xFFFF
+      00006B                        191 	      loop1:
+      00006B A6 32            [ 1]  192 	ld a, #50
+      00006D                        193 	      loop2:
+      00006D 4A               [ 1]  194 	dec a
+      00006E 26 FD            [ 1]  195 	jrne	loop2
+      000070 5A               [ 2]  196 	decw	x
+      000071 26 F8            [ 1]  197 	jrne	loop1
+      000073 84               [ 1]  198 	pop	a
+      000074 85               [ 2]  199 	popw	x
+                                    200 ;	src/main.c: 66: System_Config();
+      000075 CDr00r9A         [ 4]  201 	call	_System_Config
+                                    202 ;	src/main.c: 68: while (1)
+      000078                        203 00103$:
+                                    204 ;	src/main.c: 71: for (CCR_Val = 1000; CCR_Val < 4000; CCR_Val=CCR_Val+50 )
+      000078 AE 03 E8         [ 2]  205 	ldw	x, #0x03e8
+      00007B CFu00u00         [ 2]  206 	ldw	_CCR_Val+0, x
+      00007E                        207 00105$:
+                                    208 ;	src/main.c: 74: TIM1_Config();
+      00007E CDr00r9D         [ 4]  209 	call	_TIM1_Config
+                                    210 ;	src/main.c: 75: _delay_ms(200);
+      000081 4B C8            [ 1]  211 	push	#0xc8
+      000083 4B 00            [ 1]  212 	push	#0x00
+      000085 CDr00r4F         [ 4]  213 	call	__delay_ms
+      000088 85               [ 2]  214 	popw	x
+                                    215 ;	src/main.c: 71: for (CCR_Val = 1000; CCR_Val < 4000; CCR_Val=CCR_Val+50 )
+      000089 CEu00u00         [ 2]  216 	ldw	x, _CCR_Val+0
+      00008C 1C 00 32         [ 2]  217 	addw	x, #0x0032
+      00008F CFu00u00         [ 2]  218 	ldw	_CCR_Val+0, x
+      000092 A3 0F A0         [ 2]  219 	cpw	x, #0x0fa0
+      000095 25 E7            [ 1]  220 	jrc	00105$
+      000097 20 DF            [ 2]  221 	jra	00103$
+                                    222 ;	src/main.c: 82: }
+      000099 81               [ 4]  223 	ret
+                                    224 ;	src/main.c: 84: static void System_Config(void)
+                                    225 ;	-----------------------------------------
+                                    226 ;	 function System_Config
+                                    227 ;	-----------------------------------------
+      00009A                        228 _System_Config:
+                                    229 ;	src/main.c: 86: TIM1_Config();
+                                    230 ;	src/main.c: 87: }
+      00009A CCr00r9D         [ 2]  231 	jp	_TIM1_Config
+                                    232 ;	src/main.c: 89: static void TIM1_Config(void)
+                                    233 ;	-----------------------------------------
+                                    234 ;	 function TIM1_Config
+                                    235 ;	-----------------------------------------
+      00009D                        236 _TIM1_Config:
+                                    237 ;	src/main.c: 91: TIM1_DeInit();
+      00009D CDr00r00         [ 4]  238 	call	_TIM1_DeInit
+                                    239 ;	src/main.c: 92: TIM1_TimeBaseInit(  TIM1_PRESCALER_1, 
+      0000A0 4B 00            [ 1]  240 	push	#0x00
+      0000A2 4B 40            [ 1]  241 	push	#0x40
+      0000A4 4B 9C            [ 1]  242 	push	#0x9c
+      0000A6 4B 00            [ 1]  243 	push	#0x00
+      0000A8 5F               [ 1]  244 	clrw	x
+      0000A9 89               [ 2]  245 	pushw	x
+      0000AA CDr00r00         [ 4]  246 	call	_TIM1_TimeBaseInit
+      0000AD 5B 06            [ 2]  247 	addw	sp, #6
+                                    248 ;	src/main.c: 98: TIM1_OC4Init(   TIM1_OCMODE_PWM2, 
+      0000AF 4B 55            [ 1]  249 	push	#0x55
+      0000B1 4B 22            [ 1]  250 	push	#0x22
+      0000B3 CEu00u00         [ 2]  251 	ldw	x, _CCR_Val+0
+      0000B6 89               [ 2]  252 	pushw	x
+      0000B7 4B 11            [ 1]  253 	push	#0x11
+      0000B9 4B 70            [ 1]  254 	push	#0x70
+      0000BB CDr00r00         [ 4]  255 	call	_TIM1_OC4Init
+      0000BE 5B 06            [ 2]  256 	addw	sp, #6
+                                    257 ;	src/main.c: 105: TIM1_Cmd(ENABLE);
+      0000C0 4B 01            [ 1]  258 	push	#0x01
+      0000C2 CDr00r00         [ 4]  259 	call	_TIM1_Cmd
+      0000C5 84               [ 1]  260 	pop	a
+                                    261 ;	src/main.c: 108: TIM1_CtrlPWMOutputs(ENABLE);
+      0000C6 4B 01            [ 1]  262 	push	#0x01
+      0000C8 CDr00r00         [ 4]  263 	call	_TIM1_CtrlPWMOutputs
+      0000CB 84               [ 1]  264 	pop	a
+                                    265 ;	src/main.c: 109: }
+      0000CC 81               [ 4]  266 	ret
+                                    267 	.area CODE
+                                    268 	.area CONST
+                                    269 	.area INITIALIZER
+      000000                        270 __xinit__CCR_Val:
+      000000 07 D0                  271 	.dw #0x07d0
+                                    272 	.area CABS (ABS)

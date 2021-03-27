@@ -130,8 +130,8 @@ _TIM1_Config:
 	call	_TIM1_DeInit
 ;	src/main.c: 80: TIM1_TimeBaseInit(  TIM1_PRESCALER_1, 
 	push	#0x00
-	push	#0xff
-	push	#0x0f
+	push	#0x40
+	push	#0x9c
 	push	#0x00
 	clrw	x
 	pushw	x
@@ -140,8 +140,8 @@ _TIM1_Config:
 ;	src/main.c: 86: TIM1_OC4Init(   TIM1_OCMODE_PWM2, 
 	push	#0x55
 	push	#0x22
-	push	#0xc4
-	push	#0x09
+	push	#0x20
+	push	#0x4e
 	push	#0x11
 	push	#0x70
 	call	_TIM1_OC4Init

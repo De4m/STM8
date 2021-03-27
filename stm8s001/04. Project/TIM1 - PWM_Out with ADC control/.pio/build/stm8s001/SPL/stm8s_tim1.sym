@@ -1,0 +1,111 @@
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (STMicroelectronics STM8), page 1.
+Hexadecimal [24-Bits]
+
+Symbol Table
+
+    .__.$$$.                                                    =  002710 L
+    .__.ABS.                                                    =  000000 G
+    .__.CPU.                                                    =  000000 L
+    .__.H$L.                                                    =  000001 L
+  9 _TI1_Config                                                    0008EB R
+  9 _TI2_Config                                                    00091C R
+  9 _TI3_Config                                                    00094D R
+  9 _TI4_Config                                                    000982 R
+  9 _TIM1_ARRPreloadConfig                                         000514 GR
+  9 _TIM1_BDTRConfig                                               000249 GR
+  9 _TIM1_CCPreloadControl                                         00053A GR
+  9 _TIM1_CCxCmd                                                   000671 GR
+  9 _TIM1_CCxNCmd                                                  0006CB GR
+  9 _TIM1_ClearFlag                                                0008BA GR
+  9 _TIM1_ClearITPendingBit                                        0008E4 GR
+  9 _TIM1_Cmd                                                      000342 GR
+  9 _TIM1_CounterModeConfig                                        0004DD GR
+  9 _TIM1_CtrlPWMOutputs                                           000355 GR
+  9 _TIM1_DeInit                                                   000000 GR
+  9 _TIM1_ETRClockMode1Config                                      00038E GR
+  9 _TIM1_ETRClockMode2Config                                      0003A7 GR
+  9 _TIM1_ETRConfig                                                0003BA GR
+  9 _TIM1_EncoderInterfaceConfig                                   00047F GR
+  9 _TIM1_ForcedOC1Config                                          0004E8 GR
+  9 _TIM1_ForcedOC2Config                                          0004F3 GR
+  9 _TIM1_ForcedOC3Config                                          0004FE GR
+  9 _TIM1_ForcedOC4Config                                          000509 GR
+  9 _TIM1_GenerateEvent                                            0005E5 GR
+  9 _TIM1_GetCapture1                                              0007FD GR
+  9 _TIM1_GetCapture2                                              000816 GR
+  9 _TIM1_GetCapture3                                              00082F GR
+  9 _TIM1_GetCapture4                                              000848 GR
+  9 _TIM1_GetCounter                                               000861 GR
+  9 _TIM1_GetFlagStatus                                            000897 GR
+  9 _TIM1_GetITStatus                                              0008C9 GR
+  9 _TIM1_GetPrescaler                                             00087C GR
+  9 _TIM1_ICInit                                                   000263 GR
+  9 _TIM1_ITConfig                                                 000368 GR
+  9 _TIM1_InternalClockConfig                                      000385 GR
+  9 _TIM1_OC1FastConfig                                            000599 GR
+  9 _TIM1_OC1Init                                                  0000CC GR
+  9 _TIM1_OC1NPolarityConfig                                       0005FF GR
+  9 _TIM1_OC1PolarityConfig                                        0005EC GR
+  9 _TIM1_OC1PreloadConfig                                         00054D GR
+  9 _TIM1_OC2FastConfig                                            0005AC GR
+  9 _TIM1_OC2Init                                                  000131 GR
+  9 _TIM1_OC2NPolarityConfig                                       000625 GR
+  9 _TIM1_OC2PolarityConfig                                        000612 GR
+  9 _TIM1_OC2PreloadConfig                                         000560 GR
+  9 _TIM1_OC3FastConfig                                            0005BF GR
+  9 _TIM1_OC3Init                                                  000196 GR
+  9 _TIM1_OC3NPolarityConfig                                       00064B GR
+  9 _TIM1_OC3PolarityConfig                                        000638 GR
+  9 _TIM1_OC3PreloadConfig                                         000573 GR
+  9 _TIM1_OC4FastConfig                                            0005D2 GR
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (STMicroelectronics STM8), page 2.
+Hexadecimal [24-Bits]
+
+Symbol Table
+
+  9 _TIM1_OC4Init                                                  0001FB GR
+  9 _TIM1_OC4PolarityConfig                                        00065E GR
+  9 _TIM1_OC4PreloadConfig                                         000586 GR
+  9 _TIM1_PWMIConfig                                               0002CA GR
+  9 _TIM1_PrescalerConfig                                          0004C4 GR
+  9 _TIM1_SelectCOM                                                000527 GR
+  9 _TIM1_SelectHallSensor                                         000430 GR
+  9 _TIM1_SelectInputTrigger                                       0003FF GR
+  9 _TIM1_SelectMasterSlaveMode                                    00046C GR
+  9 _TIM1_SelectOCxM                                               00070D GR
+  9 _TIM1_SelectOnePulseMode                                       000443 GR
+  9 _TIM1_SelectOutputTrigger                                      000456 GR
+  9 _TIM1_SelectSlaveMode                                          000461 GR
+  9 _TIM1_SetAutoreload                                            000772 GR
+  9 _TIM1_SetCompare1                                              000785 GR
+  9 _TIM1_SetCompare2                                              000798 GR
+  9 _TIM1_SetCompare3                                              0007AB GR
+  9 _TIM1_SetCompare4                                              0007BE GR
+  9 _TIM1_SetCounter                                               00075F GR
+  9 _TIM1_SetIC1Prescaler                                          0007D1 GR
+  9 _TIM1_SetIC2Prescaler                                          0007DC GR
+  9 _TIM1_SetIC3Prescaler                                          0007E7 GR
+  9 _TIM1_SetIC4Prescaler                                          0007F2 GR
+  9 _TIM1_TIxExternalClockConfig                                   0003CD GR
+  9 _TIM1_TimeBaseInit                                             000099 GR
+  9 _TIM1_UpdateDisableConfig                                      00040A GR
+  9 _TIM1_UpdateRequestConfig                                      00041D GR
+
+
+ASxxxx Assembler V02.00 + NoICE + SDCC mods  (STMicroelectronics STM8), page 3.
+Hexadecimal [24-Bits]
+
+Area Table
+
+   0 _CODE                                      size      0   flags    0
+   1 DATA                                       size      0   flags    0
+   2 INITIALIZED                                size      0   flags    0
+   3 DABS                                       size      0   flags    8
+   4 HOME                                       size      0   flags    0
+   5 GSINIT                                     size      0   flags    0
+   6 GSFINAL                                    size      0   flags    0
+   7 CONST                                      size      0   flags    0
+   8 INITIALIZER                                size      0   flags    0
+   9 CODE                                       size    9B3   flags    0
+   A CABS                                       size      0   flags    8
+

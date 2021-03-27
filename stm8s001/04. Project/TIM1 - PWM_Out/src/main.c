@@ -36,8 +36,8 @@
 
 /* Private defines -----------------------------------------------------------*/
 #define TIM1_PRESCALER_1  (0)
-#define TIM1_PERIOD (4095)
-#define CCR2_Val  ((uint16_t)2500)
+#define TIM1_PERIOD (40000)
+#define CCR_Val  ((uint16_t)20000)
 
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
@@ -85,7 +85,7 @@ static void TIM1_Config(void)
     /*TIM1_Pulse = CCR2_Val*/
     TIM1_OC4Init(   TIM1_OCMODE_PWM2, 
                     TIM1_OUTPUTSTATE_ENABLE, 
-                    CCR2_Val, 
+                    CCR_Val, 
                     TIM1_OCPOLARITY_LOW,
                     TIM1_OCIDLESTATE_SET);
 
